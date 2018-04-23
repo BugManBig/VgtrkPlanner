@@ -10,15 +10,19 @@ public class PlaylistDatabase {
         soundElements.add(soundElement);
     }
 
+    public void remove(int id) {
+        soundElements.remove(id);
+    }
+
     public int getSize() {
         return soundElements.size();
     }
 
     public String getPreparedString(int id) {
         SoundElement soundElement = soundElements.get(id);
-        String result = getStandardTime(soundElement.getMainTime()) + " "
-                + getStandardTime(soundElement.getChronoTime()) + " "
-                + getWeekString(soundElement.getWeekDays()) + soundElement.getTitle();
+        String result = getStandardTime(soundElement.getMainTime()) + "    "
+                + getStandardTime(soundElement.getChronoTime()) + "    "
+                + getWeekString(soundElement.getWeekDays()) + "   " + soundElement.getTitle();
         return result;
     }
 
@@ -26,7 +30,14 @@ public class PlaylistDatabase {
         int hours = timeInSeconds / 60 / 60;
         int minutes = (timeInSeconds - hours * 60 * 60) / 60;
         int seconds = timeInSeconds - minutes * 60 - hours * 60 * 60;
-        return hours + ":" + minutes + ":" + seconds;
+        return getTwoDigitString(hours) + ":" + getTwoDigitString(minutes) + ":" + getTwoDigitString(seconds);
+    }
+
+    private String getTwoDigitString(int number) {
+        if (number < 10) {
+            return "0" + number;
+        }
+        return String.valueOf(number);
     }
 
     private String getWeekString(boolean[] weekDays) {

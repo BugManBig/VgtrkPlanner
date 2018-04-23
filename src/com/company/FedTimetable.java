@@ -1,12 +1,13 @@
 package com.company;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class FedTimetable {
-    private static final int FRAME_WIDTH = 600;
+    private static final int FRAME_WIDTH = 900;
     private static final int FRAME_HEIGHT = 600;
 
     private PlaylistDatabase playlistDatabase = new PlaylistDatabase();
@@ -19,6 +20,8 @@ public class FedTimetable {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setLayout(null);
+
+        list.setFont(new Font("Courier new", Font.PLAIN, 14));
 
         JScrollPane scrollPane = new JScrollPane(list);
         scrollPane.setBounds(10, 10, FRAME_WIDTH - 40, 500);
@@ -33,6 +36,17 @@ public class FedTimetable {
             }
         });
         frame.add(buttonForCreate);
+
+        JButton buttonForRemove = new JButton("Remove");
+        buttonForRemove.setBounds(120, FRAME_HEIGHT - 80, 100, 30);
+        buttonForRemove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                playlistDatabase.remove(list.getSelectedIndex());
+                refresh();
+            }
+        });
+        frame.add(buttonForRemove);
 
         frame.repaint();
         frame.revalidate();
@@ -117,7 +131,7 @@ public class FedTimetable {
                     }
                 }
                 int mainTime = hours * 60 * 60 + minutes * 60 + seconds;
-                int chronoTime = chronoHours * 60 * 60 + minutes * 60 + seconds;
+                int chronoTime = chronoHours * 60 * 60 + chronoMinutes * 60 + chronoSeconds;
                 playlistDatabase.add(new SoundElement(mainTime, chronoTime, title, weekDays));
                 refresh();
                 frame.dispose();
