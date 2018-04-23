@@ -6,8 +6,18 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class ContextFrame {
+    private int lineId = -1;
+
+    public ContextFrame() {
+
+    }
+
+    public ContextFrame(int lineId) {
+        this.lineId = lineId;
+    }
+
     public void createFrameForNewElement(PlaylistDatabase playlistDatabase,
-                                         FedTimetable fedTimetable, Application application) {
+                                         FedTimetable fedTimetable, Application application, JButton button) {
         JFrame frame = new JFrame("Create element");
         frame.setSize(400, 200);
         frame.setLocation(600, 400);
@@ -68,6 +78,9 @@ public class ContextFrame {
 
 
         JButton buttonOk = new JButton("Create");
+        if (lineId != -1) {
+            buttonOk.setText("Edit");
+        }
         buttonOk.setBounds(10, 120, 100, 30);
         buttonOk.addActionListener(new ActionListener() {
             @Override
@@ -87,9 +100,15 @@ public class ContextFrame {
                 }
                 int mainTime = hours * 60 * 60 + minutes * 60 + seconds;
                 int chronoTime = chronoHours * 60 * 60 + chronoMinutes * 60 + chronoSeconds;
-                playlistDatabase.add(new SoundElement(mainTime, chronoTime, title, weekDays));
+                SoundElement soundElement = new SoundElement(mainTime, chronoTime, title, weekDays);
+                if (lineId == -1) {
+                    playlistDatabase.add(soundElement);
+                } else {
+                    playlistDatabase.set(lineId, soundElement);
+                }
                 frame.dispose();
                 fedTimetable.refresh();
+                button.setEnabled(false);
                 application.serialize(playlistDatabase);
             }
         });

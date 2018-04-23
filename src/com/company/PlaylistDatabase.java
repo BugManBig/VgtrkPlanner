@@ -19,6 +19,14 @@ public class PlaylistDatabase implements Serializable {
         return soundElements.size();
     }
 
+    public SoundElement get(int id) {
+        return soundElements.get(id);
+    }
+
+    public void set(int id, SoundElement soundElement) {
+        soundElements.set(id, soundElement);
+    }
+
     public String getPreparedString(int id) {
         SoundElement soundElement = soundElements.get(id);
         String result = getStandardTime(soundElement.getMainTime()) + "    "
