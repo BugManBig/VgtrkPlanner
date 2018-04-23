@@ -3,10 +3,14 @@ package com.company;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class FedTimetable {
     private static final int FRAME_WIDTH = 600;
     private static final int FRAME_HEIGHT = 600;
+
+    private PlaylistDatabase playlistDatabase = new PlaylistDatabase();
+    private JList<String> list = new JList<>();
 
     public void create() {
         JFrame frame = new JFrame("FedTimetable");
@@ -16,7 +20,6 @@ public class FedTimetable {
         frame.setVisible(true);
         frame.setLayout(null);
 
-        JList<String> list = new JList<>();
         JScrollPane scrollPane = new JScrollPane(list);
         scrollPane.setBounds(10, 10, FRAME_WIDTH - 40, 500);
         frame.add(scrollPane);
@@ -77,12 +80,12 @@ public class FedTimetable {
         frame.add(chronoSecondsText);
 
 
-        JLabel nameLabel = new JLabel("Name:");
+        JLabel nameLabel = new JLabel("Title:");
         nameLabel.setBounds(10, 50, 50, 25);
         frame.add(nameLabel);
 
         JTextField nameTextfield = new JTextField();
-        nameTextfield.setBounds(60, 50, 250, 25);
+        nameTextfield.setBounds(60, 50, 315, 25);
         frame.add(nameTextfield);
 
         hoursText.addKeyListener(new KeyImpl(hoursText, minutesText));
@@ -92,14 +95,32 @@ public class FedTimetable {
         chronoMinutesText.addKeyListener(new KeyImpl(chronoMinutesText, chronoSecondsText));
         chronoSecondsText.addKeyListener(new KeyImpl(chronoSecondsText, nameTextfield));
 
-        addCheckboxes(frame);
+        JCheckBox[] checkBoxes = addCheckboxes(frame);
+
 
         JButton buttonOk = new JButton("Create");
         buttonOk.setBounds(10, 120, 100, 30);
         buttonOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                int hours = getNumberFromTextfield(hoursText);
+                int minutes = getNumberFromTextfield(minutesText);
+                int seconds = getNumberFromTextfield(secondsText);
+                int chronoHours = getNumberFromTextfield(chronoHoursText);
+                int chronoMinutes = getNumberFromTextfield(chronoMinutesText);
+                int chronoSeconds = getNumberFromTextfield(chronoSecondsText);
+                String title = nameTextfield.getText();
+                boolean[] weekDays = new boolean[7];
+                for (int i = 0; i < 7; i++) {
+                    if (checkBoxes[i].isSelected()) {
+                        weekDays[i] = true;
+                    }
+                }
+                int mainTime = hours * 60 * 60 + minutes * 60 + seconds;
+                int chronoTime = chronoHours * 60 * 60 + minutes * 60 + seconds;
+                playlistDatabase.add(new SoundElement(mainTime, chronoTime, title, weekDays));
+                refresh();
+                frame.dispose();
             }
         });
         frame.add(buttonOk);
@@ -118,13 +139,31 @@ public class FedTimetable {
         frame.revalidate();
     }
 
-    private void addCheckboxes(JFrame frame) {
+    private JCheckBox[] addCheckboxes(JFrame frame) {
+        JCheckBox[] checkBoxes = new JCheckBox[7];
         String[] days = {"Mon", "Tue", "Wen", "Thu", "Fri", "Sat", "Sun"};
         for (int i = 0; i < 7; i++) {
             JCheckBox checkBox = new JCheckBox();
             checkBox.setText(days[i]);
             checkBox.setBounds(10 + i * 50, 80, 52, 25);
             frame.add(checkBox);
+            checkBoxes[i] = checkBox;
         }
+        return checkBoxes;
+    }
+
+    private int getNumberFromTextfield(JTextField textField) {
+        if (Objects.equals(textField.getText(), "")) {
+            return 0;
+        }
+        return Integer.parseInt(textField.getText());
+    }
+
+    private void refresh() {
+        String[] playlistLines = new String[playlistDatabase.getSize()];
+        for (int i = 0; i < playlistLines.length; i++) {
+            playlistLines[i] = playlistDatabase.getPreparedString(i);
+        }
+        list.setListData(playlistLines);
     }
 }
