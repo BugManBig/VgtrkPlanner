@@ -27,6 +27,7 @@ public class KeyImpl implements KeyListener {
     public void keyReleased(KeyEvent e) {
         if (from.getText().length() == 2) {
             to.requestFocus();
+            to.selectAll();
         }
     }
 }

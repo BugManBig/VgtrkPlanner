@@ -93,6 +93,8 @@ public class ContextFrame {
             }
         }
 
+        hoursText.selectAll();
+
         JButton buttonOk = new JButton("Create");
         if (lineId != -1) {
             buttonOk.setText("Save");
