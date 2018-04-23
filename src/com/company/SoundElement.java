@@ -1,6 +1,8 @@
 package com.company;
 
-public class SoundElement {
+import java.io.Serializable;
+
+public class SoundElement implements Serializable {
     private int mainTime;
     private int chronoTime;
     private String title;

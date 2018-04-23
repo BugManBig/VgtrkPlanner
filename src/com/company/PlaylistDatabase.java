@@ -1,9 +1,10 @@
 package com.company;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlaylistDatabase {
+public class PlaylistDatabase implements Serializable {
     private List<SoundElement> soundElements = new ArrayList<>();
 
     public void add(SoundElement soundElement) {
