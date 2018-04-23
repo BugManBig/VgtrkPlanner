@@ -142,6 +142,18 @@ public class ContextFrame {
         });
         frame.add(buttonCancel);
 
+        JButton buttonSelectAll = new JButton("Select all");
+        buttonSelectAll.setBounds(250, 120, 100, 30);
+        buttonSelectAll.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (JCheckBox elem : checkBoxes) {
+                    elem.setSelected(true);
+                }
+            }
+        });
+        frame.add(buttonSelectAll);
+
         frame.repaint();
         frame.revalidate();
     }
