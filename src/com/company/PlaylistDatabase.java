@@ -9,6 +9,7 @@ public class PlaylistDatabase implements Serializable {
 
     public void add(SoundElement soundElement) {
         soundElements.add(soundElement);
+        sort();
     }
 
     public void remove(int id) {
@@ -63,5 +64,21 @@ public class PlaylistDatabase implements Serializable {
             }
         }
         return result;
+    }
+
+    private void sort() {
+        int minIndex;
+        SoundElement buffer;
+        for (int i = 0; i < soundElements.size() - 1; i++) {
+            minIndex = i;
+            for (int j = i + 1; j < soundElements.size(); j++) {
+                if (soundElements.get(j).getMainTime() < soundElements.get(minIndex).getMainTime()) {
+                    minIndex = j;
+                }
+            }
+            buffer = soundElements.get(i);
+            soundElements.set(i, soundElements.get(minIndex));
+            soundElements.set(minIndex, buffer);
+        }
     }
 }
