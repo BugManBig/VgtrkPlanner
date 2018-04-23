@@ -59,27 +59,43 @@ public class ContextFrame {
         frame.add(chronoSecondsText);
 
 
-        JLabel nameLabel = new JLabel("Title:");
-        nameLabel.setBounds(10, 50, 50, 25);
-        frame.add(nameLabel);
+        JLabel titleLabel = new JLabel("Title:");
+        titleLabel.setBounds(10, 50, 50, 25);
+        frame.add(titleLabel);
 
-        JTextField nameTextfield = new JTextField();
-        nameTextfield.setBounds(60, 50, 315, 25);
-        frame.add(nameTextfield);
+        JTextField titleTextfield = new JTextField();
+        titleTextfield.setBounds(60, 50, 315, 25);
+        frame.add(titleTextfield);
 
         hoursText.addKeyListener(new KeyImpl(hoursText, minutesText));
         minutesText.addKeyListener(new KeyImpl(minutesText, secondsText));
         secondsText.addKeyListener(new KeyImpl(secondsText, chronoHoursText));
         chronoHoursText.addKeyListener(new KeyImpl(chronoHoursText, chronoMinutesText));
         chronoMinutesText.addKeyListener(new KeyImpl(chronoMinutesText, chronoSecondsText));
-        chronoSecondsText.addKeyListener(new KeyImpl(chronoSecondsText, nameTextfield));
+        chronoSecondsText.addKeyListener(new KeyImpl(chronoSecondsText, titleTextfield));
 
         JCheckBox[] checkBoxes = addCheckboxes(frame);
 
+        if (lineId != -1) {
+            SoundElement soundElement = playlistDatabase.get(lineId);
+            writeValueInField(hoursText, TimeNames.MAIN_TIME, TimeNames.HOURS, soundElement);
+            writeValueInField(minutesText, TimeNames.MAIN_TIME, TimeNames.MINUTES, soundElement);
+            writeValueInField(secondsText, TimeNames.MAIN_TIME, TimeNames.SECONDS, soundElement);
+            writeValueInField(chronoHoursText, TimeNames.CHRONO_TIME, TimeNames.HOURS, soundElement);
+            writeValueInField(chronoMinutesText, TimeNames.CHRONO_TIME, TimeNames.MINUTES, soundElement);
+            writeValueInField(chronoSecondsText, TimeNames.CHRONO_TIME, TimeNames.SECONDS, soundElement);
+            titleTextfield.setText(soundElement.getTitle());
+            boolean[] checkBoxesValues = soundElement.getWeekDays();
+            for (int i = 0; i < 7; i++) {
+                if (checkBoxesValues[i]) {
+                    checkBoxes[i].setSelected(true);
+                }
+            }
+        }
 
         JButton buttonOk = new JButton("Create");
         if (lineId != -1) {
-            buttonOk.setText("Edit");
+            buttonOk.setText("Save");
         }
         buttonOk.setBounds(10, 120, 100, 30);
         buttonOk.addActionListener(new ActionListener() {
@@ -91,7 +107,7 @@ public class ContextFrame {
                 int chronoHours = getNumberFromTextfield(chronoHoursText);
                 int chronoMinutes = getNumberFromTextfield(chronoMinutesText);
                 int chronoSeconds = getNumberFromTextfield(chronoSecondsText);
-                String title = nameTextfield.getText();
+                String title = titleTextfield.getText();
                 boolean[] weekDays = new boolean[7];
                 for (int i = 0; i < 7; i++) {
                     if (checkBoxes[i].isSelected()) {
@@ -108,7 +124,7 @@ public class ContextFrame {
                 }
                 frame.dispose();
                 fedTimetable.refresh();
-                button.setEnabled(false);
+                fedTimetable.checkEnablingButtons();
                 application.serialize(playlistDatabase);
             }
         });
@@ -146,5 +162,9 @@ public class ContextFrame {
             checkBoxes[i] = checkBox;
         }
         return checkBoxes;
+    }
+
+    private void writeValueInField(JTextField textField, TimeNames timeType, TimeNames timeUnit, SoundElement soundElement) {
+        textField.setText(String.valueOf(soundElement.get(timeType, timeUnit)));
     }
 }

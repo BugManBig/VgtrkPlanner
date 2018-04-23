@@ -16,6 +16,24 @@ public class SoundElement implements Serializable {
         this.weekDays = weekDays;
     }
 
+    public int get(TimeNames timeType, TimeNames timeUnit) {
+        int time;
+        if (timeType == TimeNames.MAIN_TIME) {
+            time = mainTime;
+        } else {
+            time = chronoTime;
+        }
+        int hours = time / 60/ 60;
+        int minutes = (time - hours * 60 * 60) / 60;
+        int seconds = time - minutes * 60 - hours * 60 * 60;
+        if (timeUnit == TimeNames.HOURS) {
+            return hours;
+        } else if (timeUnit == TimeNames.MINUTES) {
+            return minutes;
+        }
+        return seconds;
+    }
+
     public int getMainTime() {
         return mainTime;
     }

@@ -29,17 +29,20 @@ public class PlaylistDatabase implements Serializable {
 
     public String getPreparedString(int id) {
         SoundElement soundElement = soundElements.get(id);
-        String result = getStandardTime(soundElement.getMainTime()) + "    "
-                + getStandardTime(soundElement.getChronoTime()) + "    "
+        return getStandardTime(soundElement, true) + "    "
+                + getStandardTime(soundElement, false) + "    "
                 + getWeekString(soundElement.getWeekDays()) + "   " + soundElement.getTitle();
-        return result;
     }
 
-    private String getStandardTime(int timeInSeconds) {
-        int hours = timeInSeconds / 60 / 60;
-        int minutes = (timeInSeconds - hours * 60 * 60) / 60;
-        int seconds = timeInSeconds - minutes * 60 - hours * 60 * 60;
-        return getTwoDigitString(hours) + ":" + getTwoDigitString(minutes) + ":" + getTwoDigitString(seconds);
+    private String getStandardTime(SoundElement soundElement, boolean isMain) {
+        if (isMain) {
+            return getTwoDigitString(soundElement.get(TimeNames.MAIN_TIME, TimeNames.HOURS)) + ":"
+                    + getTwoDigitString(soundElement.get(TimeNames.MAIN_TIME, TimeNames.MINUTES))
+                    + ":" + getTwoDigitString(soundElement.get(TimeNames.MAIN_TIME, TimeNames.SECONDS));
+        }
+        return getTwoDigitString(soundElement.get(TimeNames.CHRONO_TIME, TimeNames.HOURS)) + ":"
+                + getTwoDigitString(soundElement.get(TimeNames.CHRONO_TIME, TimeNames.MINUTES))
+                + ":" + getTwoDigitString(soundElement.get(TimeNames.CHRONO_TIME, TimeNames.SECONDS));
     }
 
     private String getTwoDigitString(int number) {

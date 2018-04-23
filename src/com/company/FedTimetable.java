@@ -16,6 +16,9 @@ public class FedTimetable {
     private PlaylistDatabase playlistDatabase;
     private JList<String> list = new JList<>();
 
+    private JButton buttonForEdit;
+    private JButton buttonForRemove;
+
     public FedTimetable(Application application) {
         this.application = application;
     }
@@ -36,8 +39,7 @@ public class FedTimetable {
         scrollPane.setBounds(10, 10, FRAME_WIDTH - 40, 500);
         frame.add(scrollPane);
 
-        JButton buttonForEdit = new JButton("Edit");
-        buttonForEdit.setEnabled(false);
+        buttonForEdit = new JButton("Edit");
         buttonForEdit.setBounds(230, FRAME_HEIGHT - 80, 100, 30);
         buttonForEdit.addActionListener(new ActionListener() {
             @Override
@@ -58,14 +60,14 @@ public class FedTimetable {
         });
         frame.add(buttonForCreate);
 
-        JButton buttonForRemove = new JButton("Remove");
+        buttonForRemove = new JButton("Remove");
         buttonForRemove.setBounds(120, FRAME_HEIGHT - 80, 100, 30);
         buttonForRemove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 playlistDatabase.remove(list.getSelectedIndex());
                 refresh();
-                buttonForEdit.setEnabled(false);
+                checkEnablingButtons();
                 application.serialize(playlistDatabase);
             }
         });
@@ -79,7 +81,7 @@ public class FedTimetable {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                buttonForEdit.setEnabled(true);
+                checkEnablingButtons();
             }
 
             @Override
@@ -98,6 +100,8 @@ public class FedTimetable {
             }
         });
 
+        checkEnablingButtons();
+
         frame.repaint();
         frame.revalidate();
 
@@ -114,5 +118,11 @@ public class FedTimetable {
 
     public void setDatabase(PlaylistDatabase playlistDatabase) {
         this.playlistDatabase = playlistDatabase;
+    }
+
+    public void checkEnablingButtons() {
+        boolean isSelected = list.getSelectedIndex() != -1;
+        buttonForEdit.setEnabled(isSelected);
+        buttonForRemove.setEnabled(isSelected);
     }
 }
