@@ -7,13 +7,18 @@ public class SoundElement implements Serializable {
     private int chronoTime;
     private String title;
     private boolean[] weekDays;
+    private int id;
 
-    public SoundElement(int mainTime, int chronoTime, String title, boolean[] weekDays) {
+    public SoundElement(int mainTime, int chronoTime, String title, boolean[] weekDays, int id) {
         this.mainTime = mainTime;
         this.chronoTime = chronoTime;
         this.title = title;
-
         this.weekDays = weekDays;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public int get(TimeNames timeType, TimeNames timeUnit) {
@@ -23,7 +28,7 @@ public class SoundElement implements Serializable {
         } else {
             time = chronoTime;
         }
-        int hours = time / 60/ 60;
+        int hours = time / 60 / 60;
         int minutes = (time - hours * 60 * 60) / 60;
         int seconds = time - minutes * 60 - hours * 60 * 60;
         if (timeUnit == TimeNames.HOURS) {

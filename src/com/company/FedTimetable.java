@@ -125,4 +125,13 @@ public class FedTimetable {
         buttonForEdit.setEnabled(isSelected);
         buttonForRemove.setEnabled(isSelected);
     }
+
+    public void selectLine(int id) {
+        for (int i = 0; i < playlistDatabase.getSize(); i++) {
+            if (playlistDatabase.get(i).getId() == id) {
+                list.setSelectedIndex(i);
+                return;
+            }
+        }
+    }
 }

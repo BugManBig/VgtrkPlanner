@@ -118,7 +118,8 @@ public class ContextFrame {
                 }
                 int mainTime = hours * 60 * 60 + minutes * 60 + seconds;
                 int chronoTime = chronoHours * 60 * 60 + chronoMinutes * 60 + chronoSeconds;
-                SoundElement soundElement = new SoundElement(mainTime, chronoTime, title, weekDays);
+                int uniqueId = playlistDatabase.getUniqueId();
+                SoundElement soundElement = new SoundElement(mainTime, chronoTime, title, weekDays, uniqueId);
                 if (lineId == -1) {
                     playlistDatabase.add(soundElement);
                 } else {
@@ -126,6 +127,7 @@ public class ContextFrame {
                 }
                 frame.dispose();
                 fedTimetable.refresh();
+                fedTimetable.selectLine(uniqueId);
                 fedTimetable.checkEnablingButtons();
                 application.serialize(playlistDatabase);
             }

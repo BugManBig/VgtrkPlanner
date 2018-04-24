@@ -6,10 +6,15 @@ import java.util.List;
 
 public class PlaylistDatabase implements Serializable {
     private List<SoundElement> soundElements = new ArrayList<>();
+    private int id = 0;
 
     public void add(SoundElement soundElement) {
         soundElements.add(soundElement);
         sort();
+    }
+
+    public int getUniqueId() {
+        return id++;
     }
 
     public void remove(int id) {
@@ -26,6 +31,7 @@ public class PlaylistDatabase implements Serializable {
 
     public void set(int id, SoundElement soundElement) {
         soundElements.set(id, soundElement);
+        sort();
     }
 
     public String getPreparedString(int id) {
