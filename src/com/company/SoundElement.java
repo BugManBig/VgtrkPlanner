@@ -21,9 +21,9 @@ public class SoundElement implements Serializable {
         return id;
     }
 
-    public int get(TimeNames timeType, TimeNames timeUnit) {
+    public int get(boolean isMainTime, TimeNames timeUnit) {
         int time;
-        if (timeType == TimeNames.MAIN_TIME) {
+        if (isMainTime) {
             time = mainTime;
         } else {
             time = chronoTime;

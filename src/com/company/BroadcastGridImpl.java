@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BroadcastGridImpl implements ListenersActions {
+public class BroadcastGridImpl implements FrameActions {
     @Override
     public ActionListener getListenerForEditButton(PlaylistDatabase playlistDatabase, FrameWithList frameWithList,
                                                    Application application, JButton buttonForEdit, JList<String> list) {
@@ -39,5 +39,14 @@ public class BroadcastGridImpl implements ListenersActions {
                 application.serialize(playlistDatabase);
             }
         };
+    }
+
+    @Override
+    public String[] getDataForList(PlaylistDatabase playlistDatabase) {
+        String[] playlistLines = new String[playlistDatabase.getSize()];
+        for (int i = 0; i < playlistLines.length; i++) {
+            playlistLines[i] = playlistDatabase.getPreparedString(i);
+        }
+        return playlistLines;
     }
 }

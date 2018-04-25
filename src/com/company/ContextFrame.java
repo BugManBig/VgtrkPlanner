@@ -77,12 +77,12 @@ public class ContextFrame {
 
         if (lineId != -1) {
             SoundElement soundElement = playlistDatabase.get(lineId);
-            writeValueInField(hoursText, TimeNames.MAIN_TIME, TimeNames.HOURS, soundElement);
-            writeValueInField(minutesText, TimeNames.MAIN_TIME, TimeNames.MINUTES, soundElement);
-            writeValueInField(secondsText, TimeNames.MAIN_TIME, TimeNames.SECONDS, soundElement);
-            writeValueInField(chronoHoursText, TimeNames.CHRONO_TIME, TimeNames.HOURS, soundElement);
-            writeValueInField(chronoMinutesText, TimeNames.CHRONO_TIME, TimeNames.MINUTES, soundElement);
-            writeValueInField(chronoSecondsText, TimeNames.CHRONO_TIME, TimeNames.SECONDS, soundElement);
+            writeValueInField(hoursText, true, TimeNames.HOURS, soundElement);
+            writeValueInField(minutesText, true, TimeNames.MINUTES, soundElement);
+            writeValueInField(secondsText, true, TimeNames.SECONDS, soundElement);
+            writeValueInField(chronoHoursText, false, TimeNames.HOURS, soundElement);
+            writeValueInField(chronoMinutesText, false, TimeNames.MINUTES, soundElement);
+            writeValueInField(chronoSecondsText, false, TimeNames.SECONDS, soundElement);
             titleTextfield.setText(soundElement.getTitle());
             boolean[] checkBoxesValues = soundElement.getWeekDays();
             for (int i = 0; i < 7; i++) {
@@ -179,7 +179,7 @@ public class ContextFrame {
         return checkBoxes;
     }
 
-    private void writeValueInField(JTextField textField, TimeNames timeType, TimeNames timeUnit, SoundElement soundElement) {
-        textField.setText(String.valueOf(soundElement.get(timeType, timeUnit)));
+    private void writeValueInField(JTextField textField, boolean isMainTime, TimeNames timeUnit, SoundElement soundElement) {
+        textField.setText(String.valueOf(soundElement.get(isMainTime, timeUnit)));
     }
 }

@@ -36,27 +36,9 @@ public class PlaylistDatabase implements Serializable {
 
     public String getPreparedString(int id) {
         SoundElement soundElement = soundElements.get(id);
-        return getStandardTime(soundElement, true) + "    "
-                + getStandardTime(soundElement, false) + "    "
+        return AdditionalUtilities.getStandardTime(soundElement, true) + "    "
+                + AdditionalUtilities.getStandardTime(soundElement, false) + "    "
                 + getWeekString(soundElement.getWeekDays()) + "   " + soundElement.getTitle();
-    }
-
-    private String getStandardTime(SoundElement soundElement, boolean isMain) {
-        if (isMain) {
-            return getTwoDigitString(soundElement.get(TimeNames.MAIN_TIME, TimeNames.HOURS)) + ":"
-                    + getTwoDigitString(soundElement.get(TimeNames.MAIN_TIME, TimeNames.MINUTES))
-                    + ":" + getTwoDigitString(soundElement.get(TimeNames.MAIN_TIME, TimeNames.SECONDS));
-        }
-        return getTwoDigitString(soundElement.get(TimeNames.CHRONO_TIME, TimeNames.HOURS)) + ":"
-                + getTwoDigitString(soundElement.get(TimeNames.CHRONO_TIME, TimeNames.MINUTES))
-                + ":" + getTwoDigitString(soundElement.get(TimeNames.CHRONO_TIME, TimeNames.SECONDS));
-    }
-
-    private String getTwoDigitString(int number) {
-        if (number < 10) {
-            return "0" + number;
-        }
-        return String.valueOf(number);
     }
 
     private String getWeekString(boolean[] weekDays) {

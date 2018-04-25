@@ -8,6 +8,13 @@ public class Application {
     public void run() {
         FrameWithList frameWithList = new FrameWithList(new BroadcastGridImpl(), getDatabaseFromFile(), this);
         frameWithList.create();
+        /*
+        PlaylistDatabase federalPlaylistDatabase = new PlaylistDatabase();
+        FederalGenerator federalGenerator = new FederalGenerator(federalPlaylistDatabase, getDatabaseFromFile());
+        federalGenerator.generate();
+        FrameWithList frameWithList = new FrameWithList(new FederalTimetableImpl(), federalPlaylistDatabase, this);
+        frameWithList.create();
+        */
     }
 
     private PlaylistDatabase getDatabaseFromFile() {

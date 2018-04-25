@@ -16,10 +16,10 @@ public class FrameWithList {
     private JButton buttonForEdit;
     private JButton buttonForRemove;
 
-    private ListenersActions listenersActions;
+    private FrameActions frameActions;
 
-    public FrameWithList(ListenersActions listenersActions, PlaylistDatabase playlistDatabase, Application application) {
-        this.listenersActions = listenersActions;
+    public FrameWithList(FrameActions frameActions, PlaylistDatabase playlistDatabase, Application application) {
+        this.frameActions = frameActions;
         this.playlistDatabase = playlistDatabase;
         this.application = application;
     }
@@ -36,7 +36,7 @@ public class FrameWithList {
 
         list.setFont(new Font("Courier new", Font.PLAIN, 14));
 
-        ActionListener listenerForEditButton = listenersActions.getListenerForEditButton(playlistDatabase, frameWithList,
+        ActionListener listenerForEditButton = frameActions.getListenerForEditButton(playlistDatabase, frameWithList,
                 application, buttonForEdit, list);
 
         list.addMouseListener(new DoubleClickListener(listenerForEditButton));
@@ -52,13 +52,13 @@ public class FrameWithList {
 
         JButton buttonForCreate = new JButton("Create");
         buttonForCreate.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
-        buttonForCreate.addActionListener(listenersActions.getListenerForCreateButton(playlistDatabase,
+        buttonForCreate.addActionListener(frameActions.getListenerForCreateButton(playlistDatabase,
                 frameWithList, application));
         frame.add(buttonForCreate);
 
         buttonForRemove = new JButton("Remove");
         buttonForRemove.setBounds(120, FRAME_HEIGHT - 80, 100, 30);
-        buttonForRemove.addActionListener(listenersActions.getListenerForRemoveButton(playlistDatabase, frameWithList,
+        buttonForRemove.addActionListener(frameActions.getListenerForRemoveButton(playlistDatabase, frameWithList,
                 application, list));
         frame.add(buttonForRemove);
 
@@ -66,18 +66,14 @@ public class FrameWithList {
 
         checkEnablingButtons();
 
+        refreshListData();
+
         frame.repaint();
         frame.revalidate();
-
-        refreshListData();
     }
 
     public void refreshListData() {
-        String[] playlistLines = new String[playlistDatabase.getSize()];
-        for (int i = 0; i < playlistLines.length; i++) {
-            playlistLines[i] = playlistDatabase.getPreparedString(i);
-        }
-        list.setListData(playlistLines);
+        list.setListData(frameActions.getDataForList(playlistDatabase));
     }
 
     public void checkEnablingButtons() {
