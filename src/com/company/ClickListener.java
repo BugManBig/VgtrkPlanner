@@ -3,11 +3,11 @@ package com.company;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class ListenerForListClick implements MouseListener {
-    private FedTimetable fedTimetable;
+public class ClickListener implements MouseListener {
+    private FrameWithList frameWithList;
 
-    public ListenerForListClick(FedTimetable fedTimetable) {
-        this.fedTimetable = fedTimetable;
+    public ClickListener(FrameWithList fedTimetable) {
+        this.frameWithList = fedTimetable;
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ListenerForListClick implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        fedTimetable.checkEnablingButtons();
+        frameWithList.checkEnablingButtons();
     }
 
     @Override

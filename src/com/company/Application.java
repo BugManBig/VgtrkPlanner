@@ -6,9 +6,8 @@ public class Application {
     private static final String PATH = "D:/AMyasnikov/GitHub/base.bin";
 
     public void run() {
-        FedTimetable fedTimetable = new FedTimetable(this);
-        fedTimetable.setDatabase(getDatabaseFromFile());
-        fedTimetable.create();
+        FrameWithList frameWithList = new FrameWithList(new BroadcastGridImpl(), getDatabaseFromFile(), this);
+        frameWithList.create();
     }
 
     private PlaylistDatabase getDatabaseFromFile() {
@@ -26,6 +25,7 @@ public class Application {
             oos.writeObject(playlistDatabase);
             oos.flush();
             oos.close();
+            fos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,6 +37,8 @@ public class Application {
             FileInputStream fis = new FileInputStream(PATH);
             ObjectInputStream oin = new ObjectInputStream(fis);
             importedDatabase = (PlaylistDatabase) oin.readObject();
+            oin.close();
+            fis.close();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

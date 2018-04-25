@@ -9,7 +9,6 @@ public class ContextFrame {
     private int lineId = -1;
 
     public ContextFrame() {
-
     }
 
     public ContextFrame(int lineId) {
@@ -17,7 +16,7 @@ public class ContextFrame {
     }
 
     public void createFrameForNewElement(PlaylistDatabase playlistDatabase,
-                                         FedTimetable fedTimetable, Application application, JButton button) {
+                                         FrameWithList frameWithList, Application application) {
         JFrame frame = new JFrame("Create element");
         frame.setSize(400, 200);
         frame.setLocation(600, 400);
@@ -126,9 +125,9 @@ public class ContextFrame {
                     playlistDatabase.set(lineId, soundElement);
                 }
                 frame.dispose();
-                fedTimetable.refreshListData();
-                fedTimetable.selectLine(uniqueId);
-                fedTimetable.checkEnablingButtons();
+                frameWithList.refreshListData();
+                frameWithList.selectLine(uniqueId);
+                frameWithList.checkEnablingButtons();
                 application.serialize(playlistDatabase);
             }
         });
@@ -169,10 +168,10 @@ public class ContextFrame {
 
     private JCheckBox[] addCheckboxes(JFrame frame) {
         JCheckBox[] checkBoxes = new JCheckBox[7];
-        String[] days = {"Mon", "Tue", "Wen", "Thu", "Fri", "Sat", "Sun"};
+        WeekDays[] days = WeekDays.values();
         for (int i = 0; i < 7; i++) {
             JCheckBox checkBox = new JCheckBox();
-            checkBox.setText(days[i]);
+            checkBox.setText(days[i].toString());
             checkBox.setBounds(10 + i * 50, 80, 52, 25);
             frame.add(checkBox);
             checkBoxes[i] = checkBox;

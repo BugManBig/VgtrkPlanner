@@ -43,31 +43,11 @@ public class SoundElement implements Serializable {
         return mainTime;
     }
 
-    public void setMainTime(int mainTime) {
-        this.mainTime = mainTime;
-    }
-
-    public int getChronoTime() {
-        return chronoTime;
-    }
-
-    public void setChronoTime(int chronoTime) {
-        this.chronoTime = chronoTime;
-    }
-
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public boolean[] getWeekDays() {
         return weekDays;
-    }
-
-    public void setWeekDays(boolean[] weekDays) {
-        this.weekDays = weekDays;
     }
 }

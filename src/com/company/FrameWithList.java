@@ -2,27 +2,30 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FedTimetable {
-    private Application application;
-
+public class FrameWithList {
     private static final int FRAME_WIDTH = 900;
     private static final int FRAME_HEIGHT = 600;
 
     private PlaylistDatabase playlistDatabase;
+    private Application application;
+
     private JList<String> list = new JList<>();
 
     private JButton buttonForEdit;
     private JButton buttonForRemove;
 
-    public FedTimetable(Application application) {
+    private ListenersActions listenersActions;
+
+    public FrameWithList(ListenersActions listenersActions, PlaylistDatabase playlistDatabase, Application application) {
+        this.listenersActions = listenersActions;
+        this.playlistDatabase = playlistDatabase;
         this.application = application;
     }
 
     public void create() {
-        FedTimetable fedTimetable = this;
+        FrameWithList frameWithList = this;
 
         JFrame frame = new JFrame("Broadcast grid");
         frame.setLocation(500, 200);
@@ -33,13 +36,8 @@ public class FedTimetable {
 
         list.setFont(new Font("Courier new", Font.PLAIN, 14));
 
-        ActionListener listenerForEditButton = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new ContextFrame(list.getSelectedIndex()).createFrameForNewElement(playlistDatabase, fedTimetable,
-                        application, buttonForEdit);
-            }
-        };
+        ActionListener listenerForEditButton = listenersActions.getListenerForEditButton(playlistDatabase, frameWithList,
+                application, buttonForEdit, list);
 
         list.addMouseListener(new DoubleClickListener(listenerForEditButton));
 
@@ -54,28 +52,17 @@ public class FedTimetable {
 
         JButton buttonForCreate = new JButton("Create");
         buttonForCreate.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
-        buttonForCreate.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new ContextFrame().createFrameForNewElement(playlistDatabase, fedTimetable, application, buttonForEdit);
-            }
-        });
+        buttonForCreate.addActionListener(listenersActions.getListenerForCreateButton(playlistDatabase,
+                frameWithList, application));
         frame.add(buttonForCreate);
 
         buttonForRemove = new JButton("Remove");
         buttonForRemove.setBounds(120, FRAME_HEIGHT - 80, 100, 30);
-        buttonForRemove.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                playlistDatabase.remove(list.getSelectedIndex());
-                refreshListData();
-                checkEnablingButtons();
-                application.serialize(playlistDatabase);
-            }
-        });
+        buttonForRemove.addActionListener(listenersActions.getListenerForRemoveButton(playlistDatabase, frameWithList,
+                application, list));
         frame.add(buttonForRemove);
 
-        list.addMouseListener(new ListenerForListClick(this));
+        list.addMouseListener(new ClickListener(this));
 
         checkEnablingButtons();
 
@@ -91,10 +78,6 @@ public class FedTimetable {
             playlistLines[i] = playlistDatabase.getPreparedString(i);
         }
         list.setListData(playlistLines);
-    }
-
-    public void setDatabase(PlaylistDatabase playlistDatabase) {
-        this.playlistDatabase = playlistDatabase;
     }
 
     public void checkEnablingButtons() {

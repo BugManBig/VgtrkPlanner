@@ -60,7 +60,7 @@ public class PlaylistDatabase implements Serializable {
     }
 
     private String getWeekString(boolean[] weekDays) {
-        String[] days = {"Mon", "Tue", "Wen", "Thu", "Fri", "Sat", "Sun"};
+        WeekDays[] days = WeekDays.values();
         String result = "";
         for (int i = 0; i < 7; i++) {
             if (weekDays[i]) {
