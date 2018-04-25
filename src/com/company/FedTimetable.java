@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class FedTimetable {
     private Application application;
@@ -26,7 +24,7 @@ public class FedTimetable {
     public void create() {
         FedTimetable fedTimetable = this;
 
-        JFrame frame = new JFrame("FedTimetable");
+        JFrame frame = new JFrame("Broadcast grid");
         frame.setLocation(500, 200);
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -35,19 +33,23 @@ public class FedTimetable {
 
         list.setFont(new Font("Courier new", Font.PLAIN, 14));
 
+        ActionListener listenerForEditButton = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ContextFrame(list.getSelectedIndex()).createFrameForNewElement(playlistDatabase, fedTimetable,
+                        application, buttonForEdit);
+            }
+        };
+
+        list.addMouseListener(new DoubleClickListener(listenerForEditButton));
+
         JScrollPane scrollPane = new JScrollPane(list);
         scrollPane.setBounds(10, 10, FRAME_WIDTH - 40, 500);
         frame.add(scrollPane);
 
         buttonForEdit = new JButton("Edit");
         buttonForEdit.setBounds(230, FRAME_HEIGHT - 80, 100, 30);
-        buttonForEdit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new ContextFrame(list.getSelectedIndex()).createFrameForNewElement(playlistDatabase, fedTimetable,
-                        application, buttonForEdit);
-            }
-        });
+        buttonForEdit.addActionListener(listenerForEditButton);
         frame.add(buttonForEdit);
 
         JButton buttonForCreate = new JButton("Create");
@@ -66,49 +68,24 @@ public class FedTimetable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 playlistDatabase.remove(list.getSelectedIndex());
-                refresh();
+                refreshListData();
                 checkEnablingButtons();
                 application.serialize(playlistDatabase);
             }
         });
         frame.add(buttonForRemove);
 
-        list.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                checkEnablingButtons();
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
+        list.addMouseListener(new ListenerForListClick(this));
 
         checkEnablingButtons();
 
         frame.repaint();
         frame.revalidate();
 
-        refresh();
+        refreshListData();
     }
 
-    public void refresh() {
+    public void refreshListData() {
         String[] playlistLines = new String[playlistDatabase.getSize()];
         for (int i = 0; i < playlistLines.length; i++) {
             playlistLines[i] = playlistDatabase.getPreparedString(i);

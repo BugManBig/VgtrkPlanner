@@ -126,7 +126,7 @@ public class ContextFrame {
                     playlistDatabase.set(lineId, soundElement);
                 }
                 frame.dispose();
-                fedTimetable.refresh();
+                fedTimetable.refreshListData();
                 fedTimetable.selectLine(uniqueId);
                 fedTimetable.checkEnablingButtons();
                 application.serialize(playlistDatabase);
