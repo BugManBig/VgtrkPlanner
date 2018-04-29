@@ -66,16 +66,28 @@ public class ContextFrame {
         titleTextfield.setBounds(60, 50, 315, 25);
         frame.add(titleTextfield);
 
-        hoursText.addKeyListener(new KeyImpl(hoursText, minutesText));
-        minutesText.addKeyListener(new KeyImpl(minutesText, secondsText));
-        secondsText.addKeyListener(new KeyImpl(secondsText, chronoHoursText));
-        chronoHoursText.addKeyListener(new KeyImpl(chronoHoursText, chronoMinutesText));
-        chronoMinutesText.addKeyListener(new KeyImpl(chronoMinutesText, chronoSecondsText));
-        chronoSecondsText.addKeyListener(new KeyImpl(chronoSecondsText, titleTextfield));
+        addClickListnerToTextField(hoursText);
+        addClickListnerToTextField(minutesText);
+        addClickListnerToTextField(secondsText);
+        addClickListnerToTextField(chronoHoursText);
+        addClickListnerToTextField(chronoMinutesText);
+        addClickListnerToTextField(chronoSecondsText);
+        addClickListnerToTextField(titleTextfield);
+
+        boolean editMode = lineId > -1;
+
+        if (!editMode) {
+            hoursText.addKeyListener(new KeyAutoJump(hoursText, minutesText));
+            minutesText.addKeyListener(new KeyAutoJump(minutesText, secondsText));
+            secondsText.addKeyListener(new KeyAutoJump(secondsText, chronoHoursText));
+            chronoHoursText.addKeyListener(new KeyAutoJump(chronoHoursText, chronoMinutesText));
+            chronoMinutesText.addKeyListener(new KeyAutoJump(chronoMinutesText, chronoSecondsText));
+            chronoSecondsText.addKeyListener(new KeyAutoJump(chronoSecondsText, titleTextfield));
+        }
 
         JCheckBox[] checkBoxes = addCheckboxes(frame);
 
-        if (lineId != -1) {
+        if (editMode) {
             SoundElement soundElement = playlistDatabase.get(lineId);
             writeValueInField(hoursText, true, TimeNames.HOURS, soundElement);
             writeValueInField(minutesText, true, TimeNames.MINUTES, soundElement);
@@ -92,10 +104,8 @@ public class ContextFrame {
             }
         }
 
-        hoursText.selectAll();
-
         JButton buttonOk = new JButton("Create");
-        if (lineId != -1) {
+        if (editMode) {
             buttonOk.setText("Save");
         }
         buttonOk.setBounds(10, 120, 100, 30);
@@ -119,7 +129,7 @@ public class ContextFrame {
                 int chronoTime = chronoHours * 60 * 60 + chronoMinutes * 60 + chronoSeconds;
                 int uniqueId = playlistDatabase.getUniqueId();
                 SoundElement soundElement = new SoundElement(mainTime, chronoTime, title, weekDays, uniqueId);
-                if (lineId == -1) {
+                if (!editMode) {
                     playlistDatabase.add(soundElement);
                 } else {
                     playlistDatabase.set(lineId, soundElement);
@@ -181,5 +191,9 @@ public class ContextFrame {
 
     private void writeValueInField(JTextField textField, boolean isMainTime, TimeNames timeUnit, SoundElement soundElement) {
         textField.setText(String.valueOf(soundElement.get(isMainTime, timeUnit)));
+    }
+
+    private void addClickListnerToTextField(JTextField textField) {
+        textField.addMouseListener(new ClickAutoSelect(textField));
     }
 }
