@@ -42,7 +42,7 @@ public class FrameWithList {
         list.addMouseListener(new DoubleClickListener(listenerForEditButton));
 
         JScrollPane scrollPane = new JScrollPane(list);
-        scrollPane.setBounds(10, 10, FRAME_WIDTH - 40, 500);
+        scrollPane.setBounds(10, 10, FRAME_WIDTH - 40, FRAME_HEIGHT - 100);
         frame.add(scrollPane);
 
         buttonForEdit = new JButton("Edit");

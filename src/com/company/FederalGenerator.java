@@ -1,11 +1,8 @@
 package com.company;
 
-import java.util.ArrayList;
-
 public class FederalGenerator {
     private PlaylistDatabase playlistDatabase;
     private PlaylistDatabase federalPlaylistDatabase;
-    private ArrayList<String> federalTimetable = new ArrayList<>();
 
     public FederalGenerator(PlaylistDatabase federalPlaylistDatabase, PlaylistDatabase playlistDatabase) {
         this.federalPlaylistDatabase = federalPlaylistDatabase;
