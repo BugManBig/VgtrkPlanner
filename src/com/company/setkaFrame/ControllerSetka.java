@@ -8,4 +8,6 @@ public interface ControllerSetka {
     void setModel(Model model);
 
     void updateDataInPlaylist();
+
+    void handleAddButtonClick();
 }

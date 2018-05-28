@@ -28,7 +28,6 @@ public class ViewSetkaFrame implements ViewSetka {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        frame.setVisible(true);
         frame.setLayout(null);
 
         list = new JList<>();
@@ -36,8 +35,14 @@ public class ViewSetkaFrame implements ViewSetka {
         playlist.setBounds(10, 10, FRAME_WIDTH - 50, FRAME_HEIGHT - 100);
         frame.add(playlist);
 
+        JButton addButton = new JButton("Add");
+        addButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
+        addButton.addActionListener(e -> controllerSetka.handleAddButtonClick());
+        frame.add(addButton);
+
         frame.repaint();
         frame.revalidate();
         frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }

@@ -1,6 +1,8 @@
 package com.company.setkaFrame;
 
 import com.company.Model;
+import com.company.federalFrame.ViewFederal;
+import com.company.federalFrame.ViewFederalFrame;
 
 public class ControllerSetkaFrame implements ControllerSetka {
     private ViewSetka viewSetka;
@@ -23,5 +25,11 @@ public class ControllerSetkaFrame implements ControllerSetka {
             data[i] = model.getElementFromSetka(i).getDataString();
         }
         viewSetka.setDataToList(data);
+    }
+
+    @Override
+    public void handleAddButtonClick() {
+        ViewFederal viewFederal = new ViewFederalFrame();
+        viewFederal.create();
     }
 }
