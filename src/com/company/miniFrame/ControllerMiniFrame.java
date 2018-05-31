@@ -28,8 +28,12 @@ public class ControllerMiniFrame implements ControllerMini {
 
     @Override
     public void handleOkButtonClick() {
+        model.addElementToSetka(new PlanElement(
+                viewMini.getTitleText(),
+                viewMini.getStartTime(),
+                viewMini.getDurationTime(),
+                new SelectedDays(new boolean[7])));
         viewMini.close();
-        model.addElementToSetka(new PlanElement(viewMini.getTitleText(), new Chrono(0, 0), new Chrono(50, 5), new SelectedDays(new boolean[7])));
         controllerSetka.updateDataInPlaylist();
     }
 }

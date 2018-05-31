@@ -1,6 +1,7 @@
 package com.company.setkaFrame;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ViewSetkaFrame implements ViewSetka {
     private String[] listData;
@@ -33,6 +34,7 @@ public class ViewSetkaFrame implements ViewSetka {
         list = new JList<>();
         JScrollPane playlist = new JScrollPane(list);
         playlist.setBounds(10, 10, FRAME_WIDTH - 50, FRAME_HEIGHT - 100);
+        list.setFont(new Font("Courier new", Font.PLAIN, 14));
         frame.add(playlist);
 
         JButton addButton = new JButton("Add");

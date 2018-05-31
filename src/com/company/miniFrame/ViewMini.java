@@ -1,5 +1,7 @@
 package com.company.miniFrame;
 
+import com.company.Chrono;
+
 public interface ViewMini {
     void setController(ControllerMini controllerMini);
 
@@ -8,4 +10,8 @@ public interface ViewMini {
     void close();
     
     String getTitleText();
+    
+    Chrono getStartTime();
+    
+    Chrono getDurationTime();
 }
