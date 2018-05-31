@@ -1,8 +1,10 @@
 package com.company.setkaFrame;
 
 import com.company.Model;
-import com.company.federalFrame.ViewFederal;
-import com.company.federalFrame.ViewFederalFrame;
+import com.company.miniFrame.ControllerMini;
+import com.company.miniFrame.ControllerMiniFrame;
+import com.company.miniFrame.ViewMini;
+import com.company.miniFrame.ViewMiniFrame;
 
 public class ControllerSetkaFrame implements ControllerSetka {
     private ViewSetka viewSetka;
@@ -29,7 +31,14 @@ public class ControllerSetkaFrame implements ControllerSetka {
 
     @Override
     public void handleAddButtonClick() {
-        ViewFederal viewFederal = new ViewFederalFrame();
-        viewFederal.create();
+        ViewMini viewMini = new ViewMiniFrame();
+
+        ControllerMini controllerMini = new ControllerMiniFrame();
+        controllerMini.setModel(model);
+        controllerMini.setView(viewMini);
+        controllerMini.setControllerSetka(this);
+
+        viewMini.setController(controllerMini);
+        viewMini.create();
     }
 }
