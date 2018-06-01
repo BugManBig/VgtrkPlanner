@@ -14,4 +14,6 @@ public interface ViewMini {
     Chrono getStartTime();
     
     Chrono getDurationTime();
+    
+    boolean[] getCheckboxesState();
 }

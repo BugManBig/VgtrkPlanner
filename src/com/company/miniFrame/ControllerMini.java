@@ -11,4 +11,6 @@ public interface ControllerMini {
     void setControllerSetka(ControllerSetka controllerSetka);
     
     void handleOkButtonClick();
+    
+    void handleCancelButtonClick();
 }

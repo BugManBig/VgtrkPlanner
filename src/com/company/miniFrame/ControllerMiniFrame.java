@@ -1,6 +1,5 @@
 package com.company.miniFrame;
 
-import com.company.Chrono;
 import com.company.Model;
 import com.company.PlanElement;
 import com.company.SelectedDays;
@@ -32,8 +31,13 @@ public class ControllerMiniFrame implements ControllerMini {
                 viewMini.getTitleText(),
                 viewMini.getStartTime(),
                 viewMini.getDurationTime(),
-                new SelectedDays(new boolean[7])));
+                new SelectedDays(viewMini.getCheckboxesState())));
         viewMini.close();
         controllerSetka.updateDataInPlaylist();
+    }
+
+    @Override
+    public void handleCancelButtonClick() {
+        viewMini.close();
     }
 }

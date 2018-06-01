@@ -1,6 +1,7 @@
 package com.company.miniFrame;
 
 import com.company.Chrono;
+import com.company.DaysOfWeek;
 
 import javax.swing.*;
 
@@ -9,7 +10,7 @@ public class ViewMiniFrame implements ViewMini {
 
     private JFrame frame;
     
-    private static final int FRAME_WIDTH = 400;
+    private static final int FRAME_WIDTH = 500;
     private static final int FRAME_HEIGHT = 200;
     
     private JTextField titleTextfield;
@@ -21,6 +22,8 @@ public class ViewMiniFrame implements ViewMini {
     private JTextField durationHrsTextfield;
     private JTextField durationMinTextfield;
     private JTextField durationSecTextfield;
+    
+    private JCheckBox[] checkBoxes;
 
     @Override
     public void setController(ControllerMini controllerMini) {
@@ -68,6 +71,20 @@ public class ViewMiniFrame implements ViewMini {
         okButton.addActionListener(e -> controllerMini.handleOkButtonClick());
         frame.add(okButton);
         
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.setBounds(FRAME_WIDTH - 125, FRAME_HEIGHT - 80, 100, 30);
+        cancelButton.addActionListener(e -> controllerMini.handleCancelButtonClick());
+        frame.add(cancelButton);
+        
+        checkBoxes = new JCheckBox[7];
+        for (int i = 0; i < 7; i++) {
+            JCheckBox checkBox = new JCheckBox();
+            checkBox.setBounds(10 + ((FRAME_WIDTH - 10) / 7) * i, 85, 60, 30);
+            checkBox.setText(DaysOfWeek.values()[i].toString());
+            checkBoxes[i] = checkBox;
+            frame.add(checkBox);
+        }
+        
         frame.repaint();
         frame.revalidate();
         frame.setLocationRelativeTo(null);
@@ -98,5 +115,14 @@ public class ViewMiniFrame implements ViewMini {
                 Integer.parseInt(durationHrsTextfield.getText()),
                 Integer.parseInt(durationMinTextfield.getText()),
                 Integer.parseInt(durationSecTextfield.getText()));
+    }
+
+    @Override
+    public boolean[] getCheckboxesState() {
+        boolean[] result = new boolean[7];
+        for (int i = 0; i < 7; i++) {
+            result[i] = checkBoxes[i].isSelected();
+        }
+        return result;
     }
 }
