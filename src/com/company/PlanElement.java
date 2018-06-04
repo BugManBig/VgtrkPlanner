@@ -6,15 +6,32 @@ public class PlanElement {
     private Chrono lengthTime;
     private SelectedDays selectedDays;
 
+    public String getTitle() {
+        return title;
+    }
+
+    public Chrono getStartTime() {
+        return startTime;
+    }
+
+    public Chrono getDurationTime() {
+        return lengthTime;
+    }
+
+    public SelectedDays getSelectedDays() {
+        return selectedDays;
+    }
+
     public PlanElement(String title, Chrono startTime, Chrono lengthTime, SelectedDays selectedDays) {
         this.title = title;
         this.startTime = startTime;
         this.lengthTime = lengthTime;
         this.selectedDays = selectedDays;
+        
     }
 
     public String getDataString() {
-        return connectViaSplitter("    ", startTime.getTime(), lengthTime.getTime(), selectedDays.getDays(), title);
+        return connectViaSplitter("    ", startTime.getTime(), lengthTime.getTime(), selectedDays.getDaysString(), title);
     }
     
     private String connectViaSplitter(String splitter, String ... data) {

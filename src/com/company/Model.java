@@ -16,4 +16,8 @@ public class Model {
     public int getSize() {
         return setkaElements.size();
     }
+    
+    public void setElementInSetka(int id, PlanElement planElement) {
+        setkaElements.set(id, planElement);
+    }
 }

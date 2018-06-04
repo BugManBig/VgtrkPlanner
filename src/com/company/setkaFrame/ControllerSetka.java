@@ -10,4 +10,6 @@ public interface ControllerSetka {
     void updateDataInPlaylist();
 
     void handleAddButtonClick();
+    
+    void handleEditButtonClick();
 }

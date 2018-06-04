@@ -2,6 +2,7 @@ package com.company.miniFrame;
 
 import com.company.Chrono;
 import com.company.DaysOfWeek;
+import com.company.PlanElement;
 
 import javax.swing.*;
 
@@ -135,6 +136,24 @@ public class ViewMiniFrame implements ViewMini {
     public void setAllCheckboxes() {
         for (JCheckBox checkBox : checkBoxes) {
             checkBox.setSelected(true);
+        }
+    }
+
+    @Override
+    public void setFieldsFromPlanElement(PlanElement planElement) {
+        startHrsTextfield.setText(String.valueOf(planElement.getStartTime().getHours()));
+        startMinTextfield.setText(String.valueOf(planElement.getStartTime().getMinutes()));
+        startSecTextfield.setText(String.valueOf(planElement.getStartTime().getSeconds()));
+        
+        durationHrsTextfield.setText(String.valueOf(planElement.getDurationTime().getHours()));
+        durationMinTextfield.setText(String.valueOf(planElement.getDurationTime().getMinutes()));
+        durationSecTextfield.setText(String.valueOf(planElement.getDurationTime().getSeconds()));
+        
+        titleTextfield.setText(planElement.getTitle());
+        
+        boolean[] daysState = planElement.getSelectedDays().getSelectedDays();
+        for (int i = 0; i < 7; i++) {
+            checkBoxes[i].setSelected(daysState[i]);
         }
     }
 }

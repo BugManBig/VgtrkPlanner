@@ -7,12 +7,16 @@ public class SelectedDays {
         this.selectedDays = selectedDays;
     }
 
-    public String getDays() {
+    public String getDaysString() {
         String string = "";
         for (int i = 0; i < 7; i++) {
             string += selectedDays[i] ? "X" : "_";
             string += " ";
         }
         return string;
+    }
+    
+    public boolean[] getSelectedDays() {
+        return selectedDays;
     }
 }

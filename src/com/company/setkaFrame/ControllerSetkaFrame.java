@@ -1,6 +1,7 @@
 package com.company.setkaFrame;
 
 import com.company.Model;
+import com.company.PlanElement;
 import com.company.miniFrame.ControllerMini;
 import com.company.miniFrame.ControllerMiniFrame;
 import com.company.miniFrame.ViewMini;
@@ -40,5 +41,22 @@ public class ControllerSetkaFrame implements ControllerSetka {
 
         viewMini.setController(controllerMini);
         viewMini.create();
+    }
+
+    @Override
+    public void handleEditButtonClick() {
+        PlanElement planElement = model.getElementFromSetka(viewSetka.getSelectedLine());
+        
+        ViewMini viewMini = new ViewMiniFrame();
+        
+        ControllerMini controllerMini = new ControllerMiniFrame();
+        controllerMini.setView(viewMini);
+        controllerMini.setModel(model);
+        controllerMini.setControllerSetka(this);
+        controllerMini.setSelectedListIndex(viewSetka.getSelectedLine());
+        
+        viewMini.setController(controllerMini);
+        viewMini.create();
+        viewMini.setFieldsFromPlanElement(planElement);
     }
 }

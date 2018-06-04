@@ -15,4 +15,6 @@ public interface ControllerMini {
     void handleCancelButtonClick();
     
     void handleSetAllButtonClick();
+    
+    void setSelectedListIndex(int index);
 }

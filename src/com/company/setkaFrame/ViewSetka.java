@@ -6,4 +6,6 @@ public interface ViewSetka {
     void setDataToList(String[] data);
 
     void create();
+    
+    int getSelectedLine();
 }

@@ -1,6 +1,7 @@
 package com.company.miniFrame;
 
 import com.company.Chrono;
+import com.company.PlanElement;
 
 public interface ViewMini {
     void setController(ControllerMini controllerMini);
@@ -18,4 +19,6 @@ public interface ViewMini {
     boolean[] getCheckboxesState();
     
     void setAllCheckboxes();
+    
+    void setFieldsFromPlanElement(PlanElement planElement);
 }

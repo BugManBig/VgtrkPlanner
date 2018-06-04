@@ -9,6 +9,7 @@ public class ControllerMiniFrame implements ControllerMini {
     private Model model;
     private ViewMini viewMini;
     private ControllerSetka controllerSetka;
+    private int selectedListIndex = -1;
     
     @Override
     public void setModel(Model model) {
@@ -27,11 +28,16 @@ public class ControllerMiniFrame implements ControllerMini {
 
     @Override
     public void handleOkButtonClick() {
-        model.addElementToSetka(new PlanElement(
+        PlanElement planElement = new PlanElement(
                 viewMini.getTitleText(),
                 viewMini.getStartTime(),
                 viewMini.getDurationTime(),
-                new SelectedDays(viewMini.getCheckboxesState())));
+                new SelectedDays(viewMini.getCheckboxesState()));
+        if (selectedListIndex > -1) {
+            model.setElementInSetka(selectedListIndex, planElement);
+        } else {
+            model.addElementToSetka(planElement);
+        }
         viewMini.close();
         controllerSetka.updateDataInPlaylist();
     }
@@ -44,5 +50,10 @@ public class ControllerMiniFrame implements ControllerMini {
     @Override
     public void handleSetAllButtonClick() {
         viewMini.setAllCheckboxes();
+    }
+
+    @Override
+    public void setSelectedListIndex(int index) {
+        selectedListIndex = index;
     }
 }
