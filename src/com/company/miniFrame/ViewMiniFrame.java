@@ -10,7 +10,7 @@ public class ViewMiniFrame implements ViewMini {
 
     private JFrame frame;
     
-    private static final int FRAME_WIDTH = 500;
+    private static final int FRAME_WIDTH = 450;
     private static final int FRAME_HEIGHT = 200;
     
     private JTextField titleTextfield;
@@ -76,6 +76,11 @@ public class ViewMiniFrame implements ViewMini {
         cancelButton.addActionListener(e -> controllerMini.handleCancelButtonClick());
         frame.add(cancelButton);
         
+        JButton setAllButton = new JButton("Set all");
+        setAllButton.setBounds(FRAME_WIDTH / 2 - 50, FRAME_HEIGHT - 80, 100, 30);
+        setAllButton.addActionListener(e -> controllerMini.handleSetAllButtonClick());
+        frame.add(setAllButton);
+        
         checkBoxes = new JCheckBox[7];
         for (int i = 0; i < 7; i++) {
             JCheckBox checkBox = new JCheckBox();
@@ -124,5 +129,12 @@ public class ViewMiniFrame implements ViewMini {
             result[i] = checkBoxes[i].isSelected();
         }
         return result;
+    }
+
+    @Override
+    public void setAllCheckboxes() {
+        for (JCheckBox checkBox : checkBoxes) {
+            checkBox.setSelected(true);
+        }
     }
 }

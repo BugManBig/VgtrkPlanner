@@ -13,4 +13,6 @@ public interface ControllerMini {
     void handleOkButtonClick();
     
     void handleCancelButtonClick();
+    
+    void handleSetAllButtonClick();
 }

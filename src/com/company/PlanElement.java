@@ -14,6 +14,15 @@ public class PlanElement {
     }
 
     public String getDataString() {
-        return startTime.getTime() + " " + lengthTime.getTime() + " " + selectedDays.getDays() + " " + title;
+        return connectViaSplitter("    ", startTime.getTime(), lengthTime.getTime(), selectedDays.getDays(), title);
+    }
+    
+    private String connectViaSplitter(String splitter, String ... data) {
+        String result = "";
+        for (int i = 0; i < data.length - 1; i++) {
+            result += data[i] + splitter;
+        }
+        result += data[data.length - 1];
+        return result;
     }
 }

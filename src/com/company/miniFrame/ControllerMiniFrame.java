@@ -40,4 +40,9 @@ public class ControllerMiniFrame implements ControllerMini {
     public void handleCancelButtonClick() {
         viewMini.close();
     }
+
+    @Override
+    public void handleSetAllButtonClick() {
+        viewMini.setAllCheckboxes();
+    }
 }
