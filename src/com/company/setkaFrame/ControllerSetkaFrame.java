@@ -45,6 +45,8 @@ public class ControllerSetkaFrame implements ControllerSetka {
 
     @Override
     public void handleEditButtonClick() {
+        if (viewSetka.getSelectedLine() == -1) return;
+        
         PlanElement planElement = model.getElementFromSetka(viewSetka.getSelectedLine());
         
         ViewMini viewMini = new ViewMiniFrame();

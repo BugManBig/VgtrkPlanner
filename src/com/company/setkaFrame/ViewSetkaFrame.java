@@ -1,7 +1,10 @@
 package com.company.setkaFrame;
 
+import com.company.DoubleClickListener;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class ViewSetkaFrame implements ViewSetka {
     private String[] listData;
@@ -31,20 +34,24 @@ public class ViewSetkaFrame implements ViewSetka {
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setLayout(null);
 
+        ActionListener listenerForEdit = e -> controllerSetka.handleEditButtonClick();
+        
         list = new JList<>();
         JScrollPane playlist = new JScrollPane(list);
         playlist.setBounds(10, 10, FRAME_WIDTH - 50, FRAME_HEIGHT - 100);
         list.setFont(new Font("Courier new", Font.PLAIN, 14));
         frame.add(playlist);
+        list.addMouseListener(new DoubleClickListener(listenerForEdit));
 
         JButton addButton = new JButton("Add");
         addButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
         addButton.addActionListener(e -> controllerSetka.handleAddButtonClick());
         frame.add(addButton);
+
         
         JButton editButton = new JButton("Edit");
         editButton.setBounds(120, FRAME_HEIGHT - 80, 100, 30);
-        editButton.addActionListener(e -> controllerSetka.handleEditButtonClick());
+        editButton.addActionListener(listenerForEdit);
         frame.add(editButton);
 
         frame.repaint();
