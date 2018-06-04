@@ -23,7 +23,7 @@ public class ControllerSetkaFrame implements ControllerSetka {
 
     @Override
     public void updateDataInPlaylist() {
-        String[] data = new String[model.getSize()];
+        String[] data = new String[model.getSetkaSize()];
         for (int i = 0; i < data.length; i++) {
             data[i] = model.getElementFromSetka(i).getDataString();
         }
