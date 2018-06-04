@@ -68,4 +68,9 @@ public class ViewSetkaFrame implements ViewSetka {
     public int getSelectedLine() {
         return list.getSelectedIndex();
     }
+
+    @Override
+    public void selectLine(int index) {
+        list.setSelectedIndex(index);
+    }
 }

@@ -8,4 +8,6 @@ public interface ViewSetka {
     void create();
     
     int getSelectedLine();
+    
+    void selectLine(int index);
 }

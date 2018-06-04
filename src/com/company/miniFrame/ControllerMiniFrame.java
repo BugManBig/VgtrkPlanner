@@ -40,6 +40,7 @@ public class ControllerMiniFrame implements ControllerMini {
         }
         viewMini.close();
         controllerSetka.updateDataInPlaylist();
+        controllerSetka.selectLine(planElement);
     }
 
     @Override
