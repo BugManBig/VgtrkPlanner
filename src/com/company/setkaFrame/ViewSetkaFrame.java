@@ -47,13 +47,17 @@ public class ViewSetkaFrame implements ViewSetka {
         addButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
         addButton.addActionListener(e -> controllerSetka.handleAddButtonClick());
         frame.add(addButton);
-
         
         JButton editButton = new JButton("Edit");
         editButton.setBounds(120, FRAME_HEIGHT - 80, 100, 30);
         editButton.addActionListener(listenerForEdit);
         frame.add(editButton);
 
+        JButton removeButton = new JButton("Remove");
+        removeButton.setBounds(230, FRAME_HEIGHT - 80, 100, 30);
+        removeButton.addActionListener(e -> controllerSetka.handleRemoveButtonClick());
+        frame.add(removeButton);
+        
         frame.repaint();
         frame.revalidate();
         frame.setLocationRelativeTo(null);

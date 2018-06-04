@@ -61,4 +61,13 @@ public class ControllerSetkaFrame implements ControllerSetka {
         viewMini.create();
         viewMini.setFieldsFromPlanElement(planElement);
     }
+
+    @Override
+    public void handleRemoveButtonClick() {
+        int selectedLine = viewSetka.getSelectedLine();
+        if (selectedLine > -1) {
+            model.removeFromSetka(selectedLine);
+        }
+        updateDataInPlaylist();
+    }
 }

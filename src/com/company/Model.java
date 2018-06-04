@@ -26,4 +26,8 @@ public class Model {
     public void sortSetka() {
         setkaElements.sort(new LexicographComparator());
     }
+    
+    public void removeFromSetka(int id) {
+        setkaElements.remove(id);
+    }
 }
