@@ -12,9 +12,11 @@ public class ViewSetkaFrame implements ViewSetka {
     private ControllerSetka controllerSetka;
 
     private JList<String> list;
+    
+    protected JFrame frame;
 
-    private static final int FRAME_WIDTH = 900;
-    private static final int FRAME_HEIGHT = 600;
+    protected static final int FRAME_WIDTH = 900;
+    protected static final int FRAME_HEIGHT = 600;
 
     @Override
     public void setController(ControllerSetka controllerSetka) {
@@ -29,7 +31,7 @@ public class ViewSetkaFrame implements ViewSetka {
 
     @Override
     public void create() {
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setLayout(null);
@@ -57,6 +59,11 @@ public class ViewSetkaFrame implements ViewSetka {
         removeButton.setBounds(230, FRAME_HEIGHT - 80, 100, 30);
         removeButton.addActionListener(e -> controllerSetka.handleRemoveButtonClick());
         frame.add(removeButton);
+
+        JButton generateButton = new JButton("Generate");
+        generateButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);
+        generateButton.addActionListener(e -> controllerSetka.handleGenerateButtonClick());
+        frame.add(generateButton);
         
         frame.repaint();
         frame.revalidate();
