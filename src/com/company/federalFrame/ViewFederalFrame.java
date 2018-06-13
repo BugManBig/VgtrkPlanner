@@ -1,4 +1,4 @@
-package com.company.setkaFrame;
+package com.company.federalFrame;
 
 import com.company.DoubleClickListener;
 
@@ -6,36 +6,33 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class ViewSetkaFrame implements ViewSetka {
+public class ViewFederalFrame {
     private String[] listData;
 
-    private ControllerSetka controllerSetka;
+    private ControllerFederalFrame controllerFederalFrame;
 
     private JList<String> list;
 
     private static final int FRAME_WIDTH = 900;
     private static final int FRAME_HEIGHT = 600;
-
-    @Override
-    public void setController(ControllerSetka controllerSetka) {
-        this.controllerSetka = controllerSetka;
+    
+    public void setController(ControllerFederalFrame controllerSetka) {
+        this.controllerFederalFrame = controllerSetka;
     }
-
-    @Override
+    
     public void setDataToList(String[] data) {
         listData = data;
         list.setListData(listData);
     }
-
-    @Override
+    
     public void create() {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setLayout(null);
 
-        ActionListener listenerForEdit = e -> controllerSetka.handleEditButtonClick();
-        
+        ActionListener listenerForEdit = e -> controllerFederalFrame.handleEditButtonClick();
+
         list = new JList<>();
         JScrollPane playlist = new JScrollPane(list);
         playlist.setBounds(10, 10, FRAME_WIDTH - 50, FRAME_HEIGHT - 100);
@@ -45,9 +42,9 @@ public class ViewSetkaFrame implements ViewSetka {
 
         JButton addButton = new JButton("Add");
         addButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
-        addButton.addActionListener(e -> controllerSetka.handleAddButtonClick());
+        addButton.addActionListener(e -> controllerFederalFrame.handleAddButtonClick());
         frame.add(addButton);
-        
+
         JButton editButton = new JButton("Edit");
         editButton.setBounds(120, FRAME_HEIGHT - 80, 100, 30);
         editButton.addActionListener(listenerForEdit);
@@ -55,27 +52,21 @@ public class ViewSetkaFrame implements ViewSetka {
 
         JButton removeButton = new JButton("Remove");
         removeButton.setBounds(230, FRAME_HEIGHT - 80, 100, 30);
-        removeButton.addActionListener(e -> controllerSetka.handleRemoveButtonClick());
+        removeButton.addActionListener(e -> controllerFederalFrame.handleRemoveButtonClick());
         frame.add(removeButton);
-        
-        JButton generateButton = new JButton("Generate");
-        generateButton.setBounds(FRAME_WIDTH - 150, FRAME_HEIGHT - 80, 100, 30);
-        generateButton.addActionListener(e -> controllerSetka.handleGenerateButtonClick());
-        frame.add(generateButton);
-        
+
         frame.repaint();
         frame.revalidate();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-
-    @Override
+    
     public int getSelectedLine() {
         return list.getSelectedIndex();
     }
-
-    @Override
+    
     public void selectLine(int index) {
         list.setSelectedIndex(index);
     }
+
 }

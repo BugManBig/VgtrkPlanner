@@ -1,11 +1,16 @@
 package com.company.setkaFrame;
 
+import com.company.FederalGenerator;
 import com.company.Model;
 import com.company.PlanElement;
+import com.company.federalFrame.ControllerFederalFrame;
+import com.company.federalFrame.ViewFederalFrame;
 import com.company.miniFrame.ControllerMini;
 import com.company.miniFrame.ControllerMiniFrame;
 import com.company.miniFrame.ViewMini;
 import com.company.miniFrame.ViewMiniFrame;
+
+import java.util.List;
 
 public class ControllerSetkaFrame implements ControllerSetka {
     private ViewSetka viewSetka;
@@ -78,5 +83,22 @@ public class ControllerSetkaFrame implements ControllerSetka {
             model.removeFromSetka(selectedLine);
         }
         updateDataInPlaylist();
+    }
+
+    @Override
+    public void handleGenerateButtonClick() {
+        List<PlanElement>[] federalElements = FederalGenerator.generate(model);
+        model.setFederalElements(federalElements);
+
+        ViewFederalFrame viewFederalFrame = new ViewFederalFrame();
+
+        ControllerFederalFrame controllerFederalFrame = new ControllerFederalFrame();
+        controllerFederalFrame.setModel(model);
+        controllerFederalFrame.setViewFederalFrame(viewFederalFrame);
+        
+        viewFederalFrame.setController(controllerFederalFrame);
+        viewFederalFrame.create();
+        
+        controllerFederalFrame.updateDataInPlaylist();
     }
 }

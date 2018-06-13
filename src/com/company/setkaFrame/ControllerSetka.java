@@ -17,4 +17,6 @@ public interface ControllerSetka {
     void handleEditButtonClick();
     
     void handleRemoveButtonClick();
+    
+    void handleGenerateButtonClick();
 }
