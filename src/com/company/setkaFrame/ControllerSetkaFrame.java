@@ -100,5 +100,6 @@ public class ControllerSetkaFrame implements ControllerSetka {
         viewFederalFrame.create();
         
         controllerFederalFrame.updateDataInPlaylist();
+        controllerFederalFrame.setWeekdayInField();
     }
 }

@@ -36,4 +36,20 @@ public class ControllerFederalFrame {
     public void handleRemoveButtonClick() {
         
     }
+    
+    public void handleNextButtonClick() {
+        weekday = weekday < 6 ? weekday + 1 : 6;
+        updateDataInPlaylist();
+        setWeekdayInField();
+    }
+    
+    public void handlePrevButtonClick() {
+        weekday = weekday > 0 ? weekday - 1 : 0;
+        updateDataInPlaylist();
+        setWeekdayInField();
+    }
+    
+    public void setWeekdayInField() {
+        viewFederalFrame.setWeekDayText(weekday);
+    }
 }

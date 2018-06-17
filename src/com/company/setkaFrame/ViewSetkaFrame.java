@@ -7,10 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class ViewSetkaFrame implements ViewSetka {
-    private String[] listData;
-
     private ControllerSetka controllerSetka;
-
     private JList<String> list;
 
     private static final int FRAME_WIDTH = 900;
@@ -23,8 +20,7 @@ public class ViewSetkaFrame implements ViewSetka {
 
     @Override
     public void setDataToList(String[] data) {
-        listData = data;
-        list.setListData(listData);
+        list.setListData(data);
     }
 
     @Override
@@ -59,7 +55,7 @@ public class ViewSetkaFrame implements ViewSetka {
         frame.add(removeButton);
         
         JButton generateButton = new JButton("Generate");
-        generateButton.setBounds(FRAME_WIDTH - 150, FRAME_HEIGHT - 80, 100, 30);
+        generateButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);
         generateButton.addActionListener(e -> controllerSetka.handleGenerateButtonClick());
         frame.add(generateButton);
         
