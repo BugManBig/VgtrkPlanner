@@ -1,22 +1,95 @@
 package com.company.setkaFrame;
 
+import com.company.FederalGenerator;
 import com.company.Model;
 import com.company.PlanElement;
+import com.company.federalFrame.ControllerFederal;
+import com.company.federalFrame.ViewFederal;
+import com.company.miniFrame.ControllerMini;
+import com.company.miniFrame.ViewMini;
 
-public interface ControllerSetka {
-    void setView(ViewSetka viewSetka);
+import java.util.List;
 
-    void setModel(Model model);
+public class ControllerSetka {
+    private ViewSetka viewSetka;
+    private Model model;
 
-    void updateDataInPlaylist();
-    
-    void selectLine(PlanElement planElement);
+    public void setViewSetka(ViewSetka viewSetka) {
+        this.viewSetka = viewSetka;
+    }
 
-    void handleAddButtonClick();
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public void updateDataInPlaylist() {
+        String[] data = new String[model.getSetkaSize()];
+        for (int i = 0; i < data.length; i++) {
+            data[i] = model.getElementFromSetka(i).getDataString();
+        }
+        viewSetka.setDataToList(data);
+    }
+
+    public void selectLine(PlanElement planElement) {
+        int i = 0;
+        while (model.getElementFromSetka(i) != planElement) {
+            i++;
+        }
+        viewSetka.selectLine(i);
+    }
+
+    public void handleAddButtonClick() {
+        ViewMini viewMini = new ViewMini();
+
+        ControllerMini controllerMini = new ControllerMini();
+        controllerMini.setModel(model);
+        controllerMini.setViewMini(viewMini);
+        controllerMini.setControllerSetka(this);
+
+        viewMini.setControllerMini(controllerMini);
+        viewMini.create();
+    }
+
+    public void handleEditButtonClick() {
+        if (viewSetka.getSelectedLine() == -1) return;
+        
+        PlanElement planElement = model.getElementFromSetka(viewSetka.getSelectedLine());
+        
+        ViewMini viewMini = new ViewMini();
+        
+        ControllerMini controllerMini = new ControllerMini();
+        controllerMini.setViewMini(viewMini);
+        controllerMini.setModel(model);
+        controllerMini.setControllerSetka(this);
+        controllerMini.setSelectedListIndex(viewSetka.getSelectedLine());
+        
+        viewMini.setControllerMini(controllerMini);
+        viewMini.create();
+        viewMini.setFieldsFromPlanElement(planElement);
+    }
+
+    public void handleRemoveButtonClick() {
+        int selectedLine = viewSetka.getSelectedLine();
+        if (selectedLine > -1) {
+            model.removeFromSetka(selectedLine);
+        }
+        updateDataInPlaylist();
+    }
     
-    void handleEditButtonClick();
-    
-    void handleRemoveButtonClick();
-    
-    void handleGenerateButtonClick();
+    public void handleGenerateButtonClick() {
+        List<PlanElement>[] federalElements = FederalGenerator.generate(model);
+        model.setFederalElements(federalElements);
+
+        ViewFederal viewFederal = new ViewFederal();
+
+        ControllerFederal controllerFederal = new ControllerFederal();
+        controllerFederal.setModel(model);
+        controllerFederal.setViewFederal(viewFederal);
+        
+        viewFederal.setControllerFederal(controllerFederal);
+        viewFederal.create();
+        
+        controllerFederal.updateDataInPlaylist();
+        controllerFederal.setWeekdayInField();
+    }
 }

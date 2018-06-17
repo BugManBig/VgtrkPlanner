@@ -21,10 +21,13 @@ public class Chrono {
         this.hours = hours;
         this.minutes = minutes;
         this.seconds = seconds;
-        
+    }
+    
+    public int getTimeInSeconds() {
+        return hours * 60 * 60 + minutes * 60 + seconds;
     }
 
-    public String getTime() {
+    public String getTimeString() {
         return getTwoDigitsNumber(hours) + ":" + getTwoDigitsNumber(minutes) + ":" + getTwoDigitsNumber(seconds);
     }
     

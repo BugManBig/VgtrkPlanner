@@ -1,21 +1,19 @@
 package com.company;
 
 import com.company.setkaFrame.ControllerSetka;
-import com.company.setkaFrame.ControllerSetkaFrame;
 import com.company.setkaFrame.ViewSetka;
-import com.company.setkaFrame.ViewSetkaFrame;
 
 public class Application {
     public void run() {
         Model model = new Model();
 
-        ViewSetka viewSetka = new ViewSetkaFrame();
+        ViewSetka viewSetka = new ViewSetka();
 
-        ControllerSetka controllerSetka = new ControllerSetkaFrame();
+        ControllerSetka controllerSetka = new ControllerSetka();
         controllerSetka.setModel(model);
-        controllerSetka.setView(viewSetka);
+        controllerSetka.setViewSetka(viewSetka);
 
-        viewSetka.setController(controllerSetka);
+        viewSetka.setControllerSetka(controllerSetka);
 
         viewSetka.create();
         controllerSetka.updateDataInPlaylist();

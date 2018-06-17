@@ -27,11 +27,10 @@ public class PlanElement {
         this.startTime = startTime;
         this.lengthTime = lengthTime;
         this.selectedDays = selectedDays;
-        
     }
 
     public String getDataString() {
-        return connectViaSplitter("    ", startTime.getTime(), lengthTime.getTime(), selectedDays.getDaysString(), title);
+        return connectViaSplitter("    ", startTime.getTimeString(), lengthTime.getTimeString(), selectedDays.getDaysString(), title);
     }
     
     private String connectViaSplitter(String splitter, String ... data) {

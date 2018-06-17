@@ -2,9 +2,9 @@ package com.company.federalFrame;
 
 import com.company.Model;
 
-public class ControllerFederalFrame {
+public class ControllerFederal {
     private Model model;
-    private ViewFederalFrame viewFederalFrame;
+    private ViewFederal viewFederal;
 
     private int weekday = 0;
     
@@ -12,8 +12,8 @@ public class ControllerFederalFrame {
         this.model = model;
     }
 
-    public void setViewFederalFrame(ViewFederalFrame viewFederalFrame) {
-        this.viewFederalFrame = viewFederalFrame;
+    public void setViewFederal(ViewFederal viewFederal) {
+        this.viewFederal = viewFederal;
     }
 
     public void updateDataInPlaylist() {
@@ -22,7 +22,7 @@ public class ControllerFederalFrame {
         for (int i = 0; i < weekdaySize; i++) {
             data[i] = model.getFederalElement(weekday, i).getDataString();
         }
-        viewFederalFrame.setDataToList(data);
+        viewFederal.setDataToList(data);
     }
     
     public void handleEditButtonClick() {
@@ -50,6 +50,6 @@ public class ControllerFederalFrame {
     }
     
     public void setWeekdayInField() {
-        viewFederalFrame.setWeekDayText(weekday);
+        viewFederal.setWeekDayText(weekday);
     }
 }
