@@ -5,6 +5,7 @@ public class PlanElement {
     private Chrono startTime;
     private Chrono lengthTime;
     private SelectedDays selectedDays;
+    private static final String SPLITTER = "    ";
 
     public String getTitle() {
         return title;
@@ -29,8 +30,12 @@ public class PlanElement {
         this.selectedDays = selectedDays;
     }
 
-    public String getDataString() {
-        return connectViaSplitter("    ", startTime.getTimeString(), lengthTime.getTimeString(), selectedDays.getDaysString(), title);
+    public String getDataStringForSetka() {
+        return connectViaSplitter(SPLITTER, startTime.getTimeString(), lengthTime.getTimeString(), selectedDays.getDaysString(), title);
+    }
+    
+    public String getDataStringForFederal() {
+        return connectViaSplitter(SPLITTER, startTime.getTimeString(), lengthTime.getTimeString(), title);
     }
     
     private String connectViaSplitter(String splitter, String ... data) {

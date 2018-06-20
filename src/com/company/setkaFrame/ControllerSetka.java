@@ -25,7 +25,7 @@ public class ControllerSetka {
     public void updateDataInPlaylist() {
         String[] data = new String[model.getSetkaSize()];
         for (int i = 0; i < data.length; i++) {
-            data[i] = model.getElementFromSetka(i).getDataString();
+            data[i] = model.getElementFromSetka(i).getDataStringForSetka();
         }
         viewSetka.setDataToList(data);
     }

@@ -20,7 +20,7 @@ public class ControllerFederal {
         int weekdaySize = model.getFederalSizeWeekday(weekday);
         String[] data = new String[weekdaySize];
         for (int i = 0; i < weekdaySize; i++) {
-            data[i] = model.getFederalElement(weekday, i).getDataString();
+            data[i] = model.getFederalElement(weekday, i).getDataStringForFederal();
         }
         viewFederal.setDataToList(data);
     }

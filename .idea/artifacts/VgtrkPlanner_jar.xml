@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="VgtrkPlanner:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/VgtrkPlanner_jar</output-path>
+    <root id="archive" name="VgtrkPlanner.jar">
+      <element id="module-output" name="VgtrkPlanner" />
+    </root>
+  </artifact>
+</component>
