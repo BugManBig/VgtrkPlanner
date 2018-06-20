@@ -1,5 +1,6 @@
 package com.company.setkaFrame;
 
+import com.company.Controller;
 import com.company.FederalGenerator;
 import com.company.Model;
 import com.company.PlanElement;
@@ -10,7 +11,7 @@ import com.company.miniFrame.ViewMini;
 
 import java.util.List;
 
-public class ControllerSetka {
+public class ControllerSetka implements Controller {
     private ViewSetka viewSetka;
     private Model model;
 
@@ -22,6 +23,7 @@ public class ControllerSetka {
         this.model = model;
     }
 
+    @Override
     public void updateDataInPlaylist() {
         String[] data = new String[model.getSetkaSize()];
         for (int i = 0; i < data.length; i++) {
@@ -30,6 +32,7 @@ public class ControllerSetka {
         viewSetka.setDataToList(data);
     }
 
+    @Override
     public void selectLine(PlanElement planElement) {
         int i = 0;
         while (model.getElementFromSetka(i) != planElement) {
@@ -38,13 +41,18 @@ public class ControllerSetka {
         viewSetka.selectLine(i);
     }
 
+    @Override
+    public int getWeekday() {
+        return 0;
+    }
+
     public void handleAddButtonClick() {
         ViewMini viewMini = new ViewMini();
 
         ControllerMini controllerMini = new ControllerMini();
         controllerMini.setModel(model);
         controllerMini.setViewMini(viewMini);
-        controllerMini.setControllerSetka(this);
+        controllerMini.setController(this);
 
         viewMini.setControllerMini(controllerMini);
         viewMini.create();
@@ -60,7 +68,7 @@ public class ControllerSetka {
         ControllerMini controllerMini = new ControllerMini();
         controllerMini.setViewMini(viewMini);
         controllerMini.setModel(model);
-        controllerMini.setControllerSetka(this);
+        controllerMini.setController(this);
         controllerMini.setSelectedListIndex(viewSetka.getSelectedLine());
         
         viewMini.setControllerMini(controllerMini);

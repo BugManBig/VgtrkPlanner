@@ -1,14 +1,14 @@
 package com.company.miniFrame;
 
+import com.company.Controller;
 import com.company.Model;
 import com.company.PlanElement;
 import com.company.SelectedDays;
-import com.company.setkaFrame.ControllerSetka;
 
 public class ControllerMini {
     private Model model;
     private ViewMini viewMini;
-    private ControllerSetka controllerSetka;
+    private Controller controller;
     private int selectedListIndex = -1;
     
     public void setModel(Model model) {
@@ -19,8 +19,8 @@ public class ControllerMini {
         this.viewMini = viewMini;
     }
 
-    public void setControllerSetka(ControllerSetka controllerSetka) {
-        this.controllerSetka = controllerSetka;
+    public void setController(Controller controller) {
+        this.controller = controller;
     }
 
     public void handleOkButtonClick() {
@@ -35,8 +35,8 @@ public class ControllerMini {
             model.addElementToSetka(planElement);
         }
         viewMini.close();
-        controllerSetka.updateDataInPlaylist();
-        controllerSetka.selectLine(planElement);
+        controller.updateDataInPlaylist();
+        controller.selectLine(planElement);
     }
 
     public void handleCancelButtonClick() {

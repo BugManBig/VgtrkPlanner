@@ -1,8 +1,12 @@
 package com.company.federalFrame;
 
+import com.company.Controller;
 import com.company.Model;
+import com.company.PlanElement;
+import com.company.miniFederal.ControllerMiniFederal;
+import com.company.miniFederal.ViewMiniFederal;
 
-public class ControllerFederal {
+public class ControllerFederal implements Controller {
     private Model model;
     private ViewFederal viewFederal;
 
@@ -16,6 +20,7 @@ public class ControllerFederal {
         this.viewFederal = viewFederal;
     }
 
+    @Override
     public void updateDataInPlaylist() {
         int weekdaySize = model.getFederalSizeWeekday(weekday);
         String[] data = new String[weekdaySize];
@@ -24,17 +29,57 @@ public class ControllerFederal {
         }
         viewFederal.setDataToList(data);
     }
-    
+
+    @Override
+    public void selectLine(PlanElement planElement) {
+        int i = 0;
+        while (model.getFederalElement(weekday, i) != planElement) {
+            i++;
+        }
+        viewFederal.selectLine(i);
+    }
+
+    @Override
+    public int getWeekday() {
+        return weekday;
+    }
+
     public void handleEditButtonClick() {
+        if (viewFederal.getSelectedLine() == -1) return;
+
+        PlanElement planElement = model.getFederalElement(weekday, viewFederal.getSelectedLine());
+
+        ViewMiniFederal viewMiniFederal = new ViewMiniFederal();
+
+        ControllerMiniFederal controllerMiniFederal = new ControllerMiniFederal();
+        controllerMiniFederal.setViewMiniFederal(viewMiniFederal);
+        controllerMiniFederal.setModel(model);
+        controllerMiniFederal.setController(this);
+        controllerMiniFederal.setSelectedListIndex(viewFederal.getSelectedLine());
         
+        viewMiniFederal.setControllerMiniFederal(controllerMiniFederal);
+        viewMiniFederal.create();
+        viewMiniFederal.setFieldsFromPlanElement(planElement);
     }
     
     public void handleAddButtonClick() {
+        ViewMiniFederal viewMiniFederal = new ViewMiniFederal();
         
+        ControllerMiniFederal controllerMiniFederal = new ControllerMiniFederal();
+        controllerMiniFederal.setModel(model);
+        controllerMiniFederal.setViewMiniFederal(viewMiniFederal);
+        controllerMiniFederal.setController(this);
+        
+        viewMiniFederal.setControllerMiniFederal(controllerMiniFederal);
+        viewMiniFederal.create();
     }
     
     public void handleRemoveButtonClick() {
-        
+        int selectedLine = viewFederal.getSelectedLine();
+        if (selectedLine > -1) {
+            model.removeFromFederal(weekday, selectedLine);
+        }
+        updateDataInPlaylist();
     }
     
     public void handleNextButtonClick() {
