@@ -11,7 +11,7 @@ public class ViewMiniFederal {
     private JFrame frame;
 
     private static final int FRAME_WIDTH = 450;
-    private static final int FRAME_HEIGHT = 200;
+    private static final int FRAME_HEIGHT = 170;
 
     private JTextField titleTextfield;
 
