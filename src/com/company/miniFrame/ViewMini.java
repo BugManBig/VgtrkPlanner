@@ -1,8 +1,6 @@
 package com.company.miniFrame;
 
-import com.company.Chrono;
-import com.company.DaysOfWeek;
-import com.company.PlanElement;
+import com.company.*;
 
 import javax.swing.*;
 
@@ -47,7 +45,6 @@ public class ViewMini {
         startSecTextfield.setBounds(90, 10, 30, 30);
         frame.add(startSecTextfield);
         
-        
         durationHrsTextfield = new JTextField();
         durationHrsTextfield.setBounds(FRAME_WIDTH - 135, 10, 30, 30);
         frame.add(durationHrsTextfield);
@@ -59,11 +56,27 @@ public class ViewMini {
         durationSecTextfield = new JTextField();
         durationSecTextfield.setBounds(FRAME_WIDTH - 55, 10, 30, 30);
         frame.add(durationSecTextfield);
-        
-        
+
         titleTextfield = new JTextField();
         titleTextfield.setBounds(10, 50, FRAME_WIDTH - 35, 30);
         frame.add(titleTextfield);
+
+
+        addKeyListener(startHrsTextfield, startMinTextfield);
+        addKeyListener(startMinTextfield, startSecTextfield);
+        addKeyListener(startSecTextfield, durationHrsTextfield);
+        addKeyListener(durationHrsTextfield, durationMinTextfield);
+        addKeyListener(durationMinTextfield, durationSecTextfield);
+        addKeyListener(durationSecTextfield, titleTextfield);
+
+        addMouseListener(startHrsTextfield);
+        addMouseListener(startMinTextfield);
+        addMouseListener(startSecTextfield);
+        addMouseListener(durationHrsTextfield);
+        addMouseListener(durationMinTextfield);
+        addMouseListener(durationSecTextfield);
+        addMouseListener(titleTextfield);
+        
         
         JButton okButton = new JButton("Ok");
         okButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
@@ -93,6 +106,14 @@ public class ViewMini {
         frame.revalidate();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+    
+    private void addKeyListener(JTextField from, JTextField to) {
+        from.addKeyListener(new TextfieldKeyListener(from, to));
+    }
+    
+    private void addMouseListener(JTextField textField) {
+        textField.addMouseListener(new TextfieldMouseListener(textField));
     }
     
     public void close() {
