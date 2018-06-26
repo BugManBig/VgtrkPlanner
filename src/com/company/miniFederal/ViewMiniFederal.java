@@ -1,6 +1,7 @@
 package com.company.miniFederal;
 
 import com.company.Chrono;
+import com.company.ListenersAdding;
 import com.company.PlanElement;
 
 import javax.swing.*;
@@ -61,6 +62,23 @@ public class ViewMiniFederal {
         titleTextfield = new JTextField();
         titleTextfield.setBounds(10, 50, FRAME_WIDTH - 35, 30);
         frame.add(titleTextfield);
+
+
+        ListenersAdding.addKeyListener(startHrsTextfield, startMinTextfield);
+        ListenersAdding.addKeyListener(startMinTextfield, startSecTextfield);
+        ListenersAdding.addKeyListener(startSecTextfield, durationHrsTextfield);
+        ListenersAdding.addKeyListener(durationHrsTextfield, durationMinTextfield);
+        ListenersAdding.addKeyListener(durationMinTextfield, durationSecTextfield);
+        ListenersAdding.addKeyListener(durationSecTextfield, titleTextfield);
+
+        ListenersAdding.addMouseListener(startHrsTextfield);
+        ListenersAdding.addMouseListener(startMinTextfield);
+        ListenersAdding.addMouseListener(startSecTextfield);
+        ListenersAdding.addMouseListener(durationHrsTextfield);
+        ListenersAdding.addMouseListener(durationMinTextfield);
+        ListenersAdding.addMouseListener(durationSecTextfield);
+        ListenersAdding.addMouseListener(titleTextfield);
+        
 
         JButton okButton = new JButton("Ok");
         okButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
