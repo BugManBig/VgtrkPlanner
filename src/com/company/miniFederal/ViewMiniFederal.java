@@ -45,7 +45,6 @@ public class ViewMiniFederal {
         startSecTextfield.setBounds(90, 10, 30, 30);
         frame.add(startSecTextfield);
 
-
         durationHrsTextfield = new JTextField();
         durationHrsTextfield.setBounds(FRAME_WIDTH - 135, 10, 30, 30);
         frame.add(durationHrsTextfield);
@@ -57,8 +56,7 @@ public class ViewMiniFederal {
         durationSecTextfield = new JTextField();
         durationSecTextfield.setBounds(FRAME_WIDTH - 55, 10, 30, 30);
         frame.add(durationSecTextfield);
-
-
+        
         titleTextfield = new JTextField();
         titleTextfield.setBounds(10, 50, FRAME_WIDTH - 35, 30);
         frame.add(titleTextfield);
@@ -77,7 +75,6 @@ public class ViewMiniFederal {
         ListenersAdding.addMouseListener(durationHrsTextfield);
         ListenersAdding.addMouseListener(durationMinTextfield);
         ListenersAdding.addMouseListener(durationSecTextfield);
-        ListenersAdding.addMouseListener(titleTextfield);
         
 
         JButton okButton = new JButton("Ok");

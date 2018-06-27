@@ -75,7 +75,6 @@ public class ViewMini {
         ListenersAdding.addMouseListener(durationHrsTextfield);
         ListenersAdding.addMouseListener(durationMinTextfield);
         ListenersAdding.addMouseListener(durationSecTextfield);
-        ListenersAdding.addMouseListener(titleTextfield);
         
         
         JButton okButton = new JButton("Ok");
