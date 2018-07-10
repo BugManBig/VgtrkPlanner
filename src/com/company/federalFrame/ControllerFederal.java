@@ -1,12 +1,11 @@
 package com.company.federalFrame;
 
-import com.company.Controller;
 import com.company.Model;
 import com.company.PlanElement;
 import com.company.transitionsFrame.ControllerTransitions;
 import com.company.transitionsFrame.ViewTransitions;
 
-public class ControllerFederal implements Controller {
+public class ControllerFederal {
     private Model model;
     private ViewFederal viewFederal;
 
@@ -19,8 +18,7 @@ public class ControllerFederal implements Controller {
     public void setViewFederal(ViewFederal viewFederal) {
         this.viewFederal = viewFederal;
     }
-
-    @Override
+    
     public void updateDataInPlaylist() {
         int weekdaySize = model.getFederalSizeWeekday(weekday);
         String[] data = new String[weekdaySize];
@@ -29,8 +27,7 @@ public class ControllerFederal implements Controller {
         }
         viewFederal.setDataToList(data);
     }
-
-    @Override
+    
     public void selectLine(PlanElement planElement) {
         int i = 0;
         while (model.getFederalElement(weekday, i) != planElement) {
@@ -38,8 +35,7 @@ public class ControllerFederal implements Controller {
         }
         viewFederal.selectLine(i);
     }
-
-    @Override
+    
     public int getWeekday() {
         return weekday;
     }

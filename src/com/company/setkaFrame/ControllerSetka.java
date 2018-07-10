@@ -1,6 +1,5 @@
 package com.company.setkaFrame;
 
-import com.company.Controller;
 import com.company.FederalGenerator;
 import com.company.Model;
 import com.company.PlanElement;
@@ -9,7 +8,7 @@ import com.company.federalFrame.ViewFederal;
 
 import java.util.List;
 
-public class ControllerSetka implements Controller {
+public class ControllerSetka {
     private ViewSetka viewSetka;
     private Model model;
 
@@ -20,8 +19,7 @@ public class ControllerSetka implements Controller {
     public void setModel(Model model) {
         this.model = model;
     }
-
-    @Override
+    
     public void updateDataInPlaylist() {
         String[] data = new String[model.getSetkaSize()];
         for (int i = 0; i < data.length; i++) {
@@ -30,7 +28,6 @@ public class ControllerSetka implements Controller {
         viewSetka.setDataToList(data);
     }
 
-    @Override
     public void selectLine(PlanElement planElement) {
         int i = 0;
         while (model.getElementFromSetka(i) != planElement) {
@@ -39,7 +36,6 @@ public class ControllerSetka implements Controller {
         viewSetka.selectLine(i);
     }
 
-    @Override
     public int getWeekday() {
         return 0;
     }
@@ -50,7 +46,7 @@ public class ControllerSetka implements Controller {
         ControllerMini controllerMini = new ControllerMini();
         controllerMini.setModel(model);
         controllerMini.setViewMini(viewMini);
-        controllerMini.setController(this);
+        controllerMini.setControllerSetka(this);
 
         viewMini.setControllerMini(controllerMini);
         viewMini.create();
@@ -66,7 +62,7 @@ public class ControllerSetka implements Controller {
         ControllerMini controllerMini = new ControllerMini();
         controllerMini.setViewMini(viewMini);
         controllerMini.setModel(model);
-        controllerMini.setController(this);
+        controllerMini.setControllerSetka(this);
         controllerMini.setSelectedListIndex(viewSetka.getSelectedLine());
         
         viewMini.setControllerMini(controllerMini);

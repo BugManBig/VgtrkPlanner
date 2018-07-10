@@ -11,4 +11,12 @@ public class SelectedDoubles {
         return selectedDoubles;
     }
 
+    public String getDoublesString() {
+        String string = "";
+        for (int i = 0; i < 4; i++) {
+            string += selectedDoubles[i] ? "X" : "_";
+            string += " ";
+        }
+        return string;
+    }
 }

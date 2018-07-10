@@ -6,6 +6,7 @@ import java.util.List;
 public class Model {
     private List<PlanElement> setkaElements = new ArrayList<>();
     private List<PlanElement>[] federalElements;
+    private List<TransitionElement> transitionElements = new ArrayList<>();
 
     public void addElementToSetka(PlanElement planElement) {
         setkaElements.add(planElement);
@@ -61,5 +62,17 @@ public class Model {
     
     private void sortFederal(int weekday) {
         federalElements[weekday].sort(new LexicographComparator());
+    }
+    
+    public void addTransitionElement(TransitionElement transitionElement) {
+        transitionElements.add(transitionElement);
+    }
+    
+    public int getTransitionSize() {
+        return transitionElements.size();
+    }
+    
+    public TransitionElement getTransitionElement(int id) {
+        return transitionElements.get(id);
     }
 }
