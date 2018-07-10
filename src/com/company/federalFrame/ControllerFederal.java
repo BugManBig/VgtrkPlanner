@@ -3,8 +3,6 @@ package com.company.federalFrame;
 import com.company.Controller;
 import com.company.Model;
 import com.company.PlanElement;
-import com.company.miniFederal.ControllerMiniFederal;
-import com.company.miniFederal.ViewMiniFederal;
 import com.company.transitionsFrame.ControllerTransitions;
 import com.company.transitionsFrame.ViewTransitions;
 

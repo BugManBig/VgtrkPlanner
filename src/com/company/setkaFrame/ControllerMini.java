@@ -1,4 +1,4 @@
-package com.company.miniFrame;
+package com.company.setkaFrame;
 
 import com.company.Controller;
 import com.company.Model;

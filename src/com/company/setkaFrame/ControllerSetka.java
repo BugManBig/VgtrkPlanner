@@ -6,8 +6,6 @@ import com.company.Model;
 import com.company.PlanElement;
 import com.company.federalFrame.ControllerFederal;
 import com.company.federalFrame.ViewFederal;
-import com.company.miniFrame.ControllerMini;
-import com.company.miniFrame.ViewMini;
 
 import java.util.List;
 

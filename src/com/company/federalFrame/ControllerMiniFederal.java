@@ -1,4 +1,4 @@
-package com.company.miniFederal;
+package com.company.federalFrame;
 
 import com.company.Controller;
 import com.company.Model;
