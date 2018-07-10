@@ -1,39 +1,33 @@
-package com.company.federalFrame;
+package com.company.transitionsFrame;
 
-import com.company.DaysOfWeek;
 import com.company.DoubleClickListener;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class ViewFederal {
-    private ControllerFederal controllerFederal;
+public class ViewTransitions {
+    private ControllerTransitions controllerTransitions;
     private JList<String> list;
-    private JTextField weekDayField;
 
     private static final int FRAME_WIDTH = 900;
     private static final int FRAME_HEIGHT = 600;
     
-    public void setControllerFederal(ControllerFederal controllerFederal) {
-        this.controllerFederal = controllerFederal;
+    public void setControllerTransitions(ControllerTransitions controllerTransitions) {
+        this.controllerTransitions = controllerTransitions;
     }
-    
-    public void setWeekDayText(int weekDay) {
-        weekDayField.setText(DaysOfWeek.values()[weekDay].toString());
-    }
-    
+
     public void setDataToList(String[] data) {
         list.setListData(data);
     }
-    
+
     public void create() {
         JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setLayout(null);
 
-        ActionListener listenerForEdit = e -> controllerFederal.handleEditButtonClick();
+        ActionListener listenerForEdit = e -> controllerTransitions.handleEditButtonClick();
 
         list = new JList<>();
         JScrollPane playlist = new JScrollPane(list);
@@ -41,15 +35,10 @@ public class ViewFederal {
         list.setFont(new Font("Courier new", Font.PLAIN, 14));
         frame.add(playlist);
         list.addMouseListener(new DoubleClickListener(listenerForEdit));
-        
-        weekDayField = new JTextField();
-        weekDayField.setBounds(350, FRAME_HEIGHT - 80, 100, 30);
-        weekDayField.setEditable(false);
-        frame.add(weekDayField);
 
         JButton addButton = new JButton("Add");
         addButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
-        addButton.addActionListener(e -> controllerFederal.handleAddButtonClick());
+        addButton.addActionListener(e -> controllerTransitions.handleAddButtonClick());
         frame.add(addButton);
 
         JButton editButton = new JButton("Edit");
@@ -59,34 +48,24 @@ public class ViewFederal {
 
         JButton removeButton = new JButton("Remove");
         removeButton.setBounds(230, FRAME_HEIGHT - 80, 100, 30);
-        removeButton.addActionListener(e -> controllerFederal.handleRemoveButtonClick());
+        removeButton.addActionListener(e -> controllerTransitions.handleRemoveButtonClick());
         frame.add(removeButton);
 
-        JButton prevButton = new JButton("Prev");
-        prevButton.setBounds(FRAME_WIDTH - 430, FRAME_HEIGHT - 80, 100, 30);
-        prevButton.addActionListener(e -> controllerFederal.handlePrevButtonClick());
-        frame.add(prevButton);
-
-        JButton nextButton = new JButton("Next");
-        nextButton.setBounds(FRAME_WIDTH - 320, FRAME_HEIGHT - 80, 100, 30);
-        nextButton.addActionListener(e -> controllerFederal.handleNextButtonClick());
-        frame.add(nextButton);
-        
-        JButton generateButton = new JButton("Transitions");
+        JButton generateButton = new JButton("Generate");
         generateButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);
-        generateButton.addActionListener(e -> controllerFederal.handleGenerateButtonClick());
+        generateButton.addActionListener(e -> controllerTransitions.handleGenerateButtonClick());
         frame.add(generateButton);
-        
+
         frame.repaint();
         frame.revalidate();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-    
+
     public int getSelectedLine() {
         return list.getSelectedIndex();
     }
-    
+
     public void selectLine(int index) {
         list.setSelectedIndex(index);
     }

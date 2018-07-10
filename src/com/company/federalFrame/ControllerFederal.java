@@ -5,6 +5,8 @@ import com.company.Model;
 import com.company.PlanElement;
 import com.company.miniFederal.ControllerMiniFederal;
 import com.company.miniFederal.ViewMiniFederal;
+import com.company.transitionsFrame.ControllerTransitions;
+import com.company.transitionsFrame.ViewTransitions;
 
 public class ControllerFederal implements Controller {
     private Model model;
@@ -92,6 +94,17 @@ public class ControllerFederal implements Controller {
         weekday = weekday > 0 ? weekday - 1 : 0;
         updateDataInPlaylist();
         setWeekdayInField();
+    }
+    
+    public void handleGenerateButtonClick() {
+        ViewTransitions viewTransitions = new ViewTransitions();
+
+        ControllerTransitions controllerTransitions = new ControllerTransitions();
+        controllerTransitions.setModel(model);
+        controllerTransitions.setViewTransitions(viewTransitions);
+        
+        viewTransitions.setControllerTransitions(controllerTransitions);
+        viewTransitions.create();
     }
     
     public void setWeekdayInField() {
