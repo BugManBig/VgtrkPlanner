@@ -3,7 +3,7 @@ package com.company;
 public enum DaysOfWeek {
     MONDAY("Mon"),
     TUESDAY("Tue"),
-    WEDNESDAY("Wen"),
+    WEDNESDAY("Wed"),
     THURSDAY("Thu"),
     FRIDAY("Fri"),
     SATURDAY("Sat"),
