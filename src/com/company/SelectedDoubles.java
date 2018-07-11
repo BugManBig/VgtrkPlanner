@@ -7,7 +7,7 @@ public class SelectedDoubles {
         this.selectedDoubles = selectedDoubles;
     }
 
-    public boolean[] getSelectedDoubles() {
+    public boolean[] getSelectionsArray() {
         return selectedDoubles;
     }
 

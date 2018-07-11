@@ -35,7 +35,16 @@ public class ControllerTransitions {
     }
     
     public void handleEditButtonClick() {
-        
+        ViewMiniTransitions viewMiniTransitions = new ViewMiniTransitions();
+
+        ControllerMiniTransitions controllerMiniTransitions = new ControllerMiniTransitions();
+        controllerMiniTransitions.setModel(model);
+        controllerMiniTransitions.setViewMiniTransitions(viewMiniTransitions);
+        controllerMiniTransitions.setControllerTransitions(this);
+
+        viewMiniTransitions.setControllerMiniTransitions(controllerMiniTransitions);
+        viewMiniTransitions.create();
+        viewMiniTransitions.setFieldsFromTransitionElement(model.getTransitionElement(viewTransitions.getSelectedLine()));
     }
     
     public void handleRemoveButtonClick() {

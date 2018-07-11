@@ -154,7 +154,7 @@ public class ViewMini {
         
         titleTextfield.setText(planElement.getTitle());
         
-        boolean[] daysState = planElement.getSelectedDays().getSelectedDays();
+        boolean[] daysState = planElement.getSelectedDays().getSelectionsArray();
         for (int i = 0; i < 7; i++) {
             checkBoxes[i].setSelected(daysState[i]);
         }

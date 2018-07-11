@@ -7,6 +7,26 @@ public class TransitionElement {
     private SelectedDays selectedDays;
     private SelectedDoubles selectedDoubles;
 
+    public Chrono getStartTime() {
+        return startTime;
+    }
+
+    public Chrono getEndTime() {
+        return endTime;
+    }
+
+    public Chrono getTransitionTime() {
+        return transitionTime;
+    }
+
+    public SelectedDays getSelectedDays() {
+        return selectedDays;
+    }
+
+    public SelectedDoubles getSelectedDoubles() {
+        return selectedDoubles;
+    }
+
     private static final String SPLITTER = "    ";
 
     public TransitionElement(Chrono startTime, Chrono endTime, Chrono transitionTime,

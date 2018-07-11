@@ -16,7 +16,7 @@ public class SelectedDays {
         return string;
     }
     
-    public boolean[] getSelectedDays() {
+    public boolean[] getSelectionsArray() {
         return selectedDays;
     }
 }

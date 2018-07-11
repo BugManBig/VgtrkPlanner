@@ -1,9 +1,6 @@
 package com.company.transitionsFrame;
 
-import com.company.Chrono;
-import com.company.DaysOfWeek;
-import com.company.ListenersAdding;
-import com.company.PlanElement;
+import com.company.*;
 
 import javax.swing.*;
 
@@ -182,19 +179,27 @@ public class ViewMiniTransitions {
         }
     }
 
-    public void setFieldsFromPlanElement(PlanElement planElement) {
-        startHrsTextfield.setText(String.valueOf(planElement.getStartTime().getHours()));
-        startMinTextfield.setText(String.valueOf(planElement.getStartTime().getMinutes()));
-        startSecTextfield.setText(String.valueOf(planElement.getStartTime().getSeconds()));
-
-        endHrsTextfield.setText(String.valueOf(planElement.getDurationTime().getHours()));
-        endMinTextfield.setText(String.valueOf(planElement.getDurationTime().getMinutes()));
-        endSecTextfield.setText(String.valueOf(planElement.getDurationTime().getSeconds()));
-
-        boolean[] daysState = planElement.getSelectedDays().getSelectedDays();
+    public void setFieldsFromTransitionElement(TransitionElement transitionElement) {
+        startHrsTextfield.setText(String.valueOf(transitionElement.getStartTime().getHours()));
+        startMinTextfield.setText(String.valueOf(transitionElement.getStartTime().getMinutes()));
+        startSecTextfield.setText(String.valueOf(transitionElement.getStartTime().getSeconds()));
+        
+        endHrsTextfield.setText(String.valueOf(transitionElement.getEndTime().getHours()));
+        endMinTextfield.setText(String.valueOf(transitionElement.getEndTime().getMinutes()));
+        endSecTextfield.setText(String.valueOf(transitionElement.getEndTime().getSeconds()));
+        
+        transitionHrsTextfield.setText(String.valueOf(transitionElement.getTransitionTime().getHours()));
+        transitionMinTextfield.setText(String.valueOf(transitionElement.getTransitionTime().getMinutes()));
+        transitionSecTextfield.setText(String.valueOf(transitionElement.getTransitionTime().getSeconds()));
+        
+        boolean[] weekdaysSelections = transitionElement.getSelectedDays().getSelectionsArray();
         for (int i = 0; i < 7; i++) {
-            weekdaysCheckboxes[i].setSelected(daysState[i]);
+            weekdaysCheckboxes[i].setSelected(weekdaysSelections[i]);
+        }
+        
+        boolean[] doublesSelections = transitionElement.getSelectedDoubles().getSelectionsArray();
+        for (int i = 0; i < 4; i++) {
+            doublesCheckboxes[i].setSelected(doublesSelections[i]);
         }
     }
-
 }

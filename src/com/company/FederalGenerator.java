@@ -9,7 +9,7 @@ public class FederalGenerator {
         for (int i = 0; i < 7; i++) {
             elementsByWeek[i] = new ArrayList<>();
             for (int j = 0; j < model.getSetkaSize(); j++) {
-                if (model.getElementFromSetka(j).getSelectedDays().getSelectedDays()[i]) {
+                if (model.getElementFromSetka(j).getSelectedDays().getSelectionsArray()[i]) {
                     elementsByWeek[i].add(model.getElementFromSetka(j));
                 }
             }
