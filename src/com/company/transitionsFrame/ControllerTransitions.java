@@ -1,6 +1,7 @@
 package com.company.transitionsFrame;
 
 import com.company.Model;
+import com.company.TransitionElement;
 
 public class ControllerTransitions {
     private Model model;
@@ -22,6 +23,12 @@ public class ControllerTransitions {
         this.viewTransitions = viewTransitions;
     }
     
+    public void selectLine(TransitionElement transitionElement) {
+        int i = 0;
+        while (model.getTransitionElement(i) != transitionElement) i++;
+        viewTransitions.selectLine(i);
+    }
+    
     public void handleAddButtonClick() {
         ViewMiniTransitions viewMiniTransitions = new ViewMiniTransitions();
         
@@ -35,12 +42,14 @@ public class ControllerTransitions {
     }
     
     public void handleEditButtonClick() {
+        if (viewTransitions.getSelectedLine() == -1) return;
         ViewMiniTransitions viewMiniTransitions = new ViewMiniTransitions();
 
         ControllerMiniTransitions controllerMiniTransitions = new ControllerMiniTransitions();
         controllerMiniTransitions.setModel(model);
         controllerMiniTransitions.setViewMiniTransitions(viewMiniTransitions);
         controllerMiniTransitions.setControllerTransitions(this);
+        controllerMiniTransitions.setSelectedListIndex(viewTransitions.getSelectedLine());
 
         viewMiniTransitions.setControllerMiniTransitions(controllerMiniTransitions);
         viewMiniTransitions.create();
@@ -48,7 +57,9 @@ public class ControllerTransitions {
     }
     
     public void handleRemoveButtonClick() {
-        
+        if (viewTransitions.getSelectedLine() == -1) return;
+        model.removeFromTransitions(viewTransitions.getSelectedLine());
+        updateDataInTransitionsList();
     }
     
     public void handleGenerateButtonClick() {

@@ -30,16 +30,10 @@ public class ControllerSetka {
 
     public void selectLine(PlanElement planElement) {
         int i = 0;
-        while (model.getElementFromSetka(i) != planElement) {
-            i++;
-        }
+        while (model.getElementFromSetka(i) != planElement) i++;
         viewSetka.selectLine(i);
     }
-
-    public int getWeekday() {
-        return 0;
-    }
-
+    
     public void handleAddButtonClick() {
         ViewMini viewMini = new ViewMini();
 

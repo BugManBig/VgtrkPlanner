@@ -10,7 +10,7 @@ public class ViewMiniTransitions {
     private JFrame frame;
 
     private static final int FRAME_WIDTH = 450;
-    private static final int FRAME_HEIGHT = 400;
+    private static final int FRAME_HEIGHT = 280;
 
     private JTextField startHrsTextfield;
     private JTextField startMinTextfield;
@@ -173,7 +173,7 @@ public class ViewMiniTransitions {
         return result;
     }
 
-    public void setAllCheckboxes() {
+    public void setAllDaysCheckboxes() {
         for (JCheckBox checkBox : weekdaysCheckboxes) {
             checkBox.setSelected(true);
         }

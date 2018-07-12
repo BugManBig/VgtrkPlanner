@@ -9,6 +9,11 @@ public class ControllerMiniTransitions {
     private Model model;
     private ViewMiniTransitions viewMiniTransitions;
     private ControllerTransitions controllerTransitions;
+    private int selectedListIndex = -1;
+
+    public void setSelectedListIndex(int selectedListIndex) {
+        this.selectedListIndex = selectedListIndex;
+    }
 
     public void setControllerTransitions(ControllerTransitions controllerTransitions) {
         this.controllerTransitions = controllerTransitions;
@@ -29,16 +34,21 @@ public class ControllerMiniTransitions {
                 viewMiniTransitions.getTransitionTime(),
                 new SelectedDays(viewMiniTransitions.getWeekdaysCheckboxes()),
                 new SelectedDoubles(viewMiniTransitions.getDoublesCheckboxes()));
-        model.addTransitionElement(transitionElement);
+        if (selectedListIndex == -1) {
+            model.addTransitionElement(transitionElement);
+        } else {
+            model.setTransitionElement(selectedListIndex, transitionElement);
+        }
         viewMiniTransitions.close();
         controllerTransitions.updateDataInTransitionsList();
+        controllerTransitions.selectLine(transitionElement);
     }
 
     public void handleCancelButtonClick() {
-        
+        viewMiniTransitions.close();
     }
 
     public void handleSetAllButtonClick() {
-        
+        viewMiniTransitions.setAllDaysCheckboxes();
     }
 }

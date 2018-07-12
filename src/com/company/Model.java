@@ -27,7 +27,7 @@ public class Model {
     }
 
     private void sortSetka() {
-        setkaElements.sort(new LexicographComparator());
+        setkaElements.sort(new LexicographComparatorForPlanElement());
     }
 
     public void removeFromSetka(int id) {
@@ -61,11 +61,17 @@ public class Model {
     }
     
     private void sortFederal(int weekday) {
-        federalElements[weekday].sort(new LexicographComparator());
+        federalElements[weekday].sort(new LexicographComparatorForPlanElement());
     }
     
     public void addTransitionElement(TransitionElement transitionElement) {
         transitionElements.add(transitionElement);
+        sortTransition();
+    }
+    
+    public void setTransitionElement(int id, TransitionElement transitionElement) {
+        transitionElements.set(id, transitionElement);
+        sortTransition();
     }
     
     public int getTransitionSize() {
@@ -74,5 +80,13 @@ public class Model {
     
     public TransitionElement getTransitionElement(int id) {
         return transitionElements.get(id);
+    }
+    
+    private void sortTransition() {
+        transitionElements.sort(new LexicographComparatorForTransitionElement());
+    }
+    
+    public void removeFromTransitions(int id) {
+        transitionElements.remove(id);
     }
 }
