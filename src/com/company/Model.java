@@ -7,6 +7,7 @@ public class Model {
     private List<PlanElement> setkaElements = new ArrayList<>();
     private List<PlanElement>[] federalElements;
     private List<TransitionElement> transitionElements = new ArrayList<>();
+    private List<PlanElement>[] doublesElements;
 
     public void addElementToSetka(PlanElement planElement) {
         setkaElements.add(planElement);
@@ -38,8 +39,8 @@ public class Model {
         this.federalElements = federalElements;
     }
 
-    public PlanElement getFederalElement(int weekday, int element) {
-        return federalElements[weekday].get(element);
+    public PlanElement getFederalElement(int weekday, int id) {
+        return federalElements[weekday].get(id);
     }
 
     public int getFederalSizeWeekday(int weekday) {
@@ -66,15 +67,15 @@ public class Model {
     
     public void addTransitionElement(TransitionElement transitionElement) {
         transitionElements.add(transitionElement);
-        sortTransition();
+        sortTransitions();
     }
     
     public void setTransitionElement(int id, TransitionElement transitionElement) {
         transitionElements.set(id, transitionElement);
-        sortTransition();
+        sortTransitions();
     }
     
-    public int getTransitionSize() {
+    public int getTransitionsSize() {
         return transitionElements.size();
     }
     
@@ -82,11 +83,15 @@ public class Model {
         return transitionElements.get(id);
     }
     
-    private void sortTransition() {
+    private void sortTransitions() {
         transitionElements.sort(new LexicographComparatorForTransitionElement());
     }
     
     public void removeFromTransitions(int id) {
         transitionElements.remove(id);
+    }
+
+    public void setDoublesElements(List<PlanElement>[] doublesElements) {
+        this.doublesElements = doublesElements;
     }
 }

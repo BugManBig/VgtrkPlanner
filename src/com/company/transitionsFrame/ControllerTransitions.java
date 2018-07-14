@@ -1,5 +1,6 @@
 package com.company.transitionsFrame;
 
+import com.company.DoublesGenerator;
 import com.company.Model;
 import com.company.TransitionElement;
 
@@ -12,7 +13,7 @@ public class ControllerTransitions {
     }
     
     public void updateDataInTransitionsList() {
-        String[] data = new String[model.getTransitionSize()];
+        String[] data = new String[model.getTransitionsSize()];
         for (int i = 0; i < data.length; i++) {
             data[i] = model.getTransitionElement(i).getDataString();
         }
@@ -63,6 +64,6 @@ public class ControllerTransitions {
     }
     
     public void handleGenerateButtonClick() {
-        
+        DoublesGenerator.generate(model);
     }
 }
