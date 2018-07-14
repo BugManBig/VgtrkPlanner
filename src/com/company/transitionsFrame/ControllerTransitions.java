@@ -2,7 +2,10 @@ package com.company.transitionsFrame;
 
 import com.company.DoublesGenerator;
 import com.company.Model;
+import com.company.PlanElement;
 import com.company.TransitionElement;
+
+import java.util.List;
 
 public class ControllerTransitions {
     private Model model;
@@ -64,6 +67,12 @@ public class ControllerTransitions {
     }
     
     public void handleGenerateButtonClick() {
-        DoublesGenerator.generate(model);
+        List<PlanElement>[] result = DoublesGenerator.generate(model);
+        for (List<PlanElement> planElements : result) {
+            for (PlanElement planElement : planElements) {
+                System.out.println(planElement.getDataStringForFederal());
+            }
+            System.out.println("___");
+        }
     }
 }
