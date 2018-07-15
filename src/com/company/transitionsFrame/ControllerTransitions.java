@@ -67,12 +67,15 @@ public class ControllerTransitions {
     }
     
     public void handleGenerateButtonClick() {
-        List<PlanElement>[] result = DoublesGenerator.generate(model);
-        for (List<PlanElement> planElements : result) {
-            for (PlanElement planElement : planElements) {
-                System.out.println(planElement.getDataStringForFederal());
+        List<PlanElement>[][] result = DoublesGenerator.generate(model);
+        for (List<PlanElement>[] doubles : result) {
+            for (List<PlanElement> weekdays : doubles) {
+                for (PlanElement planElement : weekdays) {
+                    System.out.println(planElement.getDataStringForFederal());
+                }
+                System.out.println("-end weekday-");
             }
-            System.out.println("___");
+            System.out.println("-end double-");
         }
     }
 }

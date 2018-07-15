@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DoublesGenerator {
-    public static List<PlanElement>[] generate(Model model) {
-        List<PlanElement>[] doublesElements = new ArrayList[4];
+    public static List<PlanElement>[][] generate(Model model) {
+        List<PlanElement>[][] doublesElements = new ArrayList[4][7];
         for (int i = 0; i < 4; i++) {
-            doublesElements[i] = new ArrayList<>();
+            for (int j = 0; j < 7; j++) {
+                doublesElements[i][j] = new ArrayList<>();
+            }
         }
+        
         TransitionElement transitionElement;
         PlanElement planElement;
+        PlanElement transitionedElement = null;
         int startTime;
         int endTime;
         int federalElementStartTime;
@@ -26,7 +30,13 @@ public class DoublesGenerator {
                     if (federalElementStartTime >= startTime && federalElementStartTime < endTime) {
                         for (int doubleId = 0; doubleId < 4; doubleId++) {
                             if (transitionElement.getSelectedDoubles().getSelectionsArray()[doubleId]) {
-                                doublesElements[doubleId].add(planElement);
+                                try {
+                                    transitionedElement = planElement.clone();
+                                } catch (CloneNotSupportedException e) {
+                                    e.printStackTrace();
+                                }
+                                transitionedElement.setStartTime(transitionElement.getTransitionTime());
+                                doublesElements[doubleId][weekdayId].add(transitionedElement);
                             }
                         }
                     }

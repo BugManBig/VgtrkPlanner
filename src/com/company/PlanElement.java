@@ -1,6 +1,6 @@
 package com.company;
 
-public class PlanElement {
+public class PlanElement implements Cloneable {
     private String title;
     private Chrono startTime;
     private Chrono lengthTime;
@@ -13,6 +13,10 @@ public class PlanElement {
 
     public Chrono getStartTime() {
         return startTime;
+    }
+
+    public void setStartTime(Chrono startTime) {
+        this.startTime = startTime;
     }
 
     public Chrono getDurationTime() {
@@ -45,5 +49,10 @@ public class PlanElement {
         }
         result += data[data.length - 1];
         return result;
+    }
+
+    @Override
+    protected PlanElement clone() throws CloneNotSupportedException {
+        return (PlanElement) super.clone();
     }
 }
