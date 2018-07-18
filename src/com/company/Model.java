@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Model {
@@ -8,6 +9,7 @@ public class Model {
     private List<PlanElement>[] federalElements;
     private List<TransitionElement> transitionElements = new ArrayList<>();
     private List<PlanElement>[] doublesElements;
+    private List<DataDay> dataDays = new ArrayList<>();
 
     public void addElementToSetka(PlanElement planElement) {
         setkaElements.add(planElement);
@@ -97,5 +99,20 @@ public class Model {
 
     public void setDoublesElements(List<PlanElement>[] doublesElements) {
         this.doublesElements = doublesElements;
+    }
+    
+    public void addDataDays(DataDay[] dataDays) {
+        for (int i = 0; i < 7; i++) {
+            this.dataDays.add(dataDays[i]);
+        }
+    }
+    
+    public DataDay getDataDay(GregorianCalendar date) {
+        for (int i = 0; i < dataDays.size(); i++) {
+            if (dataDays.get(i).isEquals(date)) {
+                return dataDays.get(i);
+            }
+        }
+        return null;
     }
 }

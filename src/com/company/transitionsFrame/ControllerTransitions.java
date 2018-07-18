@@ -1,6 +1,7 @@
 package com.company.transitionsFrame;
 
 import com.company.*;
+import com.company.finalFrame.ControllerFinal;
 import com.company.finalFrame.ViewFinal;
 
 import java.util.ArrayList;
@@ -80,11 +81,19 @@ public class ControllerTransitions {
             dataDays[i] = new DataDay(model.getFederalElements()[i], oneDayDoubles, date);
             date.add(Calendar.DAY_OF_MONTH, 1);
         }
-        for (int j = 0; j < 5; j++) {
-            for (int i = 0; i < dataDays[0].getPlanElementsDay(j).size(); i++) {
-                System.out.println(dataDays[0].getPlanElementsDay(j).get(i).getTitle());
-            }
-            System.out.println("---");
-        }
+        
+        model.addDataDays(dataDays);
+        
+        ViewFinal viewFinal = new ViewFinal();
+
+        ControllerFinal controllerFinal = new ControllerFinal();
+        controllerFinal.setModel(model);
+        controllerFinal.setViewFinal(viewFinal);
+        
+        viewFinal.setControllerFinal(controllerFinal);
+        viewFinal.create();
+        
+        controllerFinal.setDate(date);
+        controllerFinal.updateDataInList();
     }
 }
