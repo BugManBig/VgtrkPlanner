@@ -23,6 +23,12 @@ public class Chrono {
         this.seconds = seconds;
     }
     
+    public Chrono(int timeInSeconds) {
+        hours = timeInSeconds / 60 / 60;
+        minutes = (timeInSeconds - hours * 60 * 60) / 60;
+        seconds = timeInSeconds - hours * 60 * 60 - minutes * 60;
+    }
+    
     public int getTimeInSeconds() {
         return hours * 60 * 60 + minutes * 60 + seconds;
     }

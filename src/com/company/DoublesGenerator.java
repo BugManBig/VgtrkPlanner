@@ -18,10 +18,12 @@ public class DoublesGenerator {
         int startTime;
         int endTime;
         int federalElementStartTime;
+        int timeDelta;
         for (int i = 0; i < model.getTransitionsSize(); i++) {
             transitionElement = model.getTransitionElement(i);
             startTime = transitionElement.getStartTime().getTimeInSeconds();
             endTime = transitionElement.getEndTime().getTimeInSeconds();
+            timeDelta = transitionElement.getTransitionTime().getTimeInSeconds() - transitionElement.getStartTime().getTimeInSeconds();
             for (int weekdayId = 0; weekdayId < 7; weekdayId++) {
                 if (!transitionElement.getSelectedDays().getSelectionsArray()[weekdayId]) continue;
                 for (int federalElementId = 0; federalElementId < model.getFederalSizeWeekday(weekdayId); federalElementId++) {
@@ -35,7 +37,8 @@ public class DoublesGenerator {
                                 } catch (CloneNotSupportedException e) {
                                     e.printStackTrace();
                                 }
-                                transitionedElement.setStartTime(transitionElement.getTransitionTime());
+                                transitionedElement.setStartTime(
+                                        new Chrono(planElement.getStartTime().getTimeInSeconds() + timeDelta));
                                 doublesElements[doubleId][weekdayId].add(transitionedElement);
                             }
                         }
