@@ -5,10 +5,12 @@ import com.company.DoubleClickListener;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.GregorianCalendar;
 
 public class ViewTransitions {
     private ControllerTransitions controllerTransitions;
     private JList<String> list;
+    private JTextField dateText;
 
     private static final int FRAME_WIDTH = 900;
     private static final int FRAME_HEIGHT = 600;
@@ -54,6 +56,10 @@ public class ViewTransitions {
         generateButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);
         generateButton.addActionListener(e -> controllerTransitions.handleGenerateButtonClick());
         frame.add(generateButton);
+        
+        dateText = new JTextField();
+        dateText.setBounds(FRAME_WIDTH - 250, FRAME_HEIGHT - 80, 100, 30);
+        frame.add(dateText);
 
         frame.repaint();
         frame.revalidate();
@@ -68,5 +74,12 @@ public class ViewTransitions {
     public void selectLine(int index) {
         list.setSelectedIndex(index);
     }
-
+    
+    public GregorianCalendar getDate() {
+        String source = dateText.getText();
+        int day = Integer.parseInt(source.substring(0, 2));
+        int month = Integer.parseInt(source.substring(3, 5)) - 1;
+        int year = Integer.parseInt(source.substring(6, 8)) + 2000;
+        return new GregorianCalendar(year, month, day);
+    }
 }

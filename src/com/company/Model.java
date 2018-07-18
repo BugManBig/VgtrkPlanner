@@ -43,6 +43,10 @@ public class Model {
         return federalElements[weekday].get(id);
     }
 
+    public List<PlanElement>[] getFederalElements() {
+        return federalElements;
+    }
+
     public int getFederalSizeWeekday(int weekday) {
         return federalElements[weekday].size();
     }

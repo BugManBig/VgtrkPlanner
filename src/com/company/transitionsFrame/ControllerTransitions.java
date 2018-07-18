@@ -1,10 +1,11 @@
 package com.company.transitionsFrame;
 
-import com.company.DoublesGenerator;
-import com.company.Model;
-import com.company.PlanElement;
-import com.company.TransitionElement;
+import com.company.*;
+import com.company.finalFrame.ViewFinal;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ControllerTransitions {
@@ -67,15 +68,23 @@ public class ControllerTransitions {
     }
     
     public void handleGenerateButtonClick() {
-        List<PlanElement>[][] result = DoublesGenerator.generate(model);
-        for (List<PlanElement>[] doubles : result) {
-            for (List<PlanElement> weekdays : doubles) {
-                for (PlanElement planElement : weekdays) {
-                    System.out.println(planElement.getDataStringForFederal());
-                }
-                System.out.println("-end weekday-");
+        GregorianCalendar date = viewTransitions.getDate();
+        List<PlanElement>[][] doubles = DoublesGenerator.generate(model);
+        DataDay[] dataDays = new DataDay[7];
+        for (int i = 0; i < 7; i++) {
+            List<PlanElement>[] oneDayDoubles = new ArrayList[4];
+            for (int j = 0; j < 4; j++) {
+                oneDayDoubles[j] = new ArrayList<>();
+                oneDayDoubles[j].addAll(doubles[j][i]);
             }
-            System.out.println("-end double-");
+            dataDays[i] = new DataDay(model.getFederalElements()[i], oneDayDoubles, date);
+            date.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        for (int j = 0; j < 5; j++) {
+            for (int i = 0; i < dataDays[0].getPlanElementsDay(j).size(); i++) {
+                System.out.println(dataDays[0].getPlanElementsDay(j).get(i).getTitle());
+            }
+            System.out.println("---");
         }
     }
 }
