@@ -99,6 +99,7 @@ public class ControllerFederal {
         
         viewTransitions.setControllerTransitions(controllerTransitions);
         viewTransitions.create();
+        controllerTransitions.updateDataInTransitionsList();
     }
     
     public void setWeekdayInField() {

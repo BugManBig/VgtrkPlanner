@@ -8,8 +8,7 @@ public class Model {
     private List<PlanElement> setkaElements = new ArrayList<>();
     private List<PlanElement>[] federalElements;
     private List<TransitionElement> transitionElements = new ArrayList<>();
-    private List<PlanElement>[] doublesElements;
-    private List<DataDay> dataDays = new ArrayList<>();
+    private List<DataDay> dataDays;
 
     public void addElementToSetka(PlanElement planElement) {
         setkaElements.add(planElement);
@@ -97,11 +96,8 @@ public class Model {
         transitionElements.remove(id);
     }
 
-    public void setDoublesElements(List<PlanElement>[] doublesElements) {
-        this.doublesElements = doublesElements;
-    }
-    
     public void addDataDays(DataDay[] dataDays) {
+        this.dataDays = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
             this.dataDays.add(dataDays[i]);
         }
