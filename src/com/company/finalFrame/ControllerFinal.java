@@ -26,7 +26,11 @@ public class ControllerFinal {
     }
     
     public void updateDataInList() {
-        GregorianCalendar shiftedDate = new GregorianCalendar(date.get(Calendar.YEAR),
+        viewFinal.setWeekDayText(dayOfWeek);
+        viewFinal.setDoubleText(mode);
+
+        GregorianCalendar shiftedDate = new GregorianCalendar(
+                date.get(Calendar.YEAR),
                 date.get(Calendar.MONTH),
                 date.get(Calendar.DAY_OF_MONTH));
         shiftedDate.add(Calendar.DAY_OF_MONTH, dayOfWeek);
@@ -51,20 +55,22 @@ public class ControllerFinal {
     }
 
     public void handlePrevDayButtonClick() {
-        
+        dayOfWeek = dayOfWeek > 0 ? dayOfWeek - 1 : dayOfWeek;
+        updateDataInList();
     }
 
     public void handleNextDayButtonClick() {
-        
+        dayOfWeek = dayOfWeek < 6 ? dayOfWeek + 1 : dayOfWeek;
+        updateDataInList();
     }
     
     public void handlePrevDoubleButtonClick() {
-        mode--;
+        mode = mode > 0 ? mode - 1 : mode;
         updateDataInList();
     }
     
     public void handleNextDoubleButtonClick() {
-        mode++;
+        mode = mode < 4 ? mode + 1 : mode;
         updateDataInList();
     }
 }

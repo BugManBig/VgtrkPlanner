@@ -69,7 +69,6 @@ public class ControllerTransitions {
     }
     
     public void handleGenerateButtonClick() {
-        GregorianCalendar date = viewTransitions.getDate();
         List<PlanElement>[][] doubles = DoublesGenerator.generate(model);
         DataDay[] dataDays = new DataDay[7];
         for (int i = 0; i < 7; i++) {
@@ -78,8 +77,9 @@ public class ControllerTransitions {
                 oneDayDoubles[j] = new ArrayList<>();
                 oneDayDoubles[j].addAll(doubles[j][i]);
             }
+            GregorianCalendar date = viewTransitions.getDate();
+            date.add(Calendar.DAY_OF_MONTH, i);
             dataDays[i] = new DataDay(model.getFederalElements()[i], oneDayDoubles, date);
-            date.add(Calendar.DAY_OF_MONTH, 1);
         }
         
         model.addDataDays(dataDays);
@@ -93,7 +93,7 @@ public class ControllerTransitions {
         viewFinal.setControllerFinal(controllerFinal);
         viewFinal.create();
         
-        controllerFinal.setDate(date);
+        controllerFinal.setDate(viewTransitions.getDate());
         controllerFinal.updateDataInList();
     }
 }

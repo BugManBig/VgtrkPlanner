@@ -25,7 +25,7 @@ public class ViewFinal {
     }
     
     public void setDoubleText(int doubleNumber) {
-        doubleField.setText(String.valueOf(doubleNumber + 1));
+        doubleField.setText(String.valueOf(doubleNumber));
     }
 
     public void setDataToList(String[] data) {
