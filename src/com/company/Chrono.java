@@ -37,6 +37,10 @@ public class Chrono {
         return getTwoDigitsNumber(hours) + ":" + getTwoDigitsNumber(minutes) + ":" + getTwoDigitsNumber(seconds);
     }
     
+    public String getTimeStringSmall() {
+        return getTwoDigitsNumber(hours) + ":" + getTwoDigitsNumber(minutes);
+    }
+    
     private String getTwoDigitsNumber(int number) {
         return number > 9 ? String.valueOf(number) : "0" + number;
     }

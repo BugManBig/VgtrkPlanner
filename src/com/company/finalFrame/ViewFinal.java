@@ -91,6 +91,11 @@ public class ViewFinal {
         nextDoubleButton.setBounds(FRAME_WIDTH - 320, FRAME_HEIGHT - 80, 100, 30);
         nextDoubleButton.addActionListener(e -> controllerFinal.handleNextDoubleButtonClick());
         frame.add(nextDoubleButton);
+        
+        JButton documentationButton = new JButton("Document");
+        documentationButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 120, 100, 30);
+        documentationButton.addActionListener(e -> controllerFinal.handleDocumentationButtonClick());
+        frame.add(documentationButton);
 
         frame.repaint();
         frame.revalidate();

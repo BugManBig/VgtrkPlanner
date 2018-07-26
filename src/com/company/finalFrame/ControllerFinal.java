@@ -1,10 +1,11 @@
 package com.company.finalFrame;
 
-import com.company.DataDay;
-import com.company.Model;
+import com.company.*;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class ControllerFinal {
     private ViewFinal viewFinal;
@@ -72,5 +73,48 @@ public class ControllerFinal {
     public void handleNextDoubleButtonClick() {
         mode = mode < 4 ? mode + 1 : mode;
         updateDataInList();
+    }
+    
+    public void handleDocumentationButtonClick() {
+        GregorianCalendar shiftedDate = new GregorianCalendar(
+                date.get(Calendar.YEAR),
+                date.get(Calendar.MONTH),
+                date.get(Calendar.DAY_OF_MONTH));
+        List<String> data = new ArrayList<>();
+        data.add("ПРОГРАММА ПЕРЕДАЧ `РАДИО РОССИИ`");
+        data.add("на неделю с "
+                + twoDigitsNumber(date.get(Calendar.DAY_OF_MONTH)) + "."
+                + twoDigitsNumber((date.get(Calendar.MONTH) + 1)) + "."
+                + String.valueOf(date.get(Calendar.YEAR)).substring(2));
+        data.add("(время московское)");
+        data.add("");
+        data.add("");
+        String line;
+        List<PlanElement> list;
+        for (int i = 0; i < 7; i++) {
+            list = model.getDataDay(shiftedDate).getPlanElementsDay(0);
+            data.add(shiftedDate.get(Calendar.DAY_OF_MONTH) + " "
+                    + (getMonthName(shiftedDate.get(Calendar.MONTH))) + " - "
+                    + DaysOfWeek.values()[i].toString());
+            for (PlanElement planElement : list) {
+                line = planElement.getStartTime().getTimeStringSmall();
+                line += " " + planElement.getTitle();
+                data.add(line);
+            }
+            data.add("");
+            shiftedDate.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        FileActions.createFile("D:/AMyasnikov/Documentation.txt", data);
+    }
+    
+    private String twoDigitsNumber(int number) {
+        return number > 9 ? String.valueOf(number) : "0" + number;
+    }
+    
+    private String getMonthName(int monthNumber) {
+        String[] monthNames = {
+                "января", "февраля", "марта", "апреля", "мая", "июня",
+                "июля", "августа", "сентября", "октября", "ноября", "декабря"};
+        return monthNames[monthNumber];
     }
 }
