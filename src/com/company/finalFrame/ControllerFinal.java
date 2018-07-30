@@ -12,7 +12,7 @@ public class ControllerFinal {
     private Model model;
     private int mode = 0;
     private int dayOfWeek = 0;
-    private GregorianCalendar date;
+    private GregorianCalendar dateOfMonday;
 
     public void setViewFinal(ViewFinal viewFinal) {
         this.viewFinal = viewFinal;
@@ -22,20 +22,15 @@ public class ControllerFinal {
         this.model = model;
     }
 
-    public void setDate(GregorianCalendar date) {
-        this.date = date;
+    public void setDateOfMonday(GregorianCalendar dateOfMonday) {
+        this.dateOfMonday = dateOfMonday;
     }
     
-    public void updateDataInList() {
+    public void updateDataInPlaylist() {
         viewFinal.setWeekDayText(dayOfWeek);
         viewFinal.setDoubleText(mode);
-
-        GregorianCalendar shiftedDate = new GregorianCalendar(
-                date.get(Calendar.YEAR),
-                date.get(Calendar.MONTH),
-                date.get(Calendar.DAY_OF_MONTH));
-        shiftedDate.add(Calendar.DAY_OF_MONTH, dayOfWeek);
-        DataDay dataDay = model.getDataDay(shiftedDate);
+        
+        DataDay dataDay = model.getDataDay(getCurrentDate());
         String[] data = new String[dataDay.getPlanElementsDay(mode).size()];
         for (int i = 0; i < data.length; i++) {
             data[i] = dataDay.getPlanElementsDay(mode).get(i).getDataStringForFederal();
@@ -44,48 +39,72 @@ public class ControllerFinal {
     }
 
     public void handleEditButtonClick() {
-        
+        ViewMiniFinal viewMiniFinal = new ViewMiniFinal();
+
+        ControllerMiniFinal controllerMiniFinal = new ControllerMiniFinal();
+        controllerMiniFinal.setModel(model);
+        controllerMiniFinal.setViewMiniFinal(viewMiniFinal);
+        controllerMiniFinal.setControllerFinal(this);
+        controllerMiniFinal.setSelectedListIndex(viewFinal.getSelectedLine());
+
+        viewMiniFinal.setControllerMiniFinal(controllerMiniFinal);
+        viewMiniFinal.create();
+        viewMiniFinal.setFieldsFromPlanElement(model.getDataDay(
+                getCurrentDate()).getPlanElementsDay(mode).get(viewFinal.getSelectedLine()));
     }
 
     public void handleAddButtonClick() {
+        ViewMiniFinal viewMiniFinal = new ViewMiniFinal();
         
+        ControllerMiniFinal controllerMiniFinal = new ControllerMiniFinal();
+        controllerMiniFinal.setModel(model);
+        controllerMiniFinal.setViewMiniFinal(viewMiniFinal);
+        controllerMiniFinal.setControllerFinal(this);
+        
+        viewMiniFinal.setControllerMiniFinal(controllerMiniFinal);
+        viewMiniFinal.create();
     }
 
     public void handleRemoveButtonClick() {
-        
+        int selectedLine = viewFinal.getSelectedLine();
+        if (selectedLine > -1) {
+            model.removeFromFinal(getCurrentDate(), mode, selectedLine);
+            updateDataInPlaylist();
+        }
+
     }
 
     public void handlePrevDayButtonClick() {
         dayOfWeek = dayOfWeek > 0 ? dayOfWeek - 1 : dayOfWeek;
-        updateDataInList();
+        updateDataInPlaylist();
     }
 
     public void handleNextDayButtonClick() {
         dayOfWeek = dayOfWeek < 6 ? dayOfWeek + 1 : dayOfWeek;
-        updateDataInList();
+        updateDataInPlaylist();
     }
     
     public void handlePrevDoubleButtonClick() {
         mode = mode > 0 ? mode - 1 : mode;
-        updateDataInList();
+        updateDataInPlaylist();
     }
     
     public void handleNextDoubleButtonClick() {
         mode = mode < 4 ? mode + 1 : mode;
-        updateDataInList();
+        updateDataInPlaylist();
     }
     
     public void handleDocumentationButtonClick() {
         GregorianCalendar shiftedDate = new GregorianCalendar(
-                date.get(Calendar.YEAR),
-                date.get(Calendar.MONTH),
-                date.get(Calendar.DAY_OF_MONTH));
+                dateOfMonday.get(Calendar.YEAR),
+                dateOfMonday.get(Calendar.MONTH),
+                dateOfMonday.get(Calendar.DAY_OF_MONTH));
         List<String> data = new ArrayList<>();
         data.add("ПРОГРАММА ПЕРЕДАЧ `РАДИО РОССИИ`");
         data.add("на неделю с "
-                + twoDigitsNumber(date.get(Calendar.DAY_OF_MONTH)) + "."
-                + twoDigitsNumber((date.get(Calendar.MONTH) + 1)) + "."
-                + String.valueOf(date.get(Calendar.YEAR)).substring(2));
+                + twoDigitsNumber(dateOfMonday.get(Calendar.DAY_OF_MONTH)) + "."
+                + twoDigitsNumber((dateOfMonday.get(Calendar.MONTH) + 1)) + "."
+                + String.valueOf(dateOfMonday.get(Calendar.YEAR)).substring(2));
         data.add("(время московское)");
         data.add("");
         data.add("");
@@ -116,5 +135,34 @@ public class ControllerFinal {
                 "января", "февраля", "марта", "апреля", "мая", "июня",
                 "июля", "августа", "сентября", "октября", "ноября", "декабря"};
         return monthNames[monthNumber];
+    }
+
+    public int getWeekday() {
+        return dayOfWeek;
+    }
+
+    public GregorianCalendar getDateOfMonday() {
+        return dateOfMonday;
+    }
+    
+    public int getMode() {
+        return mode;
+    }
+    
+    public GregorianCalendar getCurrentDate() {
+        GregorianCalendar currentDate = new GregorianCalendar(
+                dateOfMonday.get(Calendar.YEAR),
+                dateOfMonday.get(Calendar.MONTH),
+                dateOfMonday.get(Calendar.DAY_OF_MONTH));
+        currentDate.add(Calendar.DAY_OF_MONTH, dayOfWeek);
+        return currentDate;
+    }
+
+    public void selectLine(PlanElement planElement) {
+        int i = 0;
+        while (model.getDataDay(getCurrentDate()).getPlanElementsDay(mode).get(i) != planElement) {
+            i++;
+        }
+        viewFinal.selectLine(i);
     }
 }

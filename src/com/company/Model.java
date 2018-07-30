@@ -111,4 +111,22 @@ public class Model {
         }
         return null;
     }
+    
+    public void sortDataDay(GregorianCalendar date, int mode) {
+        getDataDay(date).getPlanElementsDay(mode).sort(new LexicographComparatorForPlanElement());
+    }
+    
+    public void addFinalElement(GregorianCalendar date, int mode, PlanElement planElement) {
+        getDataDay(date).getPlanElementsDay(mode).add(planElement);
+        sortDataDay(date, mode);
+    }
+    
+    public void setFinalElement(GregorianCalendar date, int mode, int listIndex, PlanElement planElement) {
+        getDataDay(date).getPlanElementsDay(mode).set(listIndex, planElement);
+        sortDataDay(date, mode);
+    }
+    
+    public void removeFromFinal(GregorianCalendar date, int mode, int id) {
+        getDataDay(date).getPlanElementsDay(mode).remove(id);
+    }
 }

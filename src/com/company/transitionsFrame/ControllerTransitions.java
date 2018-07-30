@@ -63,9 +63,11 @@ public class ControllerTransitions {
     }
     
     public void handleRemoveButtonClick() {
-        if (viewTransitions.getSelectedLine() == -1) return;
-        model.removeFromTransitions(viewTransitions.getSelectedLine());
-        updateDataInTransitionsList();
+        int selectedLine = viewTransitions.getSelectedLine();
+        if (selectedLine > -1) {
+            model.removeFromTransitions(viewTransitions.getSelectedLine());
+            updateDataInTransitionsList();
+        }
     }
     
     public void handleGenerateButtonClick() {
@@ -93,7 +95,7 @@ public class ControllerTransitions {
         viewFinal.setControllerFinal(controllerFinal);
         viewFinal.create();
         
-        controllerFinal.setDate(viewTransitions.getDate());
-        controllerFinal.updateDataInList();
+        controllerFinal.setDateOfMonday(viewTransitions.getDate());
+        controllerFinal.updateDataInPlaylist();
     }
 }

@@ -18,7 +18,7 @@ public class ControllerMiniFederal {
         this.viewMiniFederal = viewMiniFederal;
     }
 
-    public void setController(ControllerFederal controllerFederal) {
+    public void setControllerFederal(ControllerFederal controllerFederal) {
         this.controllerFederal = controllerFederal;
     }
 

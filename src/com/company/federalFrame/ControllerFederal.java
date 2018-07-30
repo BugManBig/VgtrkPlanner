@@ -50,7 +50,7 @@ public class ControllerFederal {
         ControllerMiniFederal controllerMiniFederal = new ControllerMiniFederal();
         controllerMiniFederal.setViewMiniFederal(viewMiniFederal);
         controllerMiniFederal.setModel(model);
-        controllerMiniFederal.setController(this);
+        controllerMiniFederal.setControllerFederal(this);
         controllerMiniFederal.setSelectedListIndex(viewFederal.getSelectedLine());
         
         viewMiniFederal.setControllerMiniFederal(controllerMiniFederal);
@@ -64,7 +64,7 @@ public class ControllerFederal {
         ControllerMiniFederal controllerMiniFederal = new ControllerMiniFederal();
         controllerMiniFederal.setModel(model);
         controllerMiniFederal.setViewMiniFederal(viewMiniFederal);
-        controllerMiniFederal.setController(this);
+        controllerMiniFederal.setControllerFederal(this);
         
         viewMiniFederal.setControllerMiniFederal(controllerMiniFederal);
         viewMiniFederal.create();
@@ -74,8 +74,8 @@ public class ControllerFederal {
         int selectedLine = viewFederal.getSelectedLine();
         if (selectedLine > -1) {
             model.removeFromFederal(weekday, selectedLine);
+            updateDataInPlaylist();
         }
-        updateDataInPlaylist();
     }
     
     public void handleNextButtonClick() {

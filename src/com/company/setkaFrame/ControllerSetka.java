@@ -68,8 +68,8 @@ public class ControllerSetka {
         int selectedLine = viewSetka.getSelectedLine();
         if (selectedLine > -1) {
             model.removeFromSetka(selectedLine);
+            updateDataInPlaylist();
         }
-        updateDataInPlaylist();
     }
     
     public void handleGenerateButtonClick() {
