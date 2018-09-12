@@ -113,7 +113,10 @@ public class Model {
     }
     
     public void sortDataDay(GregorianCalendar date, int mode) {
-        getDataDay(date).getPlanElementsDay(mode).sort(new LexicographComparatorForPlanElement());
+        int shift = 0;
+        if (mode == 1) shift = 3;
+        if (mode == 2) shift = 1;
+        getDataDay(date).getPlanElementsDay(mode).sort(new LexicographComparatorForPlanElement(shift));
     }
     
     public void addFinalElement(GregorianCalendar date, int mode, PlanElement planElement) {

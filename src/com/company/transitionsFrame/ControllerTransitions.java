@@ -85,6 +85,13 @@ public class ControllerTransitions {
         }
         
         model.addDataDays(dataDays);
+        GregorianCalendar date = viewTransitions.getDate();
+        for (int i = 0; i < 7; i++) {
+            for (int j = 1; j <= 4; j++) {
+                model.sortDataDay(date, j);
+            }
+            date.add(Calendar.DAY_OF_MONTH, 1);
+        }
         
         ViewFinal viewFinal = new ViewFinal();
 
