@@ -95,12 +95,23 @@ public class ControllerFinal {
     }
     
     public void handleDocumentationButtonClick() {
+        createDocumentation("D:\\AMyasnikov\\Docs", "Федеральное", 0);
+        createDocumentation("D:\\AMyasnikov\\Docs", "Дубль-1", 1);
+        createDocumentation("D:\\AMyasnikov\\Docs", "Дубль-2", 2);
+        createDocumentation("D:\\AMyasnikov\\Docs", "Дубль-3", 3);
+        createDocumentation("D:\\AMyasnikov\\Docs", "Дубль-4", 4);
+    }
+    
+    private void createDocumentation(String path, String name, int mode) {
         GregorianCalendar shiftedDate = new GregorianCalendar(
                 dateOfMonday.get(Calendar.YEAR),
                 dateOfMonday.get(Calendar.MONTH),
                 dateOfMonday.get(Calendar.DAY_OF_MONTH));
         List<String> data = new ArrayList<>();
         data.add("ПРОГРАММА ПЕРЕДАЧ `РАДИО РОССИИ`");
+        if (mode > 0) {
+            data.add("РРД-" + mode);
+        }
         data.add("на неделю с "
                 + twoDigitsNumber(dateOfMonday.get(Calendar.DAY_OF_MONTH)) + "."
                 + twoDigitsNumber((dateOfMonday.get(Calendar.MONTH) + 1)) + "."
@@ -111,7 +122,7 @@ public class ControllerFinal {
         String line;
         List<PlanElement> list;
         for (int i = 0; i < 7; i++) {
-            list = model.getDataDay(shiftedDate).getPlanElementsDay(0);
+            list = model.getDataDay(shiftedDate).getPlanElementsDay(mode);
             data.add(shiftedDate.get(Calendar.DAY_OF_MONTH) + " "
                     + (getMonthName(shiftedDate.get(Calendar.MONTH))) + " - "
                     + DaysOfWeek.values()[i].toString());
@@ -123,7 +134,7 @@ public class ControllerFinal {
             data.add("");
             shiftedDate.add(Calendar.DAY_OF_MONTH, 1);
         }
-        FileActions.createFile("D:/AMyasnikov/Documentation.txt", data);
+        FileActions.createFile(path + "\\" + name + ".txt", data);
     }
     
     private String twoDigitsNumber(int number) {
