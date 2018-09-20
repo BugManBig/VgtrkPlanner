@@ -23,6 +23,9 @@ public class DoublesGenerator {
             transitionElement = model.getTransitionElement(i);
             startTime = transitionElement.getStartTime().getTimeInSeconds();
             endTime = transitionElement.getEndTime().getTimeInSeconds();
+            if (endTime == 0) {
+                endTime = 24 * 60 * 60;
+            }
             timeDelta = transitionElement.getTransitionTime().getTimeInSeconds() - transitionElement.getStartTime().getTimeInSeconds();
             for (int weekdayId = 0; weekdayId < 7; weekdayId++) {
                 if (!transitionElement.getSelectedDays().getSelectionsArray()[weekdayId]) continue;
