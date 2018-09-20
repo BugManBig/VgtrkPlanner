@@ -1,6 +1,8 @@
 package com.company;
 
-public class SelectedDoubles {
+import java.io.Serializable;
+
+public class SelectedDoubles implements Serializable {
     private boolean[] selectedDoubles = new boolean[4];
 
     public SelectedDoubles(boolean[] selectedDoubles) {

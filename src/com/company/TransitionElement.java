@@ -1,6 +1,8 @@
 package com.company;
 
-public class TransitionElement {
+import java.io.Serializable;
+
+public class TransitionElement implements Serializable {
     private Chrono startTime;
     private Chrono endTime;
     private Chrono transitionTime;

@@ -95,11 +95,11 @@ public class ControllerFinal {
     }
     
     public void handleDocumentationButtonClick() {
-        createDocumentation("D:\\AMyasnikov\\Docs", "Федеральное", 0);
-        createDocumentation("D:\\AMyasnikov\\Docs", "Дубль-1", 1);
-        createDocumentation("D:\\AMyasnikov\\Docs", "Дубль-2", 2);
-        createDocumentation("D:\\AMyasnikov\\Docs", "Дубль-3", 3);
-        createDocumentation("D:\\AMyasnikov\\Docs", "Дубль-4", 4);
+        createDocumentation(ProjectSettings.OUTPUT_PATH, "Федеральное", 0);
+        createDocumentation(ProjectSettings.OUTPUT_PATH, "Дубль-1", 1);
+        createDocumentation(ProjectSettings.OUTPUT_PATH, "Дубль-2", 2);
+        createDocumentation(ProjectSettings.OUTPUT_PATH, "Дубль-3", 3);
+        createDocumentation(ProjectSettings.OUTPUT_PATH, "Дубль-4", 4);
     }
     
     private void createDocumentation(String path, String name, int mode) {

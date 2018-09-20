@@ -12,6 +12,10 @@ public class Application {
             List<PlanElement> list = (List<PlanElement>) FileActions.load(ProjectSettings.BIN_PATH, "Setka.bin");
             model.setSetkaElements(list);
         }
+        if (FileActions.isExist(ProjectSettings.BIN_PATH, "Transitions.bin")) {
+            List<TransitionElement> list = (List<TransitionElement>) FileActions.load(ProjectSettings.BIN_PATH, "Transitions.bin");
+            model.setTransitionElements(list);
+        }
 
         ViewSetka viewSetka = new ViewSetka();
 

@@ -80,11 +80,13 @@ public class Model {
     public void addTransitionElement(TransitionElement transitionElement) {
         transitionElements.add(transitionElement);
         sortTransitions();
+        FileActions.save(transitionElements, ProjectSettings.BIN_PATH, "Transitions.bin");
     }
     
     public void setTransitionElement(int id, TransitionElement transitionElement) {
         transitionElements.set(id, transitionElement);
         sortTransitions();
+        FileActions.save(transitionElements, ProjectSettings.BIN_PATH, "Transitions.bin");
     }
     
     public int getTransitionsSize() {
@@ -101,6 +103,11 @@ public class Model {
     
     public void removeFromTransitions(int id) {
         transitionElements.remove(id);
+        FileActions.save(transitionElements, ProjectSettings.BIN_PATH, "Transitions.bin");
+    }
+
+    public void setTransitionElements(List<TransitionElement> transitionElements) {
+        this.transitionElements = transitionElements;
     }
 
     public void addDataDays(DataDay[] dataDays) {
