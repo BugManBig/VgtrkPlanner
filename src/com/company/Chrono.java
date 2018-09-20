@@ -1,6 +1,8 @@
 package com.company;
 
-public class Chrono {
+import java.io.Serializable;
+
+public class Chrono implements Serializable {
     private int hours;
     private int minutes;
     private int seconds;

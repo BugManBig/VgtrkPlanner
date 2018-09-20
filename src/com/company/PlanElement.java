@@ -1,6 +1,8 @@
 package com.company;
 
-public class PlanElement implements Cloneable {
+import java.io.Serializable;
+
+public class PlanElement implements Cloneable, Serializable {
     private String title;
     private Chrono startTime;
     private Chrono lengthTime;

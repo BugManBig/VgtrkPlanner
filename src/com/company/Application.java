@@ -3,9 +3,15 @@ package com.company;
 import com.company.setkaFrame.ControllerSetka;
 import com.company.setkaFrame.ViewSetka;
 
+import java.util.List;
+
 public class Application {
     public void run() {
         Model model = new Model();
+        if (FileActions.isExist(ProjectSettings.BIN_PATH, "Setka.bin")) {
+            List<PlanElement> list = (List<PlanElement>) FileActions.load(ProjectSettings.BIN_PATH, "Setka.bin");
+            model.setSetkaElements(list);
+        }
 
         ViewSetka viewSetka = new ViewSetka();
 

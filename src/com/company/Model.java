@@ -13,6 +13,7 @@ public class Model {
     public void addElementToSetka(PlanElement planElement) {
         setkaElements.add(planElement);
         sortSetka();
+        FileActions.save(setkaElements, ProjectSettings.BIN_PATH, "Setka.bin");
     }
 
     public PlanElement getElementFromSetka(int id) {
@@ -26,6 +27,7 @@ public class Model {
     public void setElementInSetka(int id, PlanElement planElement) {
         setkaElements.set(id, planElement);
         sortSetka();
+        FileActions.save(setkaElements, ProjectSettings.BIN_PATH, "Setka.bin");
     }
 
     private void sortSetka() {
@@ -34,6 +36,11 @@ public class Model {
 
     public void removeFromSetka(int id) {
         setkaElements.remove(id);
+        FileActions.save(setkaElements, ProjectSettings.BIN_PATH, "Setka.bin");
+    }
+
+    public void setSetkaElements(List<PlanElement> setkaElements) {
+        this.setkaElements = setkaElements;
     }
 
     public void setFederalElements(List<PlanElement>[] federalElements) {

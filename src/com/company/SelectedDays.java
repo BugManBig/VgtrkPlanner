@@ -1,6 +1,8 @@
 package com.company;
 
-public class SelectedDays {
+import java.io.Serializable;
+
+public class SelectedDays implements Serializable {
     private boolean[] selectedDays = new boolean[7];
 
     public SelectedDays(boolean[] selectedDays) {
