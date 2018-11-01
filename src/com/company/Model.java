@@ -8,7 +8,7 @@ public class Model {
     private List<PlanElement> setkaElements = new ArrayList<>();
     private List<PlanElement>[] federalElements;
     private List<TransitionElement> transitionElements = new ArrayList<>();
-    private List<DataDay> dataDays;
+    private List<DataDay> dataDays = new ArrayList<>();
 
     public void addElementToSetka(PlanElement planElement) {
         setkaElements.add(planElement);
@@ -111,9 +111,22 @@ public class Model {
     }
 
     public void addDataDays(DataDay[] dataDays) {
-        this.dataDays = new ArrayList<>();
+        checkForRewrite(dataDays);
         for (int i = 0; i < 7; i++) {
             this.dataDays.add(dataDays[i]);
+        }
+        System.out.println(this.dataDays.size());
+    }
+
+    private void checkForRewrite(DataDay[] dataDays) {
+        int weeksCount = this.dataDays.size() / 7;
+        for (int i = 0; i < weeksCount; i++) {
+            if (this.dataDays.get(i * 7).isEquals(dataDays[0].getDate())) {
+                for (int j = 0; j < 7; j++) {
+                    this.dataDays.remove(i * 7);
+                }
+                break;
+            }
         }
     }
     

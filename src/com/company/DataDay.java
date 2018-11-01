@@ -27,4 +27,8 @@ public class DataDay {
                 && this.date.get(Calendar.MONTH) == date.get(Calendar.MONTH)
                 && this.date.get(Calendar.DAY_OF_MONTH) == date.get(Calendar.DAY_OF_MONTH);
     }
+
+    public GregorianCalendar getDate() {
+        return date;
+    }
 }
