@@ -1,7 +1,7 @@
 package com.company;
 
-import com.company.setkaFrame.ControllerSetka;
-import com.company.setkaFrame.ViewSetka;
+import com.company.startFrame.ControllerStart;
+import com.company.startFrame.ViewStart;
 
 import java.util.List;
 
@@ -17,15 +17,13 @@ public class Application {
             model.setTransitionElements(list);
         }
 
-        ViewSetka viewSetka = new ViewSetka();
+        ViewStart viewStart = new ViewStart();
 
-        ControllerSetka controllerSetka = new ControllerSetka();
-        controllerSetka.setModel(model);
-        controllerSetka.setViewSetka(viewSetka);
+        ControllerStart controllerStart = new ControllerStart();
+        controllerStart.setModel(model);
+        controllerStart.setViewStart(viewStart);
 
-        viewSetka.setControllerSetka(controllerSetka);
-
-        viewSetka.create();
-        controllerSetka.updateDataInPlaylist();
+        viewStart.setControllerStart(controllerStart);
+        viewStart.create();
     }
 }
