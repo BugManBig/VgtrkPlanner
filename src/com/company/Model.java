@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -114,8 +115,17 @@ public class Model {
         checkForRewrite(dataDays);
         for (int i = 0; i < 7; i++) {
             this.dataDays.add(dataDays[i]);
+            saveDataDay(dataDays[i]);
         }
-        System.out.println(this.dataDays.size());
+    }
+
+    private void saveDataDay(DataDay dataDay) {
+        GregorianCalendar date = dataDay.getDate();
+        String fileName = date.get(Calendar.YEAR) + "-"
+                + (date.get(Calendar.MONTH) + 1) + "-"
+                + date.get(Calendar.DAY_OF_MONTH)
+                + ".bin";
+        FileActions.save(dataDay, ProjectSettings.BIN_PATH, fileName);
     }
 
     private void checkForRewrite(DataDay[] dataDays) {

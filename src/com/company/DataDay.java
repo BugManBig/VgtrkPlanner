@@ -1,10 +1,11 @@
 package com.company;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class DataDay {
+public class DataDay implements Serializable {
     private List<PlanElement> federal;
     private List<PlanElement>[] doubles;
     private GregorianCalendar date;
