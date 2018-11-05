@@ -32,6 +32,7 @@ public class FileActions {
 
     public static Object load(String path, String name) {
         Object object = null;
+        if (!new File(path + "\\" + name).exists()) return null;
         try {
             FileInputStream fileInputStream = new FileInputStream(path + "\\" + name);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);

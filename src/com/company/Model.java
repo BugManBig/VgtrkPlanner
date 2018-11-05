@@ -1,5 +1,7 @@
 package com.company;
 
+import javax.swing.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -121,10 +123,8 @@ public class Model {
 
     private void saveDataDay(DataDay dataDay) {
         GregorianCalendar date = dataDay.getDate();
-        String fileName = date.get(Calendar.YEAR) + "-"
-                + (date.get(Calendar.MONTH) + 1) + "-"
-                + date.get(Calendar.DAY_OF_MONTH)
-                + ".bin";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        String fileName = simpleDateFormat.format(date.getTime()) + ".bin";
         FileActions.save(dataDay, ProjectSettings.BIN_PATH, fileName);
     }
 
@@ -138,6 +138,22 @@ public class Model {
                 break;
             }
         }
+    }
+
+    public boolean loadWeek(GregorianCalendar date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        String fileName;
+        for (int i = 0; i < 7; i++) {
+            fileName = simpleDateFormat.format(date.getTime()) + ".bin";
+            DataDay dataDay = (DataDay) FileActions.load(ProjectSettings.BIN_PATH, fileName);
+            if (dataDay == null) {
+                JOptionPane.showMessageDialog(null, "There is no week");
+                return false;
+            }
+            dataDays.add(dataDay);
+            date.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        return true;
     }
     
     public DataDay getDataDay(GregorianCalendar date) {
