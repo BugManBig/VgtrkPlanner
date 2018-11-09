@@ -51,6 +51,7 @@ public class ControllerMiniFinal {
         viewMiniFinal.close();
         controllerFinal.updateDataInPlaylist();
         controllerFinal.selectLine(planElement);
+        model.saveAllDataDays();
     }
 
     public void handleCancelButtonClick() {

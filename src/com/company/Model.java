@@ -2,10 +2,7 @@ package com.company;
 
 import javax.swing.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 public class Model {
     private List<PlanElement> setkaElements = new ArrayList<>();
@@ -115,9 +112,13 @@ public class Model {
 
     public void addDataDays(DataDay[] dataDays) {
         checkForRewrite(dataDays);
-        for (int i = 0; i < 7; i++) {
-            this.dataDays.add(dataDays[i]);
-            saveDataDay(dataDays[i]);
+        this.dataDays.addAll(Arrays.asList(dataDays));
+        saveAllDataDays();
+    }
+
+    public void saveAllDataDays() {
+        for (DataDay dataDay : dataDays) {
+            saveDataDay(dataDay);
         }
     }
 

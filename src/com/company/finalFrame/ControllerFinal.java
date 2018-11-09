@@ -51,6 +51,7 @@ public class ControllerFinal {
         viewMiniFinal.create();
         viewMiniFinal.setFieldsFromPlanElement(model.getDataDay(
                 getCurrentDate()).getPlanElementsDay(mode).get(viewFinal.getSelectedLine()));
+        model.saveAllDataDays();
     }
 
     public void handleAddButtonClick() {
@@ -71,7 +72,7 @@ public class ControllerFinal {
             model.removeFromFinal(getCurrentDate(), mode, selectedLine);
             updateDataInPlaylist();
         }
-
+        model.saveAllDataDays();
     }
 
     public void handlePrevDayButtonClick() {
