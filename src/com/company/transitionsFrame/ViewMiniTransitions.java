@@ -32,44 +32,57 @@ public class ViewMiniTransitions {
     }
     
     public void create() {
-        frame = new JFrame();
+        frame = new JFrame("Редактирование");
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setLayout(null);
 
+        JLabel startTimeLabel = new JLabel("Время начала (от):");
+        startTimeLabel.setBounds(10, 10, 150, 30);
+        frame.add(startTimeLabel);
+
         startHrsTextfield = new JTextField();
-        startHrsTextfield.setBounds(10, 10, 30, 30);
+        startHrsTextfield.setBounds(150, 10, 30, 30);
         frame.add(startHrsTextfield);
 
         startMinTextfield = new JTextField();
-        startMinTextfield.setBounds(50, 10, 30, 30);
+        startMinTextfield.setBounds(190, 10, 30, 30);
         frame.add(startMinTextfield);
 
         startSecTextfield = new JTextField();
-        startSecTextfield.setBounds(90, 10, 30, 30);
+        startSecTextfield.setBounds(230, 10, 30, 30);
         frame.add(startSecTextfield);
 
+        JLabel endTimeLabel = new JLabel("Время окончания (до):");
+        endTimeLabel.setBounds(10, 50, 150, 30);
+        frame.add(endTimeLabel);
+
         endHrsTextfield = new JTextField();
-        endHrsTextfield.setBounds(10, 50, 30, 30);
+        endHrsTextfield.setBounds(150, 50, 30, 30);
         frame.add(endHrsTextfield);
 
         endMinTextfield = new JTextField();
-        endMinTextfield.setBounds(50, 50, 30, 30);
+        endMinTextfield.setBounds(190, 50, 30, 30);
         frame.add(endMinTextfield);
 
         endSecTextfield = new JTextField();
-        endSecTextfield.setBounds(90, 50, 30, 30);
+        endSecTextfield.setBounds(230, 50, 30, 30);
         frame.add(endSecTextfield);
-        
+
+        JLabel doubleTimeLabel = new JLabel("Время дубля:");
+        doubleTimeLabel.setBounds(10, 90, 150, 30);
+        frame.add(doubleTimeLabel);
+
         transitionHrsTextfield = new JTextField();
-        transitionHrsTextfield.setBounds(10, 90, 30, 30);
+        transitionHrsTextfield.setBounds(150, 90, 30, 30);
         frame.add(transitionHrsTextfield);
         
         transitionMinTextfield = new JTextField();
-        transitionMinTextfield.setBounds(50, 90, 30, 30);
+        transitionMinTextfield.setBounds(190, 90, 30, 30);
         frame.add(transitionMinTextfield);
         
         transitionSecTextfield = new JTextField();
-        transitionSecTextfield.setBounds(90, 90, 30, 30);
+        transitionSecTextfield.setBounds(230, 90, 30, 30);
         frame.add(transitionSecTextfield);
 
 
@@ -93,17 +106,17 @@ public class ViewMiniTransitions {
         ListenersAdding.addMouseListener(transitionSecTextfield);
 
 
-        JButton okButton = new JButton("Ok");
+        JButton okButton = new JButton("Ок");
         okButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
         okButton.addActionListener(e -> controllerMiniTransitions.handleOkButtonClick());
         frame.add(okButton);
 
-        JButton cancelButton = new JButton("Cancel");
+        JButton cancelButton = new JButton("Отмена");
         cancelButton.setBounds(FRAME_WIDTH - 125, FRAME_HEIGHT - 80, 100, 30);
         cancelButton.addActionListener(e -> controllerMiniTransitions.handleCancelButtonClick());
         frame.add(cancelButton);
 
-        JButton setAllButton = new JButton("Set all");
+        JButton setAllButton = new JButton("Все дни");
         setAllButton.setBounds(FRAME_WIDTH / 2 - 50, FRAME_HEIGHT - 80, 100, 30);
         setAllButton.addActionListener(e -> controllerMiniTransitions.handleSetAllButtonClick());
         frame.add(setAllButton);
@@ -121,7 +134,7 @@ public class ViewMiniTransitions {
         for (int i = 0; i < 4; i++) {
             JCheckBox checkBox = new JCheckBox();
             checkBox.setBounds(10 + ((FRAME_WIDTH - 10) / 7) * i, 160, 60, 30);
-            checkBox.setText("D" + (i + 1));
+            checkBox.setText("Д" + (i + 1));
             doublesCheckboxes[i] = checkBox;
             frame.add(checkBox);
         }

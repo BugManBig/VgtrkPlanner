@@ -45,6 +45,8 @@ public class ControllerFinal {
     }
 
     public void handleEditButtonClick() {
+        if (viewFinal.getSelectedLine() == -1) return;
+
         ViewMiniFinal viewMiniFinal = new ViewMiniFinal();
 
         ControllerMiniFinal controllerMiniFinal = new ControllerMiniFinal();

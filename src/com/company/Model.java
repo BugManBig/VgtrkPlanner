@@ -1,6 +1,5 @@
 package com.company;
 
-import javax.swing.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -148,7 +147,6 @@ public class Model {
             fileName = simpleDateFormat.format(date.getTime()) + ".bin";
             DataDay dataDay = (DataDay) FileActions.load(ProjectSettings.BIN_PATH, fileName);
             if (dataDay == null) {
-                JOptionPane.showMessageDialog(null, "There is no week");
                 return false;
             }
             dataDays.add(dataDay);

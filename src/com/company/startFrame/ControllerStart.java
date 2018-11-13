@@ -39,16 +39,23 @@ public class ControllerStart {
 
     public void handleLoadButtonClick() {
         String dateText = viewStart.getDateText();
+        if (dateText.equals("")) {
+            JOptionPane.showMessageDialog(null, "Не введена дата понедельника");
+            return;
+        }
         int day = Integer.parseInt(dateText.substring(0, 2));
         int month = Integer.parseInt(dateText.substring(3, 5)) - 1;
         int year = Integer.parseInt(dateText.substring(6, 8)) + 2000;
         GregorianCalendar date = new GregorianCalendar(year, month, day);
         if (date.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
-            JOptionPane.showMessageDialog(null, "This is not monday!");
+            JOptionPane.showMessageDialog(null, "Введённая дата не является понедельником");
             return;
         }
         boolean isLoaded = model.loadWeek((GregorianCalendar) date.clone());
-        if (!isLoaded) return;
+        if (!isLoaded) {
+            JOptionPane.showMessageDialog(null, "Нет такой недели");
+            return;
+        }
 
         viewStart.close();
 

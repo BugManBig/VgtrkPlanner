@@ -1,13 +1,13 @@
 package com.company;
 
 public enum DaysOfWeek {
-    MONDAY("понедельник"),
-    TUESDAY("вторник"),
-    WEDNESDAY("среда"),
-    THURSDAY("четверг"),
-    FRIDAY("пятница"),
-    SATURDAY("суббота"),
-    SUNDAY("воскресенье");
+    MONDAY("пнд"),
+    TUESDAY("втр"),
+    WEDNESDAY("срд"),
+    THURSDAY("чтв"),
+    FRIDAY("птн"),
+    SATURDAY("сбт"),
+    SUNDAY("вск");
     
     private String name;
     

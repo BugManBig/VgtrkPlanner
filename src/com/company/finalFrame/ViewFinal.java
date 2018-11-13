@@ -25,7 +25,11 @@ public class ViewFinal {
     }
     
     public void setDoubleText(int doubleNumber) {
-        doubleField.setText(String.valueOf(doubleNumber));
+        if (doubleNumber == 0) {
+            doubleField.setText("Федеральное");
+        } else {
+            doubleField.setText(doubleNumber + " дубль");
+        }
     }
 
     public void setDataToList(String[] data) {
@@ -33,7 +37,7 @@ public class ViewFinal {
     }
 
     public void create() {
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Неделя");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setLayout(null);
@@ -57,17 +61,17 @@ public class ViewFinal {
         doubleField.setEditable(false);
         frame.add(doubleField);
 
-        JButton addButton = new JButton("Add");
+        JButton addButton = new JButton("Добавить");
         addButton.setBounds(10, FRAME_HEIGHT - 120, 100, 30);
         addButton.addActionListener(e -> controllerFinal.handleAddButtonClick());
         frame.add(addButton);
 
-        JButton editButton = new JButton("Edit");
+        JButton editButton = new JButton("Изменить");
         editButton.setBounds(120, FRAME_HEIGHT - 120, 100, 30);
         editButton.addActionListener(listenerForEdit);
         frame.add(editButton);
 
-        JButton removeButton = new JButton("Remove");
+        JButton removeButton = new JButton("Удалить");
         removeButton.setBounds(230, FRAME_HEIGHT - 120, 100, 30);
         removeButton.addActionListener(e -> controllerFinal.handleRemoveButtonClick());
         frame.add(removeButton);
@@ -92,12 +96,12 @@ public class ViewFinal {
         nextDoubleButton.addActionListener(e -> controllerFinal.handleNextDoubleButtonClick());
         frame.add(nextDoubleButton);
         
-        JButton documentationButton = new JButton("Document");
+        JButton documentationButton = new JButton("В текст");
         documentationButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 120, 100, 30);
         documentationButton.addActionListener(e -> controllerFinal.handleDocumentationButtonClick());
         frame.add(documentationButton);
 
-        JButton transitionsButton = new JButton("Transitions");
+        JButton transitionsButton = new JButton("Замены");
         transitionsButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
         transitionsButton.addActionListener(e -> controllerFinal.handleTransitionsButtonClick());
         frame.add(transitionsButton);

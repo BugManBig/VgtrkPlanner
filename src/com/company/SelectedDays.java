@@ -3,7 +3,7 @@ package com.company;
 import java.io.Serializable;
 
 public class SelectedDays implements Serializable {
-    private boolean[] selectedDays = new boolean[7];
+    private boolean[] selectedDays;
 
     public SelectedDays(boolean[] selectedDays) {
         this.selectedDays = selectedDays;
@@ -12,7 +12,7 @@ public class SelectedDays implements Serializable {
     public String getDaysString() {
         String string = "";
         for (int i = 0; i < 7; i++) {
-            string += selectedDays[i] ? "X" : "_";
+            string += selectedDays[i] ? DaysOfWeek.values()[i] : "---";
             string += " ";
         }
         return string;

@@ -16,14 +16,14 @@ public class ViewStart {
     }
 
     public void create() {
-        frame = new JFrame();
+        frame = new JFrame("Выберите нужный вариант");
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
 
-        JButton createButton = new JButton("Create");
+        JButton createButton = new JButton("Сетка");
         createButton.setBounds(FRAME_WIDTH / 2 - 50, 10, 100, 30);
         createButton.addActionListener(e -> controllerStart.handleCreateButtonClick());
         frame.add(createButton);
@@ -32,7 +32,7 @@ public class ViewStart {
         dateText.setBounds(FRAME_WIDTH / 2 - 50, FRAME_HEIGHT - 120, 100, 30);
         frame.add(dateText);
 
-        JButton loadButton = new JButton("Load");
+        JButton loadButton = new JButton("Загрузить");
         loadButton.setBounds(FRAME_WIDTH / 2 - 50, FRAME_HEIGHT - 80, 100, 30);
         loadButton.addActionListener(e -> controllerStart.handleLoadButtonClick());
         frame.add(loadButton);

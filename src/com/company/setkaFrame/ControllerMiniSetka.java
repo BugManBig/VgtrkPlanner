@@ -4,9 +4,9 @@ import com.company.Model;
 import com.company.PlanElement;
 import com.company.SelectedDays;
 
-public class ControllerMini {
+public class ControllerMiniSetka {
     private Model model;
-    private ViewMini viewMini;
+    private ViewMiniSetka viewMiniSetka;
     private ControllerSetka controllerSetka;
     private int selectedListIndex = -1;
     
@@ -14,8 +14,8 @@ public class ControllerMini {
         this.model = model;
     }
 
-    public void setViewMini(ViewMini viewMini) {
-        this.viewMini = viewMini;
+    public void setViewMiniSetka(ViewMiniSetka viewMiniSetka) {
+        this.viewMiniSetka = viewMiniSetka;
     }
 
     public void setControllerSetka(ControllerSetka controllerSetka) {
@@ -24,26 +24,26 @@ public class ControllerMini {
 
     public void handleOkButtonClick() {
         PlanElement planElement = new PlanElement(
-                viewMini.getTitleText(),
-                viewMini.getStartTime(),
-                viewMini.getDurationTime(),
-                new SelectedDays(viewMini.getCheckboxesState()));
+                viewMiniSetka.getTitleText(),
+                viewMiniSetka.getStartTime(),
+                viewMiniSetka.getDurationTime(),
+                new SelectedDays(viewMiniSetka.getCheckboxesState()));
         if (selectedListIndex > -1) {
             model.setElementInSetka(selectedListIndex, planElement);
         } else {
             model.addElementToSetka(planElement);
         }
-        viewMini.close();
+        viewMiniSetka.close();
         controllerSetka.updateDataInPlaylist();
         controllerSetka.selectLine(planElement);
     }
 
     public void handleCancelButtonClick() {
-        viewMini.close();
+        viewMiniSetka.close();
     }
     
     public void handleSetAllButtonClick() {
-        viewMini.setAllCheckboxes();
+        viewMiniSetka.setAllCheckboxes();
     }
     
     public void setSelectedListIndex(int index) {

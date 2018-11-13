@@ -11,6 +11,7 @@ public class ViewSetka {
     private ControllerSetka controllerSetka;
     private JList<String> list;
     private JTextField dateText;
+    private JFrame frame;
 
     private static final int FRAME_WIDTH = 900;
     private static final int FRAME_HEIGHT = 600;
@@ -24,7 +25,7 @@ public class ViewSetka {
     }
 
     public void create() {
-        JFrame frame = new JFrame();
+        frame = new JFrame("Сетка");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setLayout(null);
@@ -38,17 +39,17 @@ public class ViewSetka {
         frame.add(playlist);
         list.addMouseListener(new DoubleClickListener(listenerForEdit));
 
-        JButton addButton = new JButton("Add");
+        JButton addButton = new JButton("Добавить");
         addButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
         addButton.addActionListener(e -> controllerSetka.handleAddButtonClick());
         frame.add(addButton);
         
-        JButton editButton = new JButton("Edit");
+        JButton editButton = new JButton("Изменить");
         editButton.setBounds(120, FRAME_HEIGHT - 80, 100, 30);
         editButton.addActionListener(listenerForEdit);
         frame.add(editButton);
 
-        JButton removeButton = new JButton("Remove");
+        JButton removeButton = new JButton("Удалить");
         removeButton.setBounds(230, FRAME_HEIGHT - 80, 100, 30);
         removeButton.addActionListener(e -> controllerSetka.handleRemoveButtonClick());
         frame.add(removeButton);
@@ -57,7 +58,7 @@ public class ViewSetka {
         dateText.setBounds(FRAME_WIDTH - 250, FRAME_HEIGHT - 80, 100, 30);
         frame.add(dateText);
         
-        JButton generateButton = new JButton("Generate");
+        JButton generateButton = new JButton("Генерировать");
         generateButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);
         generateButton.addActionListener(e -> controllerSetka.handleGenerateButtonClick());
         frame.add(generateButton);
@@ -78,9 +79,16 @@ public class ViewSetka {
 
     public GregorianCalendar getDate() {
         String source = dateText.getText();
+        if (source.equals("")) {
+            return null;
+        }
         int day = Integer.parseInt(source.substring(0, 2));
         int month = Integer.parseInt(source.substring(3, 5)) - 1;
         int year = Integer.parseInt(source.substring(6, 8)) + 2000;
         return new GregorianCalendar(year, month, day);
+    }
+
+    public void close() {
+        frame.dispose();
     }
 }

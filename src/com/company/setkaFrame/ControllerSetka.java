@@ -39,15 +39,15 @@ public class ControllerSetka {
     }
     
     public void handleAddButtonClick() {
-        ViewMini viewMini = new ViewMini();
+        ViewMiniSetka viewMiniSetka = new ViewMiniSetka();
 
-        ControllerMini controllerMini = new ControllerMini();
-        controllerMini.setModel(model);
-        controllerMini.setViewMini(viewMini);
-        controllerMini.setControllerSetka(this);
+        ControllerMiniSetka controllerMiniSetka = new ControllerMiniSetka();
+        controllerMiniSetka.setModel(model);
+        controllerMiniSetka.setViewMiniSetka(viewMiniSetka);
+        controllerMiniSetka.setControllerSetka(this);
 
-        viewMini.setControllerMini(controllerMini);
-        viewMini.create();
+        viewMiniSetka.setControllerMiniSetka(controllerMiniSetka);
+        viewMiniSetka.create();
     }
 
     public void handleEditButtonClick() {
@@ -55,31 +55,34 @@ public class ControllerSetka {
         
         PlanElement planElement = model.getElementFromSetka(viewSetka.getSelectedLine());
         
-        ViewMini viewMini = new ViewMini();
+        ViewMiniSetka viewMiniSetka = new ViewMiniSetka();
         
-        ControllerMini controllerMini = new ControllerMini();
-        controllerMini.setViewMini(viewMini);
-        controllerMini.setModel(model);
-        controllerMini.setControllerSetka(this);
-        controllerMini.setSelectedListIndex(viewSetka.getSelectedLine());
+        ControllerMiniSetka controllerMiniSetka = new ControllerMiniSetka();
+        controllerMiniSetka.setViewMiniSetka(viewMiniSetka);
+        controllerMiniSetka.setModel(model);
+        controllerMiniSetka.setControllerSetka(this);
+        controllerMiniSetka.setSelectedListIndex(viewSetka.getSelectedLine());
         
-        viewMini.setControllerMini(controllerMini);
-        viewMini.create();
-        viewMini.setFieldsFromPlanElement(planElement);
+        viewMiniSetka.setControllerMiniSetka(controllerMiniSetka);
+        viewMiniSetka.create();
+        viewMiniSetka.setFieldsFromPlanElement(planElement);
     }
 
     public void handleRemoveButtonClick() {
         int selectedLine = viewSetka.getSelectedLine();
-        if (selectedLine > -1) {
-            model.removeFromSetka(selectedLine);
-            updateDataInPlaylist();
-        }
+        if (selectedLine == -1) return;
+        model.removeFromSetka(selectedLine);
+        updateDataInPlaylist();
     }
     
     public void handleGenerateButtonClick() {
         GregorianCalendar mondayDate = viewSetka.getDate();
+        if (mondayDate == null) {
+            JOptionPane.showMessageDialog(null, "Не введена дата понедельника");
+            return;
+        }
         if (mondayDate.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
-            JOptionPane.showMessageDialog(null, "This is not monday!");
+            JOptionPane.showMessageDialog(null, "Введённая дата не является понедельником");
             return;
         }
 
@@ -106,5 +109,7 @@ public class ControllerSetka {
 
         controllerFinal.setDateOfMonday(viewSetka.getDate());
         controllerFinal.updateDataInPlaylist();
+
+        viewSetka.close();
     }
 }

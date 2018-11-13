@@ -24,8 +24,9 @@ public class ViewTransitions {
     }
 
     public void create() {
-        frame = new JFrame();
+        frame = new JFrame("Справочник замен");
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setLayout(null);
 
         ActionListener listenerForEdit = e -> controllerTransitions.handleEditButtonClick();
@@ -37,22 +38,22 @@ public class ViewTransitions {
         frame.add(playlist);
         list.addMouseListener(new DoubleClickListener(listenerForEdit));
 
-        JButton addButton = new JButton("Add");
+        JButton addButton = new JButton("Добавить");
         addButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
         addButton.addActionListener(e -> controllerTransitions.handleAddButtonClick());
         frame.add(addButton);
 
-        JButton editButton = new JButton("Edit");
+        JButton editButton = new JButton("Изменить");
         editButton.setBounds(120, FRAME_HEIGHT - 80, 100, 30);
         editButton.addActionListener(listenerForEdit);
         frame.add(editButton);
 
-        JButton removeButton = new JButton("Remove");
+        JButton removeButton = new JButton("Удалить");
         removeButton.setBounds(230, FRAME_HEIGHT - 80, 100, 30);
         removeButton.addActionListener(e -> controllerTransitions.handleRemoveButtonClick());
         frame.add(removeButton);
 
-        JButton generateButton = new JButton("Generate");
+        JButton generateButton = new JButton("Генерировать");
         generateButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);
         generateButton.addActionListener(e -> controllerTransitions.handleGenerateButtonClick());
         frame.add(generateButton);
