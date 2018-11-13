@@ -34,7 +34,7 @@ public class DoublesGenerator {
                 date.add(Calendar.DAY_OF_MONTH, weekdayId);
                 if (!transitionElement.getSelectedDays().getSelectionsArray()[weekdayId]) continue;
                 for (int federalElementId = 0; federalElementId < model.getDataDay(date).getPlanElementsDay(0).size(); federalElementId++) {
-                    planElement = model.getDataDay(dateOfMonday).getPlanElementsDay(0).get(federalElementId);
+                    planElement = model.getDataDay(date).getPlanElementsDay(0).get(federalElementId);
                     federalElementStartTime = planElement.getStartTime().getTimeInSeconds();
                     if (federalElementStartTime >= startTime && federalElementStartTime < endTime) {
                         for (int doubleId = 0; doubleId < 4; doubleId++) {
