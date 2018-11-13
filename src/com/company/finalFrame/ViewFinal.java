@@ -34,7 +34,7 @@ public class ViewFinal {
 
     public void create() {
         JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setLayout(null);
 
@@ -96,6 +96,11 @@ public class ViewFinal {
         documentationButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 120, 100, 30);
         documentationButton.addActionListener(e -> controllerFinal.handleDocumentationButtonClick());
         frame.add(documentationButton);
+
+        JButton transitionsButton = new JButton("Transitions");
+        transitionsButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
+        transitionsButton.addActionListener(e -> controllerFinal.handleTransitionsButtonClick());
+        frame.add(transitionsButton);
 
         frame.repaint();
         frame.revalidate();

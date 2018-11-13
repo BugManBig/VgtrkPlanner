@@ -7,6 +7,7 @@ import com.company.PlanElement;
 import com.company.finalFrame.ControllerFinal;
 import com.company.finalFrame.ViewFinal;
 
+import javax.swing.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -76,6 +77,12 @@ public class ControllerSetka {
     }
     
     public void handleGenerateButtonClick() {
+        GregorianCalendar mondayDate = viewSetka.getDate();
+        if (mondayDate.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
+            JOptionPane.showMessageDialog(null, "This is not monday!");
+            return;
+        }
+
         List<PlanElement>[] federalElements = FederalGenerator.generate(model);
         model.setFederalElements(federalElements);
 

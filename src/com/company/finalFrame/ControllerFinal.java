@@ -1,6 +1,8 @@
 package com.company.finalFrame;
 
 import com.company.*;
+import com.company.transitionsFrame.ControllerTransitions;
+import com.company.transitionsFrame.ViewTransitions;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -105,6 +107,18 @@ public class ControllerFinal {
         createDocumentation(ProjectSettings.OUTPUT_PATH, "Дубль-2", 2);
         createDocumentation(ProjectSettings.OUTPUT_PATH, "Дубль-3", 3);
         createDocumentation(ProjectSettings.OUTPUT_PATH, "Дубль-4", 4);
+    }
+
+    public void handleTransitionsButtonClick() {
+        ViewTransitions viewTransitions = new ViewTransitions();
+
+        ControllerTransitions controllerTransitions = new ControllerTransitions();
+        controllerTransitions.setModel(model);
+        controllerTransitions.setViewTransitions(viewTransitions);
+
+        viewTransitions.setControllerTransitions(controllerTransitions);
+        viewTransitions.create();
+        controllerTransitions.updateDataInTransitionsList();
     }
     
     private void createDocumentation(String path, String name, int mode) {
