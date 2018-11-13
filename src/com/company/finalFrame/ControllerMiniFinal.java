@@ -40,8 +40,7 @@ public class ControllerMiniFinal {
         GregorianCalendar date = new GregorianCalendar(
                 controllerFinal.getDateOfMonday().get(Calendar.YEAR),
                 controllerFinal.getDateOfMonday().get(Calendar.MONTH),
-                controllerFinal.getDateOfMonday().get(Calendar.DAY_OF_MONTH)
-        );
+                controllerFinal.getDateOfMonday().get(Calendar.DAY_OF_MONTH));
         date.add(Calendar.DAY_OF_MONTH, controllerFinal.getWeekday());
         if (selectedListIndex > -1) {
             model.setFinalElement(date, controllerFinal.getMode(), selectedListIndex, planElement);

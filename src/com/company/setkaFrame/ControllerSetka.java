@@ -1,11 +1,14 @@
 package com.company.setkaFrame;
 
+import com.company.DataDay;
 import com.company.FederalGenerator;
 import com.company.Model;
 import com.company.PlanElement;
-import com.company.federalFrame.ControllerFederal;
-import com.company.federalFrame.ViewFederal;
+import com.company.finalFrame.ControllerFinal;
+import com.company.finalFrame.ViewFinal;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ControllerSetka {
@@ -76,16 +79,25 @@ public class ControllerSetka {
         List<PlanElement>[] federalElements = FederalGenerator.generate(model);
         model.setFederalElements(federalElements);
 
-        ViewFederal viewFederal = new ViewFederal();
+        DataDay[] dataDays = new DataDay[7];
+        for (int i = 0; i < 7; i++) {
+            GregorianCalendar date = viewSetka.getDate();
+            date.add(Calendar.DAY_OF_MONTH, i);
+            dataDays[i] = new DataDay(model.getFederalElements()[i], null, date);
+        }
 
-        ControllerFederal controllerFederal = new ControllerFederal();
-        controllerFederal.setModel(model);
-        controllerFederal.setViewFederal(viewFederal);
-        
-        viewFederal.setControllerFederal(controllerFederal);
-        viewFederal.create();
-        
-        controllerFederal.updateDataInPlaylist();
-        controllerFederal.setWeekdayInField();
+        model.addDataDays(dataDays);
+
+        ViewFinal viewFinal = new ViewFinal();
+
+        ControllerFinal controllerFinal = new ControllerFinal();
+        controllerFinal.setModel(model);
+        controllerFinal.setViewFinal(viewFinal);
+
+        viewFinal.setControllerFinal(controllerFinal);
+        viewFinal.create();
+
+        controllerFinal.setDateOfMonday(viewSetka.getDate());
+        controllerFinal.updateDataInPlaylist();
     }
 }

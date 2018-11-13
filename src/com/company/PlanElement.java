@@ -40,7 +40,7 @@ public class PlanElement implements Cloneable, Serializable {
         return connectViaSplitter(SPLITTER, startTime.getTimeString(), lengthTime.getTimeString(), selectedDays.getDaysString(), title);
     }
     
-    public String getDataStringForFederal() {
+    public String getDataStringForFinal() {
         return connectViaSplitter(SPLITTER, startTime.getTimeString(), lengthTime.getTimeString(), title);
     }
     

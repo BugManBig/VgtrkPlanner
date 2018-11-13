@@ -31,9 +31,13 @@ public class ControllerFinal {
         viewFinal.setDoubleText(mode);
         
         DataDay dataDay = model.getDataDay(getCurrentDate());
+        if (dataDay.getPlanElementsDay(mode) == null) {
+            viewFinal.setDataToList(new String[]{});
+            return;
+        }
         String[] data = new String[dataDay.getPlanElementsDay(mode).size()];
         for (int i = 0; i < data.length; i++) {
-            data[i] = dataDay.getPlanElementsDay(mode).get(i).getDataStringForFederal();
+            data[i] = dataDay.getPlanElementsDay(mode).get(i).getDataStringForFinal();
         }
         viewFinal.setDataToList(data);
     }
