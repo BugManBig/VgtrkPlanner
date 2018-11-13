@@ -115,6 +115,8 @@ public class ControllerFinal {
         ControllerTransitions controllerTransitions = new ControllerTransitions();
         controllerTransitions.setModel(model);
         controllerTransitions.setViewTransitions(viewTransitions);
+        controllerTransitions.setDateOfMonday(dateOfMonday);
+        controllerTransitions.setControllerFinal(this);
 
         viewTransitions.setControllerTransitions(controllerTransitions);
         viewTransitions.create();

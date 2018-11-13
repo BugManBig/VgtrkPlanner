@@ -2,7 +2,6 @@ package com.company.transitionsFrame;
 
 import com.company.*;
 import com.company.finalFrame.ControllerFinal;
-import com.company.finalFrame.ViewFinal;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,6 +11,16 @@ import java.util.List;
 public class ControllerTransitions {
     private Model model;
     private ViewTransitions viewTransitions;
+    private GregorianCalendar dateOfMonday;
+    private ControllerFinal controllerFinal;
+
+    public void setControllerFinal(ControllerFinal controllerFinal) {
+        this.controllerFinal = controllerFinal;
+    }
+
+    public void setDateOfMonday(GregorianCalendar dateOfMonday) {
+        this.dateOfMonday = dateOfMonday;
+    }
 
     public void setModel(Model model) {
         this.model = model;
@@ -71,7 +80,7 @@ public class ControllerTransitions {
     }
     
     public void handleGenerateButtonClick() {
-        List<PlanElement>[][] doubles = DoublesGenerator.generate(model);
+        List<PlanElement>[][] doubles = DoublesGenerator.generate(model, (GregorianCalendar) dateOfMonday.clone());
         DataDay[] dataDays = new DataDay[7];
         for (int i = 0; i < 7; i++) {
             List<PlanElement>[] oneDayDoubles = new ArrayList[4];
@@ -79,30 +88,21 @@ public class ControllerTransitions {
                 oneDayDoubles[j] = new ArrayList<>();
                 oneDayDoubles[j].addAll(doubles[j][i]);
             }
-            GregorianCalendar date = viewTransitions.getDate();
+            GregorianCalendar date = (GregorianCalendar) dateOfMonday.clone();
             date.add(Calendar.DAY_OF_MONTH, i);
-            dataDays[i] = new DataDay(model.getFederalElements()[i], oneDayDoubles, date);
+            dataDays[i] = new DataDay(model.getDataDay(date).getPlanElementsDay(0), oneDayDoubles, date);
         }
         
         model.addDataDays(dataDays);
-        GregorianCalendar date = viewTransitions.getDate();
+        GregorianCalendar date = (GregorianCalendar) dateOfMonday.clone();
         for (int i = 0; i < 7; i++) {
             for (int j = 1; j <= 4; j++) {
                 model.sortDataDay(date, j);
             }
             date.add(Calendar.DAY_OF_MONTH, 1);
         }
-        
-        ViewFinal viewFinal = new ViewFinal();
 
-        ControllerFinal controllerFinal = new ControllerFinal();
-        controllerFinal.setModel(model);
-        controllerFinal.setViewFinal(viewFinal);
-        
-        viewFinal.setControllerFinal(controllerFinal);
-        viewFinal.create();
-        
-        controllerFinal.setDateOfMonday(viewTransitions.getDate());
+        viewTransitions.close();
         controllerFinal.updateDataInPlaylist();
     }
 }
