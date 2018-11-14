@@ -12,6 +12,7 @@ public class ViewFinal {
     private JList<String> list;
     private JTextField weekDayField;
     private JTextField doubleField;
+    private JFrame frame;
 
     private static final int FRAME_WIDTH = 900;
     private static final int FRAME_HEIGHT = 600;
@@ -37,7 +38,7 @@ public class ViewFinal {
     }
 
     public void create() {
-        JFrame frame = new JFrame("Неделя");
+        frame = new JFrame("Неделя");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setLayout(null);
@@ -96,7 +97,7 @@ public class ViewFinal {
         nextDoubleButton.addActionListener(e -> controllerFinal.handleNextDoubleButtonClick());
         frame.add(nextDoubleButton);
         
-        JButton documentationButton = new JButton("В текст");
+        JButton documentationButton = new JButton("Отчёты");
         documentationButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 120, 100, 30);
         documentationButton.addActionListener(e -> controllerFinal.handleDocumentationButtonClick());
         frame.add(documentationButton);
@@ -105,6 +106,11 @@ public class ViewFinal {
         transitionsButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
         transitionsButton.addActionListener(e -> controllerFinal.handleTransitionsButtonClick());
         frame.add(transitionsButton);
+
+        JButton menuButton = new JButton("Меню");
+        menuButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);
+        menuButton.addActionListener(e -> controllerFinal.handleMenuButtonClick());
+        frame.add(menuButton);
 
         frame.repaint();
         frame.revalidate();
@@ -120,4 +126,11 @@ public class ViewFinal {
         list.setSelectedIndex(index);
     }
 
+    public void close() {
+        frame.dispose();
+    }
+
+    public void setVisible(boolean b) {
+        frame.setVisible(b);
+    }
 }

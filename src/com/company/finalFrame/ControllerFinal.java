@@ -112,6 +112,8 @@ public class ControllerFinal {
     }
 
     public void handleTransitionsButtonClick() {
+        setVisible(false);
+
         ViewTransitions viewTransitions = new ViewTransitions();
 
         ControllerTransitions controllerTransitions = new ControllerTransitions();
@@ -123,6 +125,11 @@ public class ControllerFinal {
         viewTransitions.setControllerTransitions(controllerTransitions);
         viewTransitions.create();
         controllerTransitions.updateDataInTransitionsList();
+    }
+
+    public void handleMenuButtonClick() {
+        viewFinal.close();
+        Starter.run(model);
     }
     
     private void createDocumentation(String path, String name, int mode) {
@@ -158,6 +165,10 @@ public class ControllerFinal {
             shiftedDate.add(Calendar.DAY_OF_MONTH, 1);
         }
         FileActions.createFile(path + "\\" + name + ".txt", data);
+    }
+
+    public void setVisible(boolean b) {
+        viewFinal.setVisible(b);
     }
     
     private String twoDigitsNumber(int number) {

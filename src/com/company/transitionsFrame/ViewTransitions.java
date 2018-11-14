@@ -26,7 +26,7 @@ public class ViewTransitions {
     public void create() {
         frame = new JFrame("Справочник замен");
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(null);
 
         ActionListener listenerForEdit = e -> controllerTransitions.handleEditButtonClick();
@@ -57,6 +57,11 @@ public class ViewTransitions {
         generateButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);
         generateButton.addActionListener(e -> controllerTransitions.handleGenerateButtonClick());
         frame.add(generateButton);
+
+        JButton backButton = new JButton("Назад");
+        backButton.setBounds(FRAME_WIDTH - 250, FRAME_HEIGHT - 80, 100, 30);
+        backButton.addActionListener(e -> controllerTransitions.handleBackButtonClick());
+        frame.add(backButton);
 
         frame.repaint();
         frame.revalidate();

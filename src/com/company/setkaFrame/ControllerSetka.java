@@ -1,9 +1,6 @@
 package com.company.setkaFrame;
 
-import com.company.DataDay;
-import com.company.FederalGenerator;
-import com.company.Model;
-import com.company.PlanElement;
+import com.company.*;
 import com.company.finalFrame.ControllerFinal;
 import com.company.finalFrame.ViewFinal;
 
@@ -111,5 +108,10 @@ public class ControllerSetka {
         controllerFinal.updateDataInPlaylist();
 
         viewSetka.close();
+    }
+
+    public void handleMenuButtonClick() {
+        viewSetka.close();
+        Starter.run(model);
     }
 }

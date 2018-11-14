@@ -1,8 +1,5 @@
 package com.company;
 
-import com.company.startFrame.ControllerStart;
-import com.company.startFrame.ViewStart;
-
 import java.util.List;
 
 public class Application {
@@ -17,13 +14,6 @@ public class Application {
             model.setTransitionElements(list);
         }
 
-        ViewStart viewStart = new ViewStart();
-
-        ControllerStart controllerStart = new ControllerStart();
-        controllerStart.setModel(model);
-        controllerStart.setViewStart(viewStart);
-
-        viewStart.setControllerStart(controllerStart);
-        viewStart.create();
+        Starter.run(model);
     }
 }

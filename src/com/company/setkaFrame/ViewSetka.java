@@ -62,6 +62,11 @@ public class ViewSetka {
         generateButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);
         generateButton.addActionListener(e -> controllerSetka.handleGenerateButtonClick());
         frame.add(generateButton);
+
+        JButton menuButton = new JButton("Меню");
+        menuButton.setBounds(FRAME_WIDTH - 360, FRAME_HEIGHT - 80, 100, 30);
+        menuButton.addActionListener(e -> controllerSetka.handleMenuButtonClick());
+        frame.add(menuButton);
         
         frame.repaint();
         frame.revalidate();

@@ -103,6 +103,12 @@ public class ControllerTransitions {
         }
 
         viewTransitions.close();
+        controllerFinal.setVisible(true);
         controllerFinal.updateDataInPlaylist();
+    }
+
+    public void handleBackButtonClick() {
+        viewTransitions.close();
+        controllerFinal.setVisible(true);
     }
 }
