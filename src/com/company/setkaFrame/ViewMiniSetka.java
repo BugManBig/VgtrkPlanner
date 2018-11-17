@@ -1,6 +1,9 @@
 package com.company.setkaFrame;
 
-import com.company.*;
+import com.company.Chrono;
+import com.company.DaysOfWeek;
+import com.company.ListenersAdding;
+import com.company.PlanElement;
 
 import javax.swing.*;
 

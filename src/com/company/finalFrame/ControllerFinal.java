@@ -104,11 +104,14 @@ public class ControllerFinal {
     }
     
     public void handleDocumentationButtonClick() {
-        createDocumentation(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH), "Федеральное", 0);
-        createDocumentation(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH), "Дубль-1", 1);
-        createDocumentation(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH), "Дубль-2", 2);
-        createDocumentation(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH), "Дубль-3", 3);
-        createDocumentation(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH), "Дубль-4", 4);
+        String reversedDate = dateOfMonday.get(Calendar.YEAR) + "-"
+                + (dateOfMonday.get(Calendar.MONTH) + 1) + "-"
+                + dateOfMonday.get(Calendar.DAY_OF_MONTH);
+        createDocumentation(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH), reversedDate + " " + "Федеральное", 0);
+        createDocumentation(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH), reversedDate + " " + "Дубль-1", 1);
+        createDocumentation(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH), reversedDate + " " + "Дубль-2", 2);
+        createDocumentation(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH), reversedDate + " " + "Дубль-3", 3);
+        createDocumentation(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH), reversedDate + " " + "Дубль-4", 4);
     }
 
     public void handleTransitionsButtonClick() {
