@@ -9,10 +9,21 @@ public class Model {
     private List<TransitionElement> transitionElements = new ArrayList<>();
     private List<DataDay> dataDays = new ArrayList<>();
 
+    public void startCheck() {
+        if (FileActions.isExist(ProjectSettings.getParam(ProjectParams.BIN_PATH), "Setka.bin")) {
+            List<PlanElement> list = (List<PlanElement>) FileActions.load(ProjectSettings.getParam(ProjectParams.BIN_PATH), "Setka.bin");
+            setSetkaElements(list);
+        }
+        if (FileActions.isExist(ProjectSettings.getParam(ProjectParams.BIN_PATH), "Transitions.bin")) {
+            List<TransitionElement> list = (List<TransitionElement>) FileActions.load(ProjectSettings.getParam(ProjectParams.BIN_PATH), "Transitions.bin");
+            setTransitionElements(list);
+        }
+    }
+
     public void addElementToSetka(PlanElement planElement) {
         setkaElements.add(planElement);
         sortSetka();
-        FileActions.save(setkaElements, ProjectSettings.BIN_PATH, "Setka.bin");
+        FileActions.save(setkaElements, ProjectSettings.getParam(ProjectParams.BIN_PATH), "Setka.bin");
     }
 
     public PlanElement getElementFromSetka(int id) {
@@ -26,7 +37,7 @@ public class Model {
     public void setElementInSetka(int id, PlanElement planElement) {
         setkaElements.set(id, planElement);
         sortSetka();
-        FileActions.save(setkaElements, ProjectSettings.BIN_PATH, "Setka.bin");
+        FileActions.save(setkaElements, ProjectSettings.getParam(ProjectParams.BIN_PATH), "Setka.bin");
     }
 
     private void sortSetka() {
@@ -35,7 +46,7 @@ public class Model {
 
     public void removeFromSetka(int id) {
         setkaElements.remove(id);
-        FileActions.save(setkaElements, ProjectSettings.BIN_PATH, "Setka.bin");
+        FileActions.save(setkaElements, ProjectSettings.getParam(ProjectParams.BIN_PATH), "Setka.bin");
     }
 
     public void setSetkaElements(List<PlanElement> setkaElements) {
@@ -79,13 +90,13 @@ public class Model {
     public void addTransitionElement(TransitionElement transitionElement) {
         transitionElements.add(transitionElement);
         sortTransitions();
-        FileActions.save(transitionElements, ProjectSettings.BIN_PATH, "Transitions.bin");
+        FileActions.save(transitionElements, ProjectSettings.getParam(ProjectParams.BIN_PATH), "Transitions.bin");
     }
     
     public void setTransitionElement(int id, TransitionElement transitionElement) {
         transitionElements.set(id, transitionElement);
         sortTransitions();
-        FileActions.save(transitionElements, ProjectSettings.BIN_PATH, "Transitions.bin");
+        FileActions.save(transitionElements, ProjectSettings.getParam(ProjectParams.BIN_PATH), "Transitions.bin");
     }
     
     public int getTransitionsSize() {
@@ -102,7 +113,7 @@ public class Model {
     
     public void removeFromTransitions(int id) {
         transitionElements.remove(id);
-        FileActions.save(transitionElements, ProjectSettings.BIN_PATH, "Transitions.bin");
+        FileActions.save(transitionElements, ProjectSettings.getParam(ProjectParams.BIN_PATH), "Transitions.bin");
     }
 
     public void setTransitionElements(List<TransitionElement> transitionElements) {
@@ -125,7 +136,7 @@ public class Model {
         GregorianCalendar date = dataDay.getDate();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
         String fileName = simpleDateFormat.format(date.getTime()) + ".bin";
-        FileActions.save(dataDay, ProjectSettings.BIN_PATH, fileName);
+        FileActions.save(dataDay, ProjectSettings.getParam(ProjectParams.BIN_PATH), fileName);
     }
 
     private void checkForRewrite(DataDay[] dataDays) {
@@ -146,7 +157,7 @@ public class Model {
         String fileName;
         for (int i = 0; i < 7; i++) {
             fileName = simpleDateFormat.format(date.getTime()) + ".bin";
-            DataDay dataDay = (DataDay) FileActions.load(ProjectSettings.BIN_PATH, fileName);
+            DataDay dataDay = (DataDay) FileActions.load(ProjectSettings.getParam(ProjectParams.BIN_PATH), fileName);
             if (dataDay == null) {
                 return false;
             }
