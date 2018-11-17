@@ -141,6 +141,7 @@ public class Model {
     }
 
     public boolean loadWeek(GregorianCalendar date) {
+        DataDay[] week = new DataDay[7];
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
         String fileName;
         for (int i = 0; i < 7; i++) {
@@ -149,9 +150,10 @@ public class Model {
             if (dataDay == null) {
                 return false;
             }
-            dataDays.add(dataDay);
+            week[i] = dataDay;
             date.add(Calendar.DAY_OF_MONTH, 1);
         }
+        addDataDays(week);
         return true;
     }
     
