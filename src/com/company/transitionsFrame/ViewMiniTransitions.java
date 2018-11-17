@@ -125,7 +125,7 @@ public class ViewMiniTransitions {
         for (int i = 0; i < 7; i++) {
             JCheckBox checkBox = new JCheckBox();
             checkBox.setBounds(10 + ((FRAME_WIDTH - 10) / 7) * i, 130, 60, 30);
-            checkBox.setText(DaysOfWeek.values()[i].toString());
+            checkBox.setText(DaysOfWeek.values()[i].getShortName());
             weekdaysCheckboxes[i] = checkBox;
             frame.add(checkBox);
         }
@@ -190,6 +190,24 @@ public class ViewMiniTransitions {
         for (JCheckBox checkBox : weekdaysCheckboxes) {
             checkBox.setSelected(true);
         }
+    }
+
+    public boolean isNothingWeekCheckboxesSelected() {
+        for (JCheckBox checkBox : weekdaysCheckboxes) {
+            if (checkBox.isSelected()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isNothingDoublesCheckboxesSelected() {
+        for (JCheckBox checkBox : doublesCheckboxes) {
+            if (checkBox.isSelected()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void setFieldsFromTransitionElement(TransitionElement transitionElement) {

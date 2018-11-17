@@ -1,5 +1,6 @@
 package com.company.startFrame;
 
+import com.company.DateInput;
 import com.company.Model;
 import com.company.finalFrame.ControllerFinal;
 import com.company.finalFrame.ViewFinal;
@@ -38,22 +39,12 @@ public class ControllerStart {
     }
 
     public void handleLoadButtonClick() {
-        String dateText = viewStart.getDateText();
-        if (dateText.equals("")) {
-            JOptionPane.showMessageDialog(null, "Не введена дата понедельника");
-            return;
-        }
-        int day = Integer.parseInt(dateText.substring(0, 2));
-        int month = Integer.parseInt(dateText.substring(3, 5)) - 1;
-        int year = Integer.parseInt(dateText.substring(6, 8)) + 2000;
-        GregorianCalendar date = new GregorianCalendar(year, month, day);
-        if (date.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
-            JOptionPane.showMessageDialog(null, "Введённая дата не является понедельником");
-            return;
-        }
-        boolean isLoaded = model.loadWeek((GregorianCalendar) date.clone());
+        GregorianCalendar mondayDate = DateInput.run();
+        if (mondayDate == null) return;
+
+        boolean isLoaded = model.loadWeek((GregorianCalendar) mondayDate.clone());
         if (!isLoaded) {
-            JOptionPane.showMessageDialog(null, "Нет такой недели");
+            JOptionPane.showMessageDialog(null, "Неделя ещё не сгенерирована", "Ошибка", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -68,7 +59,7 @@ public class ControllerStart {
         viewFinal.setControllerFinal(controllerFinal);
         viewFinal.create();
 
-        controllerFinal.setDateOfMonday(date);
+        controllerFinal.setDateOfMonday(mondayDate);
         controllerFinal.updateDataInPlaylist();
     }
 }

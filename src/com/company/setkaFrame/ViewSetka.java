@@ -10,7 +10,6 @@ import java.util.GregorianCalendar;
 public class ViewSetka {
     private ControllerSetka controllerSetka;
     private JList<String> list;
-    private JTextField dateText;
     private JFrame frame;
 
     private static final int FRAME_WIDTH = 900;
@@ -53,10 +52,6 @@ public class ViewSetka {
         removeButton.setBounds(230, FRAME_HEIGHT - 80, 100, 30);
         removeButton.addActionListener(e -> controllerSetka.handleRemoveButtonClick());
         frame.add(removeButton);
-
-        dateText = new JTextField();
-        dateText.setBounds(FRAME_WIDTH - 250, FRAME_HEIGHT - 80, 100, 30);
-        frame.add(dateText);
         
         JButton generateButton = new JButton("Генерировать");
         generateButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);
@@ -64,7 +59,7 @@ public class ViewSetka {
         frame.add(generateButton);
 
         JButton menuButton = new JButton("Меню");
-        menuButton.setBounds(FRAME_WIDTH - 360, FRAME_HEIGHT - 80, 100, 30);
+        menuButton.setBounds(FRAME_WIDTH - 250, FRAME_HEIGHT - 80, 100, 30);
         menuButton.addActionListener(e -> controllerSetka.handleMenuButtonClick());
         frame.add(menuButton);
         
@@ -80,17 +75,6 @@ public class ViewSetka {
 
     public void selectLine(int index) {
         list.setSelectedIndex(index);
-    }
-
-    public GregorianCalendar getDate() {
-        String source = dateText.getText();
-        if (source.equals("")) {
-            return null;
-        }
-        int day = Integer.parseInt(source.substring(0, 2));
-        int month = Integer.parseInt(source.substring(3, 5)) - 1;
-        int year = Integer.parseInt(source.substring(6, 8)) + 2000;
-        return new GregorianCalendar(year, month, day);
     }
 
     public void close() {

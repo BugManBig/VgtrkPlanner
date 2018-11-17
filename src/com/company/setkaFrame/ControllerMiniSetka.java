@@ -4,6 +4,8 @@ import com.company.Model;
 import com.company.PlanElement;
 import com.company.SelectedDays;
 
+import javax.swing.*;
+
 public class ControllerMiniSetka {
     private Model model;
     private ViewMiniSetka viewMiniSetka;
@@ -23,6 +25,10 @@ public class ControllerMiniSetka {
     }
 
     public void handleOkButtonClick() {
+        if (viewMiniSetka.isNothingCheckboxesSelected()) {
+            JOptionPane.showMessageDialog(null, "Не выбран ни один день недели");
+            return;
+        }
         PlanElement planElement = new PlanElement(
                 viewMiniSetka.getTitleText(),
                 viewMiniSetka.getStartTime(),

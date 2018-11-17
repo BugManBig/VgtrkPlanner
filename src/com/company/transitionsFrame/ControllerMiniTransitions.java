@@ -5,6 +5,8 @@ import com.company.SelectedDays;
 import com.company.SelectedDoubles;
 import com.company.TransitionElement;
 
+import javax.swing.*;
+
 public class ControllerMiniTransitions {
     private Model model;
     private ViewMiniTransitions viewMiniTransitions;
@@ -28,6 +30,14 @@ public class ControllerMiniTransitions {
     }
 
     public void handleOkButtonClick() {
+        if (viewMiniTransitions.isNothingWeekCheckboxesSelected()) {
+            JOptionPane.showMessageDialog(null, "Не выбран ни один день недели");
+            return;
+        }
+        if (viewMiniTransitions.isNothingDoublesCheckboxesSelected()) {
+            JOptionPane.showMessageDialog(null, "Не выбран ни один дубль");
+            return;
+        }
         TransitionElement transitionElement = new TransitionElement(
                 viewMiniTransitions.getStartTime(),
                 viewMiniTransitions.getEndTime(),

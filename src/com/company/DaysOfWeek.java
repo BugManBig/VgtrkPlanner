@@ -1,21 +1,28 @@
 package com.company;
 
 public enum DaysOfWeek {
-    MONDAY("пнд"),
-    TUESDAY("втр"),
-    WEDNESDAY("срд"),
-    THURSDAY("чтв"),
-    FRIDAY("птн"),
-    SATURDAY("сбт"),
-    SUNDAY("вск");
-    
-    private String name;
-    
-    DaysOfWeek(String name) {
-        this.name = name;
+    MONDAY("ПОНЕДЕЛЬНИК", "пнд"),
+    TUESDAY("ВТОРНИК", "втр"),
+    WEDNESDAY("СРЕДА", "срд"),
+    THURSDAY("ЧЕТВЕРГ", "чтв"),
+    FRIDAY("ПЯТНИЦА", "птн"),
+    SATURDAY("СУББОТА", "сбт"),
+    SUNDAY("ВОСКРЕСЕНЬЕ", "вск");
+
+    private String fullName;
+    private String shortName;
+
+    DaysOfWeek(String fullName, String shortName) {
+        this.fullName = fullName;
+        this.shortName = shortName;
     }
-    
+
+    @Override
     public String toString() {
-        return name;
+        return fullName;
+    }
+
+    public String getShortName() {
+        return shortName;
     }
 }

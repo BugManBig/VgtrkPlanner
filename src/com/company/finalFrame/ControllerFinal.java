@@ -84,22 +84,22 @@ public class ControllerFinal {
     }
 
     public void handlePrevDayButtonClick() {
-        dayOfWeek = dayOfWeek > 0 ? dayOfWeek - 1 : dayOfWeek;
+        dayOfWeek = dayOfWeek > 0 ? dayOfWeek - 1 : 6;
         updateDataInPlaylist();
     }
 
     public void handleNextDayButtonClick() {
-        dayOfWeek = dayOfWeek < 6 ? dayOfWeek + 1 : dayOfWeek;
+        dayOfWeek = dayOfWeek < 6 ? dayOfWeek + 1 : 0;
         updateDataInPlaylist();
     }
     
     public void handlePrevDoubleButtonClick() {
-        mode = mode > 0 ? mode - 1 : mode;
+        mode = mode > 0 ? mode - 1 : 4;
         updateDataInPlaylist();
     }
     
     public void handleNextDoubleButtonClick() {
-        mode = mode < 4 ? mode + 1 : mode;
+        mode = mode < 4 ? mode + 1 : 0;
         updateDataInPlaylist();
     }
     
@@ -154,7 +154,7 @@ public class ControllerFinal {
         for (int i = 0; i < 7; i++) {
             list = model.getDataDay(shiftedDate).getPlanElementsDay(mode);
             data.add(shiftedDate.get(Calendar.DAY_OF_MONTH) + " "
-                    + (getMonthName(shiftedDate.get(Calendar.MONTH))) + " - "
+                    + (Months.values()[shiftedDate.get(Calendar.MONTH)]) + " - "
                     + DaysOfWeek.values()[i].toString());
             for (PlanElement planElement : list) {
                 line = planElement.getStartTime().getTimeStringSmall();

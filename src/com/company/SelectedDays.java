@@ -12,7 +12,7 @@ public class SelectedDays implements Serializable {
     public String getDaysString() {
         String string = "";
         for (int i = 0; i < 7; i++) {
-            string += selectedDays[i] ? DaysOfWeek.values()[i] : "---";
+            string += selectedDays[i] ? DaysOfWeek.values()[i].getShortName() : "---";
             string += " ";
         }
         return string;

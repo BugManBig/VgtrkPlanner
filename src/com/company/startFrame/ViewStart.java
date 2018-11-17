@@ -6,10 +6,9 @@ public class ViewStart {
     private ControllerStart controllerStart;
 
     private static final int FRAME_WIDTH = 300;
-    private static final int FRAME_HEIGHT = 200;
+    private static final int FRAME_HEIGHT = 140;
 
     JFrame frame;
-    JTextField dateText;
 
     public void setControllerStart(ControllerStart controllerStart) {
         this.controllerStart = controllerStart;
@@ -28,10 +27,6 @@ public class ViewStart {
         createButton.addActionListener(e -> controllerStart.handleCreateButtonClick());
         frame.add(createButton);
 
-        dateText = new JTextField();
-        dateText.setBounds(FRAME_WIDTH / 2 - 50, FRAME_HEIGHT - 120, 100, 30);
-        frame.add(dateText);
-
         JButton loadButton = new JButton("Загрузить");
         loadButton.setBounds(FRAME_WIDTH / 2 - 50, FRAME_HEIGHT - 80, 100, 30);
         loadButton.addActionListener(e -> controllerStart.handleLoadButtonClick());
@@ -43,9 +38,5 @@ public class ViewStart {
 
     public void close() {
         frame.dispose();
-    }
-
-    public String getDateText() {
-        return dateText.getText();
     }
 }

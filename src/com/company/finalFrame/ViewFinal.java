@@ -22,14 +22,16 @@ public class ViewFinal {
     }
 
     public void setWeekDayText(int weekDay) {
-        weekDayField.setText(DaysOfWeek.values()[weekDay].toString());
+        String day = DaysOfWeek.values()[weekDay].toString();
+        day = day.substring(0, 1) + day.substring(1).toLowerCase();
+        weekDayField.setText(day);
     }
     
     public void setDoubleText(int doubleNumber) {
         if (doubleNumber == 0) {
             doubleField.setText("Федеральное");
         } else {
-            doubleField.setText(doubleNumber + " дубль");
+            doubleField.setText("Дубль-" + doubleNumber);
         }
     }
 

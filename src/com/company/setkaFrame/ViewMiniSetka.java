@@ -109,7 +109,7 @@ public class ViewMiniSetka {
         for (int i = 0; i < 7; i++) {
             JCheckBox checkBox = new JCheckBox();
             checkBox.setBounds(10 + ((FRAME_WIDTH - 10) / 7) * i, 130, 60, 30);
-            checkBox.setText(DaysOfWeek.values()[i].toString());
+            checkBox.setText(DaysOfWeek.values()[i].getShortName());
             checkBoxes[i] = checkBox;
             frame.add(checkBox);
         }
@@ -154,6 +154,15 @@ public class ViewMiniSetka {
         for (JCheckBox checkBox : checkBoxes) {
             checkBox.setSelected(true);
         }
+    }
+
+    public boolean isNothingCheckboxesSelected() {
+        for (JCheckBox checkBox : checkBoxes) {
+            if (checkBox.isSelected()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void setFieldsFromPlanElement(PlanElement planElement) {

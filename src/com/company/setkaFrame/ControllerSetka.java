@@ -73,22 +73,15 @@ public class ControllerSetka {
     }
     
     public void handleGenerateButtonClick() {
-        GregorianCalendar mondayDate = viewSetka.getDate();
-        if (mondayDate == null) {
-            JOptionPane.showMessageDialog(null, "Не введена дата понедельника");
-            return;
-        }
-        if (mondayDate.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
-            JOptionPane.showMessageDialog(null, "Введённая дата не является понедельником");
-            return;
-        }
+        GregorianCalendar mondayDate = DateInput.run();
+        if (mondayDate == null) return;
 
         List<PlanElement>[] federalElements = FederalGenerator.generate(model);
         model.setFederalElements(federalElements);
 
         DataDay[] dataDays = new DataDay[7];
         for (int i = 0; i < 7; i++) {
-            GregorianCalendar date = viewSetka.getDate();
+            GregorianCalendar date = (GregorianCalendar) mondayDate.clone();
             date.add(Calendar.DAY_OF_MONTH, i);
             dataDays[i] = new DataDay(model.getFederalElements()[i], null, date);
         }
@@ -104,7 +97,7 @@ public class ControllerSetka {
         viewFinal.setControllerFinal(controllerFinal);
         viewFinal.create();
 
-        controllerFinal.setDateOfMonday(viewSetka.getDate());
+        controllerFinal.setDateOfMonday(mondayDate);
         controllerFinal.updateDataInPlaylist();
 
         viewSetka.close();
