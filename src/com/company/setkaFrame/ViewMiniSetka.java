@@ -183,5 +183,7 @@ public class ViewMiniSetka {
         for (int i = 0; i < 7; i++) {
             checkBoxes[i].setSelected(daysState[i]);
         }
+
+        titleTextfield.requestFocus();
     }
 }

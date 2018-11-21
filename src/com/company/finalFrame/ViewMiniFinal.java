@@ -138,5 +138,7 @@ public class ViewMiniFinal {
         durationSecTextfield.setText(String.valueOf(planElement.getDurationTime().getSeconds()));
 
         titleTextfield.setText(planElement.getTitle());
+
+        titleTextfield.requestFocus();
     }
 }
