@@ -4,6 +4,7 @@ import com.company.*;
 import com.company.transitionsFrame.ControllerTransitions;
 import com.company.transitionsFrame.ViewTransitions;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -104,9 +105,8 @@ public class ControllerFinal {
     }
     
     public void handleDocumentationButtonClick() {
-        String reversedDate = dateOfMonday.get(Calendar.YEAR) + "-"
-                + (dateOfMonday.get(Calendar.MONTH) + 1) + "-"
-                + dateOfMonday.get(Calendar.DAY_OF_MONTH);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        String reversedDate = simpleDateFormat.format(dateOfMonday.getTime());
         createDocumentation(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH), reversedDate + " " + "Федеральное", 0);
         createDocumentation(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH), reversedDate + " " + "Дубль-1", 1);
         createDocumentation(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH), reversedDate + " " + "Дубль-2", 2);
