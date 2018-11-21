@@ -177,13 +177,6 @@ public class ControllerFinal {
     private String twoDigitsNumber(int number) {
         return number > 9 ? String.valueOf(number) : "0" + number;
     }
-    
-    private String getMonthName(int monthNumber) {
-        String[] monthNames = {
-                "января", "февраля", "марта", "апреля", "мая", "июня",
-                "июля", "августа", "сентября", "октября", "ноября", "декабря"};
-        return monthNames[monthNumber];
-    }
 
     public int getWeekday() {
         return dayOfWeek;
@@ -197,7 +190,7 @@ public class ControllerFinal {
         return mode;
     }
     
-    public GregorianCalendar getCurrentDate() {
+    private GregorianCalendar getCurrentDate() {
         GregorianCalendar currentDate = new GregorianCalendar(
                 dateOfMonday.get(Calendar.YEAR),
                 dateOfMonday.get(Calendar.MONTH),

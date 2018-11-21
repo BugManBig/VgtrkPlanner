@@ -20,16 +20,15 @@ public class ProjectSettings {
         }
         path = path.substring(0, path.lastIndexOf("\\") + 1) + "config.ini";
 
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String currentLine;
-            while ((currentLine = br.readLine()) != null) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
+            String currentLine = bufferedReader.readLine();
+            while (currentLine != null) {
                 parseLine(currentLine);
+                currentLine = bufferedReader.readLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        String s = config.toString();
     }
 
     private static void parseLine(String line) {

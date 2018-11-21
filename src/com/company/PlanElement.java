@@ -37,17 +37,24 @@ public class PlanElement implements Cloneable, Serializable {
     }
 
     public String getDataStringForSetka() {
-        return connectViaSplitter(SPLITTER, startTime.getTimeString(), lengthTime.getTimeString(), selectedDays.getDaysString(), title);
+        return connectViaSplitter(
+                startTime.getTimeString(),
+                lengthTime.getTimeString(),
+                selectedDays.getDaysString(),
+                title);
     }
     
     public String getDataStringForFinal() {
-        return connectViaSplitter(SPLITTER, startTime.getTimeString(), lengthTime.getTimeString(), title);
+        return connectViaSplitter(
+                startTime.getTimeString(),
+                lengthTime.getTimeString(),
+                title);
     }
     
-    private String connectViaSplitter(String splitter, String ... data) {
+    private String connectViaSplitter(String ... data) {
         String result = "";
         for (int i = 0; i < data.length - 1; i++) {
-            result += data[i] + splitter;
+            result += data[i] + SPLITTER;
         }
         result += data[data.length - 1];
         return result;

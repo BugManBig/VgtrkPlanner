@@ -49,7 +49,7 @@ public class Model {
         FileActions.save(setkaElements, ProjectSettings.getParam(ProjectParams.BIN_PATH), "Setka.bin");
     }
 
-    public void setSetkaElements(List<PlanElement> setkaElements) {
+    private void setSetkaElements(List<PlanElement> setkaElements) {
         this.setkaElements = setkaElements;
     }
 
@@ -57,36 +57,10 @@ public class Model {
         this.federalElements = federalElements;
     }
 
-    public PlanElement getFederalElement(int weekday, int id) {
-        return federalElements[weekday].get(id);
-    }
-
     public List<PlanElement>[] getFederalElements() {
         return federalElements;
     }
 
-    public int getFederalSizeWeekday(int weekday) {
-        return federalElements[weekday].size();
-    }
-    
-    public void setFederalElement(int weekday, int id, PlanElement planElement) {
-        federalElements[weekday].set(id, planElement);
-        sortFederal(weekday);
-    }
-    
-    public void addFederalElement(int weekday, PlanElement planElement) {
-        federalElements[weekday].add(planElement);
-        sortFederal(weekday);
-    }
-    
-    public void removeFromFederal(int weekday, int id) {
-        federalElements[weekday].remove(id);
-    }
-    
-    private void sortFederal(int weekday) {
-        federalElements[weekday].sort(new LexicographComparatorForPlanElement());
-    }
-    
     public void addTransitionElement(TransitionElement transitionElement) {
         transitionElements.add(transitionElement);
         sortTransitions();
@@ -116,7 +90,7 @@ public class Model {
         FileActions.save(transitionElements, ProjectSettings.getParam(ProjectParams.BIN_PATH), "Transitions.bin");
     }
 
-    public void setTransitionElements(List<TransitionElement> transitionElements) {
+    private void setTransitionElements(List<TransitionElement> transitionElements) {
         this.transitionElements = transitionElements;
     }
 
@@ -169,9 +143,9 @@ public class Model {
     }
     
     public DataDay getDataDay(GregorianCalendar date) {
-        for (int i = 0; i < dataDays.size(); i++) {
-            if (dataDays.get(i).isEquals(date)) {
-                return dataDays.get(i);
+        for (DataDay dataDay : dataDays) {
+            if (dataDay.isEquals(date)) {
+                return dataDay;
             }
         }
         return null;

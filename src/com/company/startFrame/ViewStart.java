@@ -8,7 +8,7 @@ public class ViewStart {
     private static final int FRAME_WIDTH = 300;
     private static final int FRAME_HEIGHT = 140;
 
-    JFrame frame;
+    private JFrame frame;
 
     public void setControllerStart(ControllerStart controllerStart) {
         this.controllerStart = controllerStart;

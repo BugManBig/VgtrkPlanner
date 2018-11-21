@@ -8,7 +8,6 @@ import com.company.setkaFrame.ControllerSetka;
 import com.company.setkaFrame.ViewSetka;
 
 import javax.swing.*;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class ControllerStart {

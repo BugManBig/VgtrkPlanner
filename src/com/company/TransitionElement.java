@@ -8,6 +8,7 @@ public class TransitionElement implements Serializable {
     private Chrono transitionTime;
     private SelectedDays selectedDays;
     private SelectedDoubles selectedDoubles;
+    private static final String SPLITTER = "    ";
 
     public Chrono getStartTime() {
         return startTime;
@@ -29,8 +30,6 @@ public class TransitionElement implements Serializable {
         return selectedDoubles;
     }
 
-    private static final String SPLITTER = "    ";
-
     public TransitionElement(Chrono startTime, Chrono endTime, Chrono transitionTime,
                              SelectedDays selectedDays, SelectedDoubles selectedDoubles) {
         this.startTime = startTime;
@@ -41,7 +40,7 @@ public class TransitionElement implements Serializable {
     }
     
     public String getDataString() {
-        return connectViaSplitter(SPLITTER,
+        return connectViaSplitter(
                 startTime.getTimeString(),
                 endTime.getTimeString(),
                 selectedDays.getDaysString(),
@@ -49,10 +48,10 @@ public class TransitionElement implements Serializable {
                 selectedDoubles.getDoublesString());
     }
 
-    private String connectViaSplitter(String splitter, String ... data) {
+    private String connectViaSplitter(String ... data) {
         String result = "";
         for (int i = 0; i < data.length - 1; i++) {
-            result += data[i] + splitter;
+            result += data[i] + SPLITTER;
         }
         result += data[data.length - 1];
         return result;

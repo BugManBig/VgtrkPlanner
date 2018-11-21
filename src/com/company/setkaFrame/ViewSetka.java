@@ -5,7 +5,6 @@ import com.company.DoubleClickListener;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.GregorianCalendar;
 
 public class ViewSetka {
     private ControllerSetka controllerSetka;
