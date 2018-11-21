@@ -55,12 +55,12 @@ public class ViewFinal {
         list.addMouseListener(new DoubleClickListener(listenerForEdit));
 
         weekDayField = new JTextField();
-        weekDayField.setBounds(350, FRAME_HEIGHT - 120, 100, 30);
+        weekDayField.setBounds(FRAME_WIDTH - 410, FRAME_HEIGHT - 120, 100, 30);
         weekDayField.setEditable(false);
         frame.add(weekDayField);
         
         doubleField = new JTextField();
-        doubleField.setBounds(350, FRAME_HEIGHT - 80, 100, 30);
+        doubleField.setBounds(FRAME_WIDTH - 410, FRAME_HEIGHT - 80, 100, 30);
         doubleField.setEditable(false);
         frame.add(doubleField);
 
@@ -80,22 +80,22 @@ public class ViewFinal {
         frame.add(removeButton);
 
         JButton prevDayButton = new JButton("<<<");
-        prevDayButton.setBounds(FRAME_WIDTH - 430, FRAME_HEIGHT - 120, 100, 30);
+        prevDayButton.setBounds(FRAME_WIDTH - 520, FRAME_HEIGHT - 120, 100, 30);
         prevDayButton.addActionListener(e -> controllerFinal.handlePrevDayButtonClick());
         frame.add(prevDayButton);
 
         JButton nextDayButton = new JButton(">>>");
-        nextDayButton.setBounds(FRAME_WIDTH - 320, FRAME_HEIGHT - 120, 100, 30);
+        nextDayButton.setBounds(FRAME_WIDTH - 300, FRAME_HEIGHT - 120, 100, 30);
         nextDayButton.addActionListener(e -> controllerFinal.handleNextDayButtonClick());
         frame.add(nextDayButton);
         
         JButton prevDoubleButton = new JButton("<<<");
-        prevDoubleButton.setBounds(FRAME_WIDTH - 430, FRAME_HEIGHT - 80, 100, 30);
+        prevDoubleButton.setBounds(FRAME_WIDTH - 520, FRAME_HEIGHT - 80, 100, 30);
         prevDoubleButton.addActionListener(e -> controllerFinal.handlePrevDoubleButtonClick());
         frame.add(prevDoubleButton);
         
         JButton nextDoubleButton = new JButton(">>>");
-        nextDoubleButton.setBounds(FRAME_WIDTH - 320, FRAME_HEIGHT - 80, 100, 30);
+        nextDoubleButton.setBounds(FRAME_WIDTH - 300, FRAME_HEIGHT - 80, 100, 30);
         nextDoubleButton.addActionListener(e -> controllerFinal.handleNextDoubleButtonClick());
         frame.add(nextDoubleButton);
         
