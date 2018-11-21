@@ -4,6 +4,8 @@ import com.company.*;
 import com.company.finalFrame.ControllerFinal;
 import com.company.finalFrame.ViewFinal;
 
+import javax.swing.*;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -74,6 +76,24 @@ public class ControllerSetka {
     public void handleGenerateButtonClick() {
         GregorianCalendar mondayDate = DateInput.run();
         if (mondayDate == null) return;
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        String fileName = simpleDateFormat.format(mondayDate.getTime()) + ".bin";
+        if (FileActions.isExist(ProjectSettings.getParam(ProjectParams.BIN_PATH), fileName)) {
+            int answer = JOptionPane.showOptionDialog(
+                    null,
+                    "Эта неделя уже сгенерирована ранее. Сгенерировать ещё раз?",
+                    "Подтвердите действие",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    new String[]{"Да", "Нет"},
+                    null
+            );
+            if (answer > 0) {
+                return;
+            }
+        }
 
         List<PlanElement>[] federalElements = FederalGenerator.generate(model);
         model.setFederalElements(federalElements);

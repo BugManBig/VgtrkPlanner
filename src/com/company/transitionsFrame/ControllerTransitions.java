@@ -3,6 +3,7 @@ package com.company.transitionsFrame;
 import com.company.*;
 import com.company.finalFrame.ControllerFinal;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -25,7 +26,7 @@ public class ControllerTransitions {
     public void setModel(Model model) {
         this.model = model;
     }
-    
+
     public void updateDataInTransitionsList() {
         String[] data = new String[model.getTransitionsSize()];
         for (int i = 0; i < data.length; i++) {
@@ -37,25 +38,25 @@ public class ControllerTransitions {
     public void setViewTransitions(ViewTransitions viewTransitions) {
         this.viewTransitions = viewTransitions;
     }
-    
+
     public void selectLine(TransitionElement transitionElement) {
         int i = 0;
         while (model.getTransitionElement(i) != transitionElement) i++;
         viewTransitions.selectLine(i);
     }
-    
+
     public void handleAddButtonClick() {
         ViewMiniTransitions viewMiniTransitions = new ViewMiniTransitions();
-        
+
         ControllerMiniTransitions controllerMiniTransitions = new ControllerMiniTransitions();
         controllerMiniTransitions.setModel(model);
         controllerMiniTransitions.setViewMiniTransitions(viewMiniTransitions);
         controllerMiniTransitions.setControllerTransitions(this);
-        
+
         viewMiniTransitions.setControllerMiniTransitions(controllerMiniTransitions);
         viewMiniTransitions.create();
     }
-    
+
     public void handleEditButtonClick() {
         if (viewTransitions.getSelectedLine() == -1) return;
         ViewMiniTransitions viewMiniTransitions = new ViewMiniTransitions();
@@ -70,7 +71,7 @@ public class ControllerTransitions {
         viewMiniTransitions.create();
         viewMiniTransitions.setFieldsFromTransitionElement(model.getTransitionElement(viewTransitions.getSelectedLine()));
     }
-    
+
     public void handleRemoveButtonClick() {
         int selectedLine = viewTransitions.getSelectedLine();
         if (selectedLine > -1) {
@@ -78,8 +79,24 @@ public class ControllerTransitions {
             updateDataInTransitionsList();
         }
     }
-    
+
     public void handleGenerateButtonClick() {
+        if (model.isDoublesGenerated((GregorianCalendar) dateOfMonday.clone())) {
+            int answer = JOptionPane.showOptionDialog(
+                    null,
+                    "Дубли уже были сгенерированы ранее. Сгенерировать их ещё раз?",
+                    "Подтвердите действие",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    new String[]{"Да", "Нет"},
+                    null
+            );
+            if (answer > 0) {
+                return;
+            }
+        }
+
         List<PlanElement>[][] doubles = DoublesGenerator.generate(model, (GregorianCalendar) dateOfMonday.clone());
         DataDay[] dataDays = new DataDay[7];
         for (int i = 0; i < 7; i++) {
@@ -92,7 +109,7 @@ public class ControllerTransitions {
             date.add(Calendar.DAY_OF_MONTH, i);
             dataDays[i] = new DataDay(model.getDataDay(date).getPlanElementsDay(0), oneDayDoubles, date);
         }
-        
+
         model.addDataDays(dataDays);
         GregorianCalendar date = (GregorianCalendar) dateOfMonday.clone();
         for (int i = 0; i < 7; i++) {

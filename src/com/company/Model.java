@@ -150,6 +150,18 @@ public class Model {
         }
         return null;
     }
+
+    public boolean isDoublesGenerated(GregorianCalendar date) {
+        DataDay dataDay;
+        for (int i = 0; i < 7; i++) {
+            dataDay = getDataDay(date);
+            for (int j = 1; j <= 4; j++) {
+                if (dataDay.getPlanElementsDay(j).size() > 0) return true;
+            }
+            date.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        return false;
+    }
     
     public void sortDataDay(GregorianCalendar date, int mode) {
         int shift = 0;
