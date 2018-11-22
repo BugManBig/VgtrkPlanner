@@ -92,7 +92,7 @@ public class ControllerTransitions {
                     new String[]{"Да", "Нет"},
                     null
             );
-            if (answer > 0) {
+            if (answer != 0) {
                 return;
             }
         }
