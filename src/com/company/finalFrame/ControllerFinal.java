@@ -3,6 +3,7 @@ package com.company.finalFrame;
 import com.company.*;
 
 import javax.swing.*;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -107,12 +108,29 @@ public class ControllerFinal {
     public void handleDocumentationButtonClick() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
         String reversedDate = simpleDateFormat.format(dateOfMonday.getTime());
-        String outputPath = ProjectSettings.getParam(ProjectParams.OUTPUT_PATH);
-        createDocumentation(outputPath, reversedDate + " " + "Федеральное", 0);
-        createDocumentation(outputPath, reversedDate + " " + "Дубль-1", 1);
-        createDocumentation(outputPath, reversedDate + " " + "Дубль-2", 2);
-        createDocumentation(outputPath, reversedDate + " " + "Дубль-3", 3);
-        createDocumentation(outputPath, reversedDate + " " + "Дубль-4", 4);
+
+        if (new File(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH)
+                + "\\" + reversedDate + " Федеральное.txt").exists()) {
+            int answer = JOptionPane.showOptionDialog(
+                    null,
+                    "Отчёты уже были созданы ранее. Создать их ещё раз?",
+                    "Подтвердите действие",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    new String[]{"Да", "Нет"},
+                    null
+            );
+            if (answer != 0) {
+                return;
+            }
+        }
+
+        createDocumentation(reversedDate + " " + "Федеральное", 0);
+        createDocumentation(reversedDate + " " + "Дубль-1", 1);
+        createDocumentation(reversedDate + " " + "Дубль-2", 2);
+        createDocumentation(reversedDate + " " + "Дубль-3", 3);
+        createDocumentation(reversedDate + " " + "Дубль-4", 4);
     }
 
     public void handleGenerateButtonClick() {
@@ -162,20 +180,17 @@ public class ControllerFinal {
         Starter.run(model);
     }
     
-    private void createDocumentation(String path, String name, int mode) {
-        GregorianCalendar shiftedDate = new GregorianCalendar(
-                dateOfMonday.get(Calendar.YEAR),
-                dateOfMonday.get(Calendar.MONTH),
-                dateOfMonday.get(Calendar.DAY_OF_MONTH));
+    private void createDocumentation(String name, int mode) {
+        GregorianCalendar shiftedDate = (GregorianCalendar) dateOfMonday.clone();
         List<String> data = new ArrayList<>();
+
         data.add("ПРОГРАММА ПЕРЕДАЧ `РАДИО РОССИИ`");
         if (mode > 0) {
             data.add("РРД-" + mode);
         }
-        data.add("на неделю с "
-                + twoDigitsNumber(dateOfMonday.get(Calendar.DAY_OF_MONTH)) + "."
-                + twoDigitsNumber((dateOfMonday.get(Calendar.MONTH) + 1)) + "."
-                + String.valueOf(dateOfMonday.get(Calendar.YEAR)).substring(2));
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.YY");
+        data.add("на неделю с " + simpleDateFormat.format(dateOfMonday.getTime()));
         data.add("(время московское)");
         data.add("");
         data.add("");
@@ -194,11 +209,8 @@ public class ControllerFinal {
             data.add("");
             shiftedDate.add(Calendar.DAY_OF_MONTH, 1);
         }
-        FileActions.createFile(path + "\\" + name + ".txt", data);
-    }
-
-    private String twoDigitsNumber(int number) {
-        return number > 9 ? String.valueOf(number) : "0" + number;
+        String outputPath = ProjectSettings.getParam(ProjectParams.OUTPUT_PATH);
+        FileActions.createFile(outputPath + "\\" + name + ".txt", data);
     }
 
     public int getWeekday() {
