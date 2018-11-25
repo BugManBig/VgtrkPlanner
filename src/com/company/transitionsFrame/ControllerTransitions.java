@@ -1,27 +1,12 @@
 package com.company.transitionsFrame;
 
-import com.company.*;
-import com.company.finalFrame.ControllerFinal;
-
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
+import com.company.Model;
+import com.company.Starter;
+import com.company.TransitionElement;
 
 public class ControllerTransitions {
     private Model model;
     private ViewTransitions viewTransitions;
-    private GregorianCalendar dateOfMonday;
-    private ControllerFinal controllerFinal;
-
-    public void setControllerFinal(ControllerFinal controllerFinal) {
-        this.controllerFinal = controllerFinal;
-    }
-
-    public void setDateOfMonday(GregorianCalendar dateOfMonday) {
-        this.dateOfMonday = dateOfMonday;
-    }
 
     public void setModel(Model model) {
         this.model = model;
@@ -45,7 +30,7 @@ public class ControllerTransitions {
         viewTransitions.selectLine(i);
     }
 
-    public void selectLineAfterCopyElement(TransitionElement transitionElement) {
+    private void selectLineAfterCopyElement(TransitionElement transitionElement) {
         int i = 0;
         while (model.getTransitionElement(i).getStartTime().getTimeInSeconds()
                 != transitionElement.getStartTime().getTimeInSeconds()) {
@@ -104,52 +89,8 @@ public class ControllerTransitions {
         selectLineAfterCopyElement(transitionElement);
     }
 
-    public void handleGenerateButtonClick() {
-        if (model.isDoublesGenerated((GregorianCalendar) dateOfMonday.clone())) {
-            int answer = JOptionPane.showOptionDialog(
-                    null,
-                    "Дубли уже были сгенерированы ранее. Сгенерировать их ещё раз?",
-                    "Подтвердите действие",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    new String[]{"Да", "Нет"},
-                    null
-            );
-            if (answer != 0) {
-                return;
-            }
-        }
-
-        List<PlanElement>[][] doubles = DoublesGenerator.generate(model, (GregorianCalendar) dateOfMonday.clone());
-        DataDay[] dataDays = new DataDay[7];
-        for (int i = 0; i < 7; i++) {
-            List<PlanElement>[] oneDayDoubles = new ArrayList[4];
-            for (int j = 0; j < 4; j++) {
-                oneDayDoubles[j] = new ArrayList<>();
-                oneDayDoubles[j].addAll(doubles[j][i]);
-            }
-            GregorianCalendar date = (GregorianCalendar) dateOfMonday.clone();
-            date.add(Calendar.DAY_OF_MONTH, i);
-            dataDays[i] = new DataDay(model.getDataDay(date).getPlanElementsDay(0), oneDayDoubles, date);
-        }
-
-        model.addDataDays(dataDays);
-        GregorianCalendar date = (GregorianCalendar) dateOfMonday.clone();
-        for (int i = 0; i < 7; i++) {
-            for (int j = 1; j <= 4; j++) {
-                model.sortDataDay(date, j);
-            }
-            date.add(Calendar.DAY_OF_MONTH, 1);
-        }
-
-        viewTransitions.close();
-        controllerFinal.setVisible(true);
-        controllerFinal.updateDataInPlaylist();
-    }
-
     public void handleBackButtonClick() {
         viewTransitions.close();
-        controllerFinal.setVisible(true);
+        Starter.run(model);
     }
 }

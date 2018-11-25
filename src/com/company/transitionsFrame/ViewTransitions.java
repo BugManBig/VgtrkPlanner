@@ -54,17 +54,12 @@ public class ViewTransitions {
         frame.add(removeButton);
 
         JButton copyButton = new JButton("Дублировать");
-        copyButton.setBounds(FRAME_WIDTH - 360, FRAME_HEIGHT - 80, 100, 30);
+        copyButton.setBounds(FRAME_WIDTH - 250, FRAME_HEIGHT - 80, 100, 30);
         copyButton.addActionListener(e -> controllerTransitions.handleCopyButtonClick());
         frame.add(copyButton);
 
-        JButton generateButton = new JButton("Генерировать");
-        generateButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);
-        generateButton.addActionListener(e -> controllerTransitions.handleGenerateButtonClick());
-        frame.add(generateButton);
-
         JButton backButton = new JButton("Назад");
-        backButton.setBounds(FRAME_WIDTH - 250, FRAME_HEIGHT - 80, 100, 30);
+        backButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);
         backButton.addActionListener(e -> controllerTransitions.handleBackButtonClick());
         frame.add(backButton);
 

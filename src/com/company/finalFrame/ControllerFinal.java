@@ -1,9 +1,8 @@
 package com.company.finalFrame;
 
 import com.company.*;
-import com.company.transitionsFrame.ControllerTransitions;
-import com.company.transitionsFrame.ViewTransitions;
 
+import javax.swing.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -108,27 +107,54 @@ public class ControllerFinal {
     public void handleDocumentationButtonClick() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
         String reversedDate = simpleDateFormat.format(dateOfMonday.getTime());
-        createDocumentation(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH), reversedDate + " " + "Федеральное", 0);
-        createDocumentation(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH), reversedDate + " " + "Дубль-1", 1);
-        createDocumentation(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH), reversedDate + " " + "Дубль-2", 2);
-        createDocumentation(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH), reversedDate + " " + "Дубль-3", 3);
-        createDocumentation(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH), reversedDate + " " + "Дубль-4", 4);
+        String outputPath = ProjectSettings.getParam(ProjectParams.OUTPUT_PATH);
+        createDocumentation(outputPath, reversedDate + " " + "Федеральное", 0);
+        createDocumentation(outputPath, reversedDate + " " + "Дубль-1", 1);
+        createDocumentation(outputPath, reversedDate + " " + "Дубль-2", 2);
+        createDocumentation(outputPath, reversedDate + " " + "Дубль-3", 3);
+        createDocumentation(outputPath, reversedDate + " " + "Дубль-4", 4);
     }
 
-    public void handleTransitionsButtonClick() {
-        setVisible(false);
+    public void handleGenerateButtonClick() {
+        if (model.isDoublesGenerated((GregorianCalendar) dateOfMonday.clone())) {
+            int answer = JOptionPane.showOptionDialog(
+                    null,
+                    "Дубли уже были сгенерированы ранее. Сгенерировать их ещё раз?",
+                    "Подтвердите действие",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    new String[]{"Да", "Нет"},
+                    null
+            );
+            if (answer != 0) {
+                return;
+            }
+        }
 
-        ViewTransitions viewTransitions = new ViewTransitions();
+        List<PlanElement>[][] doubles = DoublesGenerator.generate(model, (GregorianCalendar) dateOfMonday.clone());
+        DataDay[] dataDays = new DataDay[7];
+        for (int i = 0; i < 7; i++) {
+            List<PlanElement>[] oneDayDoubles = new ArrayList[4];
+            for (int j = 0; j < 4; j++) {
+                oneDayDoubles[j] = new ArrayList<>();
+                oneDayDoubles[j].addAll(doubles[j][i]);
+            }
+            GregorianCalendar date = (GregorianCalendar) dateOfMonday.clone();
+            date.add(Calendar.DAY_OF_MONTH, i);
+            dataDays[i] = new DataDay(model.getDataDay(date).getPlanElementsDay(0), oneDayDoubles, date);
+        }
 
-        ControllerTransitions controllerTransitions = new ControllerTransitions();
-        controllerTransitions.setModel(model);
-        controllerTransitions.setViewTransitions(viewTransitions);
-        controllerTransitions.setDateOfMonday(dateOfMonday);
-        controllerTransitions.setControllerFinal(this);
+        model.addDataDays(dataDays);
+        GregorianCalendar date = (GregorianCalendar) dateOfMonday.clone();
+        for (int i = 0; i < 7; i++) {
+            for (int j = 1; j <= 4; j++) {
+                model.sortDataDay(date, j);
+            }
+            date.add(Calendar.DAY_OF_MONTH, 1);
+        }
 
-        viewTransitions.setControllerTransitions(controllerTransitions);
-        viewTransitions.create();
-        controllerTransitions.updateDataInTransitionsList();
+        updateDataInPlaylist();
     }
 
     public void handleMenuButtonClick() {
@@ -171,10 +197,6 @@ public class ControllerFinal {
         FileActions.createFile(path + "\\" + name + ".txt", data);
     }
 
-    public void setVisible(boolean b) {
-        viewFinal.setVisible(b);
-    }
-    
     private String twoDigitsNumber(int number) {
         return number > 9 ? String.valueOf(number) : "0" + number;
     }

@@ -106,9 +106,9 @@ public class ViewFinal {
         documentationButton.addActionListener(e -> controllerFinal.handleDocumentationButtonClick());
         frame.add(documentationButton);
 
-        JButton transitionsButton = new JButton("Замены");
+        JButton transitionsButton = new JButton("Генерировать");
         transitionsButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
-        transitionsButton.addActionListener(e -> controllerFinal.handleTransitionsButtonClick());
+        transitionsButton.addActionListener(e -> controllerFinal.handleGenerateButtonClick());
         frame.add(transitionsButton);
 
         JButton menuButton = new JButton("Меню");
@@ -132,10 +132,6 @@ public class ViewFinal {
 
     public void close() {
         frame.dispose();
-    }
-
-    public void setVisible(boolean b) {
-        frame.setVisible(b);
     }
 
     public void setDateAtFrameTitle(GregorianCalendar date) {

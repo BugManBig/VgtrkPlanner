@@ -6,7 +6,7 @@ public class ViewStart {
     private ControllerStart controllerStart;
 
     private static final int FRAME_WIDTH = 300;
-    private static final int FRAME_HEIGHT = 140;
+    private static final int FRAME_HEIGHT = 300;
 
     private JFrame frame;
 
@@ -28,9 +28,19 @@ public class ViewStart {
         frame.add(createButton);
 
         JButton loadButton = new JButton("Загрузить");
-        loadButton.setBounds(FRAME_WIDTH / 2 - 50, FRAME_HEIGHT - 80, 100, 30);
+        loadButton.setBounds(FRAME_WIDTH / 2 - 50, 50, 100, 30);
         loadButton.addActionListener(e -> controllerStart.handleLoadButtonClick());
         frame.add(loadButton);
+
+        JButton generateButton = new JButton("Генерировать");
+        generateButton.setBounds(FRAME_WIDTH / 2 - 50, 90, 100, 30);
+        generateButton.addActionListener(e -> controllerStart.handleGenerateButtonClick());
+        frame.add(generateButton);
+
+        JButton transitionsButton = new JButton("Замены");
+        transitionsButton.setBounds(FRAME_WIDTH / 2 - 50, 130, 100, 30);
+        transitionsButton.addActionListener(e -> controllerStart.handleTransitionsButtonClick());
+        frame.add(transitionsButton);
 
         frame.repaint();
         frame.revalidate();

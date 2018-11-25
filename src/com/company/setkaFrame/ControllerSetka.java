@@ -72,55 +72,6 @@ public class ControllerSetka {
         model.removeFromSetka(selectedLine);
         updateDataInPlaylist();
     }
-    
-    public void handleGenerateButtonClick() {
-        GregorianCalendar mondayDate = DateInput.run();
-        if (mondayDate == null) return;
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
-        String fileName = simpleDateFormat.format(mondayDate.getTime()) + ".bin";
-        if (FileActions.isExist(ProjectSettings.getParam(ProjectParams.BIN_PATH), fileName)) {
-            int answer = JOptionPane.showOptionDialog(
-                    null,
-                    "Эта неделя уже сгенерирована ранее. Сгенерировать ещё раз?",
-                    "Подтвердите действие",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    new String[]{"Да", "Нет"},
-                    null
-            );
-            if (answer != 0) {
-                return;
-            }
-        }
-
-        List<PlanElement>[] federalElements = FederalGenerator.generate(model);
-        model.setFederalElements(federalElements);
-
-        DataDay[] dataDays = new DataDay[7];
-        for (int i = 0; i < 7; i++) {
-            GregorianCalendar date = (GregorianCalendar) mondayDate.clone();
-            date.add(Calendar.DAY_OF_MONTH, i);
-            dataDays[i] = new DataDay(model.getFederalElements()[i], null, date);
-        }
-
-        model.addDataDays(dataDays);
-
-        ViewFinal viewFinal = new ViewFinal();
-
-        ControllerFinal controllerFinal = new ControllerFinal();
-        controllerFinal.setModel(model);
-        controllerFinal.setViewFinal(viewFinal);
-
-        viewFinal.setControllerFinal(controllerFinal);
-        viewFinal.create();
-
-        controllerFinal.setDateOfMonday(mondayDate);
-        controllerFinal.updateDataInPlaylist();
-
-        viewSetka.close();
-    }
 
     public void handleMenuButtonClick() {
         viewSetka.close();
