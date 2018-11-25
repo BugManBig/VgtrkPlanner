@@ -61,7 +61,6 @@ public class ControllerFinal {
         viewMiniFinal.create();
         viewMiniFinal.setFieldsFromPlanElement(model.getDataDay(
                 getCurrentDate()).getPlanElementsDay(mode).get(viewFinal.getSelectedLine()));
-        model.saveAllDataDays();
     }
 
     public void handleAddButtonClick() {
@@ -163,7 +162,11 @@ public class ControllerFinal {
             dataDays[i] = new DataDay(model.getDataDay(date).getPlanElementsDay(0), oneDayDoubles, date);
         }
 
+        model.resetDataDays();
+
         model.addDataDays(dataDays);
+        model.saveAllDataDays();
+
         GregorianCalendar date = (GregorianCalendar) dateOfMonday.clone();
         for (int i = 0; i < 7; i++) {
             for (int j = 1; j <= 4; j++) {
@@ -176,6 +179,7 @@ public class ControllerFinal {
     }
 
     public void handleMenuButtonClick() {
+        model.resetDataDays();
         viewFinal.close();
         Starter.run(model);
     }

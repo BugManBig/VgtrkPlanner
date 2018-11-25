@@ -6,7 +6,7 @@ public class ViewStart {
     private ControllerStart controllerStart;
 
     private static final int FRAME_WIDTH = 300;
-    private static final int FRAME_HEIGHT = 300;
+    private static final int FRAME_HEIGHT = 210;
 
     private JFrame frame;
 

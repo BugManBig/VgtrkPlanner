@@ -99,6 +99,7 @@ public class ControllerStart {
         }
 
         model.addDataDays(dataDays);
+        model.saveAllDataDays();
 
         ViewFinal viewFinal = new ViewFinal();
 

@@ -20,6 +20,10 @@ public class Model {
         }
     }
 
+    public void resetDataDays() {
+        dataDays = new ArrayList<>();
+    }
+
     public void addElementToSetka(PlanElement planElement) {
         setkaElements.add(planElement);
         sortSetka();
@@ -95,9 +99,7 @@ public class Model {
     }
 
     public void addDataDays(DataDay[] dataDays) {
-        checkForRewrite(dataDays);
         this.dataDays.addAll(Arrays.asList(dataDays));
-        saveAllDataDays();
     }
 
     public void saveAllDataDays() {
@@ -111,18 +113,6 @@ public class Model {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
         String fileName = simpleDateFormat.format(date.getTime()) + ".bin";
         FileActions.save(dataDay, ProjectSettings.getParam(ProjectParams.BIN_PATH), fileName);
-    }
-
-    private void checkForRewrite(DataDay[] dataDays) {
-        int weeksCount = this.dataDays.size() / 7;
-        for (int i = 0; i < weeksCount; i++) {
-            if (this.dataDays.get(i * 7).isEquals(dataDays[0].getDate())) {
-                for (int j = 0; j < 7; j++) {
-                    this.dataDays.remove(i * 7);
-                }
-                break;
-            }
-        }
     }
 
     public boolean loadWeek(GregorianCalendar date) {
