@@ -28,6 +28,7 @@ public class ViewTransitions {
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(null);
+        frame.setResizable(false);
 
         ActionListener listenerForEdit = e -> controllerTransitions.handleEditButtonClick();
 

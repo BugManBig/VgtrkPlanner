@@ -21,6 +21,7 @@ public class ViewStart {
         frame.setVisible(true);
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
 
         JButton createButton = new JButton("Сетка");
         createButton.setBounds(FRAME_WIDTH / 2 - 50, 10, 100, 30);

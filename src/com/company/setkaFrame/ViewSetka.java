@@ -27,6 +27,7 @@ public class ViewSetka {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setLayout(null);
+        frame.setResizable(false);
 
         ActionListener listenerForEdit = e -> controllerSetka.handleEditButtonClick();
         

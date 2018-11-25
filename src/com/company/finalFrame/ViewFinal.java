@@ -46,6 +46,7 @@ public class ViewFinal {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setLayout(null);
+        frame.setResizable(false);
 
         ActionListener listenerForEdit = e -> controllerFinal.handleEditButtonClick();
 
@@ -59,11 +60,13 @@ public class ViewFinal {
         weekDayField = new JTextField();
         weekDayField.setBounds(FRAME_WIDTH - 410, FRAME_HEIGHT - 120, 100, 30);
         weekDayField.setEditable(false);
+        weekDayField.setFocusable(false);
         frame.add(weekDayField);
         
         doubleField = new JTextField();
         doubleField.setBounds(FRAME_WIDTH - 410, FRAME_HEIGHT - 80, 100, 30);
         doubleField.setEditable(false);
+        doubleField.setFocusable(false);
         frame.add(doubleField);
 
         JButton addButton = new JButton("Добавить");

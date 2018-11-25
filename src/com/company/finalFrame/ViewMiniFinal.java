@@ -33,6 +33,7 @@ public class ViewMiniFinal {
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setLayout(null);
+        frame.setResizable(false);
 
         JLabel startTimeLabel = new JLabel("Время начала:");
         startTimeLabel.setBounds(10, 10, 100, 30);
