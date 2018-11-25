@@ -43,6 +43,7 @@ public class ControllerFinal {
             data[i] = dataDay.getPlanElementsDay(mode).get(i).getDataStringForFinal();
         }
         viewFinal.setDataToList(data);
+        viewFinal.setDateAtFrameTitle(getCurrentDate());
     }
 
     public void handleEditButtonClick() {

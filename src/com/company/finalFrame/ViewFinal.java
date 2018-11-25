@@ -6,6 +6,8 @@ import com.company.DoubleClickListener;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
 public class ViewFinal {
     private ControllerFinal controllerFinal;
@@ -40,7 +42,7 @@ public class ViewFinal {
     }
 
     public void create() {
-        frame = new JFrame("Неделя");
+        frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setLayout(null);
@@ -134,5 +136,11 @@ public class ViewFinal {
 
     public void setVisible(boolean b) {
         frame.setVisible(b);
+    }
+
+    public void setDateAtFrameTitle(GregorianCalendar date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY");
+        String dateString = simpleDateFormat.format(date.getTime());
+        frame.setTitle("Неделя: " + dateString);
     }
 }
