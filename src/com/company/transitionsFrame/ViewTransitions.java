@@ -53,6 +53,11 @@ public class ViewTransitions {
         removeButton.addActionListener(e -> controllerTransitions.handleRemoveButtonClick());
         frame.add(removeButton);
 
+        JButton copyButton = new JButton("Дублировать");
+        copyButton.setBounds(FRAME_WIDTH - 360, FRAME_HEIGHT - 80, 100, 30);
+        copyButton.addActionListener(e -> controllerTransitions.handleCopyButtonClick());
+        frame.add(copyButton);
+
         JButton generateButton = new JButton("Генерировать");
         generateButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);
         generateButton.addActionListener(e -> controllerTransitions.handleGenerateButtonClick());

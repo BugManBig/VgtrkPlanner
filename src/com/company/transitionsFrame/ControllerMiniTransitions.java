@@ -51,7 +51,7 @@ public class ControllerMiniTransitions {
         }
         viewMiniTransitions.close();
         controllerTransitions.updateDataInTransitionsList();
-        controllerTransitions.selectLine(transitionElement);
+        controllerTransitions.selectLineAfterCreatingElement(transitionElement);
     }
 
     public void handleCancelButtonClick() {

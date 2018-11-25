@@ -39,10 +39,23 @@ public class ControllerTransitions {
         this.viewTransitions = viewTransitions;
     }
 
-    public void selectLine(TransitionElement transitionElement) {
+    public void selectLineAfterCreatingElement(TransitionElement transitionElement) {
         int i = 0;
         while (model.getTransitionElement(i) != transitionElement) i++;
         viewTransitions.selectLine(i);
+    }
+
+    public void selectLineAfterCopyElement(TransitionElement transitionElement) {
+        int i = 0;
+        while (model.getTransitionElement(i).getStartTime().getTimeInSeconds()
+                != transitionElement.getStartTime().getTimeInSeconds()) {
+            i++;
+        }
+        while (i < model.getTransitionsSize() && model.getTransitionElement(i).getStartTime().getTimeInSeconds()
+                == transitionElement.getStartTime().getTimeInSeconds()) {
+            i++;
+        }
+        viewTransitions.selectLine(i - 1);
     }
 
     public void handleAddButtonClick() {
@@ -78,6 +91,17 @@ public class ControllerTransitions {
             model.removeFromTransitions(viewTransitions.getSelectedLine());
             updateDataInTransitionsList();
         }
+    }
+
+    public void handleCopyButtonClick() {
+        if (viewTransitions.getSelectedLine() == -1) {
+            return;
+        }
+        int selectedLine = viewTransitions.getSelectedLine();
+        TransitionElement transitionElement = model.getTransitionElement(selectedLine);
+        model.addTransitionElement(transitionElement);
+        updateDataInTransitionsList();
+        selectLineAfterCopyElement(transitionElement);
     }
 
     public void handleGenerateButtonClick() {
