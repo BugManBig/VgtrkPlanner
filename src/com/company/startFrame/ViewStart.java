@@ -24,22 +24,22 @@ public class ViewStart {
         frame.setResizable(false);
 
         JButton createButton = new JButton("Сетка");
-        createButton.setBounds(FRAME_WIDTH / 2 - 50, 10, 100, 30);
+        createButton.setBounds(FRAME_WIDTH / 2 - 100, 10, 200, 30);
         createButton.addActionListener(e -> controllerStart.handleCreateButtonClick());
         frame.add(createButton);
 
         JButton loadButton = new JButton("Загрузить неделю");
-        loadButton.setBounds(FRAME_WIDTH / 2 - 50, 50, 100, 30);
+        loadButton.setBounds(FRAME_WIDTH / 2 - 100, 50, 200, 30);
         loadButton.addActionListener(e -> controllerStart.handleLoadButtonClick());
         frame.add(loadButton);
 
         JButton generateButton = new JButton("Формирование РР");
-        generateButton.setBounds(FRAME_WIDTH / 2 - 50, 90, 100, 30);
+        generateButton.setBounds(FRAME_WIDTH / 2 - 100, 90, 200, 30);
         generateButton.addActionListener(e -> controllerStart.handleGenerateButtonClick());
         frame.add(generateButton);
 
         JButton transitionsButton = new JButton("Справочник замен");
-        transitionsButton.setBounds(FRAME_WIDTH / 2 - 50, 130, 100, 30);
+        transitionsButton.setBounds(FRAME_WIDTH / 2 - 100, 130, 200, 30);
         transitionsButton.addActionListener(e -> controllerStart.handleTransitionsButtonClick());
         frame.add(transitionsButton);
 

@@ -152,7 +152,7 @@ public class ControllerFinal {
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public void handleGenerateButtonClick() {
+    public void handleGenerateDoublesButtonClick() {
         if (model.isDoublesGenerated((GregorianCalendar) dateOfMonday.clone())) {
             int answer = JOptionPane.showOptionDialog(
                     null,

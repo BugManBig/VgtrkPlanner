@@ -1,6 +1,8 @@
 package com.company.setkaFrame;
 
 import com.company.DoubleClickListener;
+import com.company.ProjectParams;
+import com.company.ProjectSettings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,8 +13,8 @@ public class ViewSetka {
     private JList<String> list;
     private JFrame frame;
 
-    private static final int FRAME_WIDTH = 900;
-    private static final int FRAME_HEIGHT = 600;
+    private static final int FRAME_WIDTH = Integer.parseInt(ProjectSettings.getParam(ProjectParams.WINDOW_WIDTH));
+    private static final int FRAME_HEIGHT = Integer.parseInt(ProjectSettings.getParam(ProjectParams.WINDOW_HEIGHT));
 
     public void setControllerSetka(ControllerSetka controllerSetka) {
         this.controllerSetka = controllerSetka;
@@ -34,7 +36,8 @@ public class ViewSetka {
         list = new JList<>();
         JScrollPane playlist = new JScrollPane(list);
         playlist.setBounds(10, 10, FRAME_WIDTH - 50, FRAME_HEIGHT - 100);
-        list.setFont(new Font("Courier new", Font.PLAIN, 14));
+        int fontSize = Integer.parseInt(ProjectSettings.getParam(ProjectParams.FONT_SIZE));
+        list.setFont(new Font("Courier new", Font.PLAIN, fontSize));
         frame.add(playlist);
         list.addMouseListener(new DoubleClickListener(listenerForEdit));
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

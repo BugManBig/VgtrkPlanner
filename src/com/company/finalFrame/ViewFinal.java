@@ -2,6 +2,8 @@ package com.company.finalFrame;
 
 import com.company.DaysOfWeek;
 import com.company.DoubleClickListener;
+import com.company.ProjectParams;
+import com.company.ProjectSettings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,8 +18,8 @@ public class ViewFinal {
     private JTextField doubleField;
     private JFrame frame;
 
-    private static final int FRAME_WIDTH = 900;
-    private static final int FRAME_HEIGHT = 600;
+    private static final int FRAME_WIDTH = Integer.parseInt(ProjectSettings.getParam(ProjectParams.WINDOW_WIDTH));
+    private static final int FRAME_HEIGHT = Integer.parseInt(ProjectSettings.getParam(ProjectParams.WINDOW_HEIGHT));
 
     public void setControllerFinal(ControllerFinal controllerFinal) {
         this.controllerFinal = controllerFinal;
@@ -53,7 +55,8 @@ public class ViewFinal {
         list = new JList<>();
         JScrollPane playlist = new JScrollPane(list);
         playlist.setBounds(10, 10, FRAME_WIDTH - 50, FRAME_HEIGHT - 140);
-        list.setFont(new Font("Courier new", Font.PLAIN, 14));
+        int fontSize = Integer.parseInt(ProjectSettings.getParam(ProjectParams.FONT_SIZE));
+        list.setFont(new Font("Courier new", Font.PLAIN, fontSize));
         frame.add(playlist);
         list.addMouseListener(new DoubleClickListener(listenerForEdit));
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -110,10 +113,10 @@ public class ViewFinal {
         documentationButton.addActionListener(e -> controllerFinal.handleDocumentationButtonClick());
         frame.add(documentationButton);
 
-        JButton transitionsButton = new JButton("Формирование дублей");
-        transitionsButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
-        transitionsButton.addActionListener(e -> controllerFinal.handleGenerateButtonClick());
-        frame.add(transitionsButton);
+        JButton generateDoublesButton = new JButton("Формирование дублей");
+        generateDoublesButton.setBounds(10, FRAME_HEIGHT - 80, 210, 30);
+        generateDoublesButton.addActionListener(e -> controllerFinal.handleGenerateDoublesButtonClick());
+        frame.add(generateDoublesButton);
 
         JButton menuButton = new JButton("Меню");
         menuButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);

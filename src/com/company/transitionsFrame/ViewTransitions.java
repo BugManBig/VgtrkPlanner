@@ -1,6 +1,8 @@
 package com.company.transitionsFrame;
 
 import com.company.DoubleClickListener;
+import com.company.ProjectParams;
+import com.company.ProjectSettings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,8 +12,8 @@ public class ViewTransitions {
     private ControllerTransitions controllerTransitions;
     private JList<String> list;
 
-    private static final int FRAME_WIDTH = 900;
-    private static final int FRAME_HEIGHT = 600;
+    private static final int FRAME_WIDTH = Integer.parseInt(ProjectSettings.getParam(ProjectParams.WINDOW_WIDTH));
+    private static final int FRAME_HEIGHT = Integer.parseInt(ProjectSettings.getParam(ProjectParams.WINDOW_HEIGHT));
 
     private JFrame frame;
     
@@ -35,7 +37,8 @@ public class ViewTransitions {
         list = new JList<>();
         JScrollPane playlist = new JScrollPane(list);
         playlist.setBounds(10, 10, FRAME_WIDTH - 50, FRAME_HEIGHT - 100);
-        list.setFont(new Font("Courier new", Font.PLAIN, 14));
+        int fontSize = Integer.parseInt(ProjectSettings.getParam(ProjectParams.FONT_SIZE));
+        list.setFont(new Font("Courier new", Font.PLAIN, fontSize));
         frame.add(playlist);
         list.addMouseListener(new DoubleClickListener(listenerForEdit));
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -56,7 +59,7 @@ public class ViewTransitions {
         frame.add(removeButton);
 
         JButton copyButton = new JButton("Дублировать");
-        copyButton.setBounds(FRAME_WIDTH - 250, FRAME_HEIGHT - 80, 100, 30);
+        copyButton.setBounds(FRAME_WIDTH - 350, FRAME_HEIGHT - 80, 200, 30);
         copyButton.addActionListener(e -> controllerTransitions.handleCopyButtonClick());
         frame.add(copyButton);
 
