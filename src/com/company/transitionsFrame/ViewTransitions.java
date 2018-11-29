@@ -63,7 +63,7 @@ public class ViewTransitions {
         copyButton.addActionListener(e -> controllerTransitions.handleCopyButtonClick());
         frame.add(copyButton);
 
-        JButton backButton = new JButton("Назад");
+        JButton backButton = new JButton("Меню");
         backButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);
         backButton.addActionListener(e -> controllerTransitions.handleBackButtonClick());
         frame.add(backButton);
