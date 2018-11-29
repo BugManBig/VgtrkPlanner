@@ -4,6 +4,8 @@ import com.company.Model;
 import com.company.Starter;
 import com.company.TransitionElement;
 
+import javax.swing.*;
+
 public class ControllerTransitions {
     private Model model;
     private ViewTransitions viewTransitions;
@@ -72,10 +74,26 @@ public class ControllerTransitions {
 
     public void handleRemoveButtonClick() {
         int selectedLine = viewTransitions.getSelectedLine();
-        if (selectedLine > -1) {
-            model.removeFromTransitions(viewTransitions.getSelectedLine());
-            updateDataInTransitionsList();
+        if (selectedLine == -1) {
+            return;
         }
+
+        int answer = JOptionPane.showOptionDialog(
+                null,
+                "Вы уверены, что хотите удалить выбранный элемент?",
+                "Подтвердите действие",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new String[]{"Да", "Нет"},
+                null
+        );
+        if (answer != 0) {
+            return;
+        }
+
+        model.removeFromTransitions(viewTransitions.getSelectedLine());
+        updateDataInTransitionsList();
     }
 
     public void handleCopyButtonClick() {

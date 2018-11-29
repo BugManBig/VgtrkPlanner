@@ -1,14 +1,10 @@
 package com.company.setkaFrame;
 
-import com.company.*;
-import com.company.finalFrame.ControllerFinal;
-import com.company.finalFrame.ViewFinal;
+import com.company.Model;
+import com.company.PlanElement;
+import com.company.Starter;
 
 import javax.swing.*;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
 
 public class ControllerSetka {
     private ViewSetka viewSetka;
@@ -68,7 +64,25 @@ public class ControllerSetka {
 
     public void handleRemoveButtonClick() {
         int selectedLine = viewSetka.getSelectedLine();
-        if (selectedLine == -1) return;
+        if (selectedLine == -1) {
+            return;
+        }
+
+        String title = model.getElementFromSetka(selectedLine).getTitle();
+        int answer = JOptionPane.showOptionDialog(
+                null,
+                "Вы уверены, что хотите удалить элемент: \"" + title + "\"?",
+                "Подтвердите действие",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new String[]{"Да", "Нет"},
+                null
+        );
+        if (answer != 0) {
+            return;
+        }
+
         model.removeFromSetka(selectedLine);
         updateDataInPlaylist();
     }

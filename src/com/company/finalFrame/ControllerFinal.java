@@ -77,10 +77,27 @@ public class ControllerFinal {
 
     public void handleRemoveButtonClick() {
         int selectedLine = viewFinal.getSelectedLine();
-        if (selectedLine > -1) {
-            model.removeFromFinal(getCurrentDate(), mode, selectedLine);
-            updateDataInPlaylist();
+        if (selectedLine == -1) {
+            return;
         }
+
+        String title = model.getDataDay(getCurrentDate()).getPlanElementsDay(mode).get(selectedLine).getTitle();
+        int answer = JOptionPane.showOptionDialog(
+                null,
+                "Вы уверены, что хотите удалить элемент: \"" + title + "\"?",
+                "Подтвердите действие",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new String[]{"Да", "Нет"},
+                null
+        );
+        if (answer != 0) {
+            return;
+        }
+
+        model.removeFromFinal(getCurrentDate(), mode, selectedLine);
+        updateDataInPlaylist();
         model.saveAllDataDays();
     }
 
@@ -130,6 +147,9 @@ public class ControllerFinal {
         createDocumentation(reversedDate + " " + "Дубль-2", 2);
         createDocumentation(reversedDate + " " + "Дубль-3", 3);
         createDocumentation(reversedDate + " " + "Дубль-4", 4);
+
+        JOptionPane.showMessageDialog(null, "Документация успешно сгенерирована", "Сообщение об операции",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void handleGenerateButtonClick() {
@@ -176,6 +196,9 @@ public class ControllerFinal {
         }
 
         updateDataInPlaylist();
+
+        JOptionPane.showMessageDialog(null, "Дубли успешно сформированы", "Сообщение об операции",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void handleMenuButtonClick() {
