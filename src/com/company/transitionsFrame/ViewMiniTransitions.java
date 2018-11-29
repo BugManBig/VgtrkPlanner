@@ -3,6 +3,8 @@ package com.company.transitionsFrame;
 import com.company.*;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ViewMiniTransitions {
     private ControllerMiniTransitions controllerMiniTransitions;
@@ -10,7 +12,7 @@ public class ViewMiniTransitions {
     private JFrame frame;
 
     private static final int FRAME_WIDTH = 450;
-    private static final int FRAME_HEIGHT = 280;
+    private static final int FRAME_HEIGHT = 370;
 
     private JTextField startHrsTextfield;
     private JTextField startMinTextfield;
@@ -26,6 +28,9 @@ public class ViewMiniTransitions {
     
     private JCheckBox[] weekdaysCheckboxes;
     private JCheckBox[] doublesCheckboxes;
+
+    private JCheckBox radiobuttonsCheckbox;
+    private JRadioButton[] weekdaysRadiobuttons;
 
     public void setControllerMiniTransitions(ControllerMiniTransitions controllerMiniTransitions) {
         this.controllerMiniTransitions = controllerMiniTransitions;
@@ -130,7 +135,7 @@ public class ViewMiniTransitions {
             weekdaysCheckboxes[i] = checkBox;
             frame.add(checkBox);
         }
-        
+
         doublesCheckboxes = new JCheckBox[4];
         for (int i = 0; i < 4; i++) {
             JCheckBox checkBox = new JCheckBox();
@@ -140,10 +145,72 @@ public class ViewMiniTransitions {
             frame.add(checkBox);
         }
 
+        radiobuttonsCheckbox = new JCheckBox("Перенос дня недели для дублей. Перенос на:");
+        radiobuttonsCheckbox.setBounds(10, 220, 300, 30);
+        radiobuttonsCheckbox.addActionListener(e -> {
+            setRadiobuttonsEnabled(radiobuttonsCheckbox.isSelected());
+        });
+        frame.add(radiobuttonsCheckbox);
+
+        weekdaysRadiobuttons = new JRadioButton[7];
+        for (int i = 0; i < 7; i++) {
+            JRadioButton radioButton = new JRadioButton();
+            radioButton.setBounds(10 + ((FRAME_WIDTH - 10) / 7) * i, 250, 60, 30);
+            radioButton.setText(DaysOfWeek.values()[i].getShortName());
+            int k = i;
+            radioButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    for (int j = 0; j < 7; j++) {
+                        if (j != k) {
+                            weekdaysRadiobuttons[j].setSelected(false);
+                        }
+                    }
+                }
+            });
+            weekdaysRadiobuttons[i] = radioButton;
+            frame.add(radioButton);
+        }
+        setRadiobuttonsEnabled(false);
+
         frame.repaint();
         frame.revalidate();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    public boolean isRadiobuttonsCheckboxSelected() {
+        return radiobuttonsCheckbox.isSelected();
+    }
+
+    private void setRadiobuttonsEnabled(boolean b) {
+        for (int i = 0; i < 7; i++) {
+            weekdaysRadiobuttons[i].setEnabled(b);
+            weekdaysRadiobuttons[i].setSelected(false);
+        }
+        if (b) {
+            selectRadiobutton(0);
+        }
+    }
+
+    public int getSelectedRadiobutton() {
+        int index = -1;
+        if (!radiobuttonsCheckbox.isSelected()) {
+            return index;
+        }
+        for (int i = 0; i < 7; i++) {
+            if (weekdaysRadiobuttons[i].isSelected()) {
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    private void selectRadiobutton(int index) {
+        for (int i = 0; i < 7; i++) {
+            weekdaysRadiobuttons[i].setSelected(false);
+        }
+        weekdaysRadiobuttons[index].setSelected(true);
     }
 
     public void close() {
@@ -232,6 +299,13 @@ public class ViewMiniTransitions {
         boolean[] doublesSelections = transitionElement.getSelectedDoubles().getSelectionsArray();
         for (int i = 0; i < 4; i++) {
             doublesCheckboxes[i].setSelected(doublesSelections[i]);
+        }
+
+        int offsetWeekday = transitionElement.getOffsetToWeekday();
+        if (offsetWeekday > -1) {
+            radiobuttonsCheckbox.setSelected(true);
+            setRadiobuttonsEnabled(true);
+            selectRadiobutton(offsetWeekday);
         }
     }
 }

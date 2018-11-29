@@ -31,19 +31,35 @@ public class ControllerMiniTransitions {
 
     public void handleOkButtonClick() {
         if (viewMiniTransitions.isNothingWeekCheckboxesSelected()) {
-            JOptionPane.showMessageDialog(null, "Не выбран ни один день недели");
+            JOptionPane.showMessageDialog(null, "Не выбран ни один день недели", "Ошибка", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if (viewMiniTransitions.isNothingDoublesCheckboxesSelected()) {
-            JOptionPane.showMessageDialog(null, "Не выбран ни один дубль");
+            JOptionPane.showMessageDialog(null, "Не выбран ни один дубль", "Ошибка", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        if (viewMiniTransitions.isRadiobuttonsCheckboxSelected()) {
+            boolean[] weekCheckboxes = viewMiniTransitions.getWeekdaysCheckboxes();
+            int sum = 0;
+            for (boolean weekCheckbox : weekCheckboxes) {
+                if (weekCheckbox) {
+                    sum++;
+                }
+            }
+            if (sum > 1) {
+                JOptionPane.showMessageDialog(null, "Переносить можно только один день недели", "Ошибка",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
         TransitionElement transitionElement = new TransitionElement(
                 viewMiniTransitions.getStartTime(),
                 viewMiniTransitions.getEndTime(),
                 viewMiniTransitions.getTransitionTime(),
                 new SelectedDays(viewMiniTransitions.getWeekdaysCheckboxes()),
-                new SelectedDoubles(viewMiniTransitions.getDoublesCheckboxes()));
+                new SelectedDoubles(viewMiniTransitions.getDoublesCheckboxes()),
+                viewMiniTransitions.getSelectedRadiobutton());
         if (selectedListIndex == -1) {
             model.addTransitionElement(transitionElement);
         } else {

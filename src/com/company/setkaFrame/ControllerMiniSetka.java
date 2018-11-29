@@ -26,7 +26,7 @@ public class ControllerMiniSetka {
 
     public void handleOkButtonClick() {
         if (viewMiniSetka.isNothingCheckboxesSelected()) {
-            JOptionPane.showMessageDialog(null, "Не выбран ни один день недели");
+            JOptionPane.showMessageDialog(null, "Не выбран ни один день недели", "Ошибка", JOptionPane.WARNING_MESSAGE);
             return;
         }
         PlanElement planElement = new PlanElement(

@@ -8,6 +8,7 @@ public class TransitionElement implements Serializable {
     private Chrono transitionTime;
     private SelectedDays selectedDays;
     private SelectedDoubles selectedDoubles;
+    private int offsetToWeekday;
     private static final String SPLITTER = "    ";
 
     public Chrono getStartTime() {
@@ -30,22 +31,32 @@ public class TransitionElement implements Serializable {
         return selectedDoubles;
     }
 
+    public int getOffsetToWeekday() {
+        return offsetToWeekday;
+    }
+
     public TransitionElement(Chrono startTime, Chrono endTime, Chrono transitionTime,
-                             SelectedDays selectedDays, SelectedDoubles selectedDoubles) {
+                             SelectedDays selectedDays, SelectedDoubles selectedDoubles, int offsetToWeekday) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.transitionTime = transitionTime;
         this.selectedDays = selectedDays;
         this.selectedDoubles = selectedDoubles;
+        this.offsetToWeekday = offsetToWeekday;
     }
     
     public String getDataString() {
+        String offsetAdding = "";
+        if (offsetToWeekday > -1) {
+            offsetAdding = "день на дублях: " + DaysOfWeek.values()[offsetToWeekday].toString().toLowerCase();
+        }
         return connectViaSplitter(
                 startTime.getTimeString(),
                 endTime.getTimeString(),
                 selectedDays.getDaysString(),
                 transitionTime.getTimeString(),
-                selectedDoubles.getDoublesString());
+                selectedDoubles.getDoublesString(),
+                offsetAdding);
     }
 
     private String connectViaSplitter(String ... data) {

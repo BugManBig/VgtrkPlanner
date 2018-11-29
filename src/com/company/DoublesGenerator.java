@@ -46,7 +46,9 @@ public class DoublesGenerator {
                                 }
                                 transitionedElement.setStartTime(
                                         new Chrono(planElement.getStartTime().getTimeInSeconds() + timeDelta));
-                                doublesElements[doubleId][weekdayId].add(transitionedElement);
+                                int offsetToWeekday = transitionElement.getOffsetToWeekday();
+                                int resultWeekdayIndex = offsetToWeekday == -1 ? weekdayId : offsetToWeekday;
+                                doublesElements[doubleId][resultWeekdayIndex].add(transitionedElement);
                             }
                         }
                     }
