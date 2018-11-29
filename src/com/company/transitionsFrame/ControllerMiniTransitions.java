@@ -51,6 +51,19 @@ public class ControllerMiniTransitions {
                         JOptionPane.WARNING_MESSAGE);
                 return;
             }
+
+            int dayOfWeek = 0;
+            for (int i = 0; i < 7; i++) {
+                if (weekCheckboxes[i]) {
+                    dayOfWeek = i;
+                    break;
+                }
+            }
+            if (dayOfWeek == viewMiniTransitions.getSelectedRadiobutton()) {
+                JOptionPane.showMessageDialog(null, "Не имеет смысла переносить день на тот же самый", "Ошибка",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
         }
 
         TransitionElement transitionElement = new TransitionElement(
