@@ -194,7 +194,10 @@ public class ControllerFinal {
         }
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.YY");
-        data.add("на неделю с " + simpleDateFormat.format(dateOfMonday.getTime()));
+        GregorianCalendar dateOfSunday = (GregorianCalendar) dateOfMonday.clone();
+        dateOfSunday.add(Calendar.DAY_OF_MONTH, 6);
+        data.add("на неделю с " + simpleDateFormat.format(dateOfMonday.getTime())
+                + " по " + simpleDateFormat.format(dateOfSunday.getTime()));
         data.add("(время московское)");
         data.add("");
         data.add("");

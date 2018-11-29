@@ -28,17 +28,17 @@ public class ViewStart {
         createButton.addActionListener(e -> controllerStart.handleCreateButtonClick());
         frame.add(createButton);
 
-        JButton loadButton = new JButton("Загрузить");
+        JButton loadButton = new JButton("Загрузить неделю");
         loadButton.setBounds(FRAME_WIDTH / 2 - 50, 50, 100, 30);
         loadButton.addActionListener(e -> controllerStart.handleLoadButtonClick());
         frame.add(loadButton);
 
-        JButton generateButton = new JButton("Генерировать");
+        JButton generateButton = new JButton("Формирование РР");
         generateButton.setBounds(FRAME_WIDTH / 2 - 50, 90, 100, 30);
         generateButton.addActionListener(e -> controllerStart.handleGenerateButtonClick());
         frame.add(generateButton);
 
-        JButton transitionsButton = new JButton("Замены");
+        JButton transitionsButton = new JButton("Справочник замен");
         transitionsButton.setBounds(FRAME_WIDTH / 2 - 50, 130, 100, 30);
         transitionsButton.addActionListener(e -> controllerStart.handleTransitionsButtonClick());
         frame.add(transitionsButton);

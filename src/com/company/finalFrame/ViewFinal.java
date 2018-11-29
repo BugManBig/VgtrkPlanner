@@ -28,7 +28,7 @@ public class ViewFinal {
         day = day.substring(0, 1) + day.substring(1).toLowerCase();
         weekDayField.setText(day);
     }
-    
+
     public void setDoubleText(int doubleNumber) {
         if (doubleNumber == 0) {
             doubleField.setText("Федеральное");
@@ -56,13 +56,14 @@ public class ViewFinal {
         list.setFont(new Font("Courier new", Font.PLAIN, 14));
         frame.add(playlist);
         list.addMouseListener(new DoubleClickListener(listenerForEdit));
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         weekDayField = new JTextField();
         weekDayField.setBounds(FRAME_WIDTH - 410, FRAME_HEIGHT - 120, 100, 30);
         weekDayField.setEditable(false);
         weekDayField.setFocusable(false);
         frame.add(weekDayField);
-        
+
         doubleField = new JTextField();
         doubleField.setBounds(FRAME_WIDTH - 410, FRAME_HEIGHT - 80, 100, 30);
         doubleField.setEditable(false);
@@ -93,23 +94,23 @@ public class ViewFinal {
         nextDayButton.setBounds(FRAME_WIDTH - 300, FRAME_HEIGHT - 120, 100, 30);
         nextDayButton.addActionListener(e -> controllerFinal.handleNextDayButtonClick());
         frame.add(nextDayButton);
-        
+
         JButton prevDoubleButton = new JButton("<<<");
         prevDoubleButton.setBounds(FRAME_WIDTH - 520, FRAME_HEIGHT - 80, 100, 30);
         prevDoubleButton.addActionListener(e -> controllerFinal.handlePrevDoubleButtonClick());
         frame.add(prevDoubleButton);
-        
+
         JButton nextDoubleButton = new JButton(">>>");
         nextDoubleButton.setBounds(FRAME_WIDTH - 300, FRAME_HEIGHT - 80, 100, 30);
         nextDoubleButton.addActionListener(e -> controllerFinal.handleNextDoubleButtonClick());
         frame.add(nextDoubleButton);
-        
+
         JButton documentationButton = new JButton("Отчёты");
         documentationButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 120, 100, 30);
         documentationButton.addActionListener(e -> controllerFinal.handleDocumentationButtonClick());
         frame.add(documentationButton);
 
-        JButton transitionsButton = new JButton("Генерировать");
+        JButton transitionsButton = new JButton("Формирование дублей");
         transitionsButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
         transitionsButton.addActionListener(e -> controllerFinal.handleGenerateButtonClick());
         frame.add(transitionsButton);

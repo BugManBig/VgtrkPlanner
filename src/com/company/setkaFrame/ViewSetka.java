@@ -37,6 +37,7 @@ public class ViewSetka {
         list.setFont(new Font("Courier new", Font.PLAIN, 14));
         frame.add(playlist);
         list.addMouseListener(new DoubleClickListener(listenerForEdit));
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         JButton addButton = new JButton("Добавить");
         addButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
