@@ -164,6 +164,8 @@ public class ViewMiniTransitions {
                     for (int j = 0; j < 7; j++) {
                         if (j != k) {
                             weekdaysRadiobuttons[j].setSelected(false);
+                        } else {
+                            weekdaysRadiobuttons[j].setSelected(true);
                         }
                     }
                 }
