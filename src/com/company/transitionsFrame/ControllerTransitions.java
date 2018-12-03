@@ -32,19 +32,6 @@ public class ControllerTransitions {
         viewTransitions.selectLine(i);
     }
 
-    private void selectLineAfterCopyElement(TransitionElement transitionElement) {
-        int i = 0;
-        while (model.getTransitionElement(i).getStartTime().getTimeInSeconds()
-                != transitionElement.getStartTime().getTimeInSeconds()) {
-            i++;
-        }
-        while (i < model.getTransitionsSize() && model.getTransitionElement(i).getStartTime().getTimeInSeconds()
-                == transitionElement.getStartTime().getTimeInSeconds()) {
-            i++;
-        }
-        viewTransitions.selectLine(i - 1);
-    }
-
     public void handleAddButtonClick() {
         ViewMiniTransitions viewMiniTransitions = new ViewMiniTransitions();
 
@@ -96,15 +83,14 @@ public class ControllerTransitions {
         updateDataInTransitionsList();
     }
 
-    public void handleCopyButtonClick() {
-        if (viewTransitions.getSelectedLine() == -1) {
+    public void handleDuplicateButtonClick() {
+        int selectedLine = viewTransitions.getSelectedLine();
+        if (selectedLine == -1) {
             return;
         }
-        int selectedLine = viewTransitions.getSelectedLine();
-        TransitionElement transitionElement = model.getTransitionElement(selectedLine);
-        model.addTransitionElement(transitionElement);
+        model.duplicateTransitionElement(selectedLine);
         updateDataInTransitionsList();
-        selectLineAfterCopyElement(transitionElement);
+        viewTransitions.selectLine(selectedLine + 1);
     }
 
     public void handleMenuButtonClick() {

@@ -27,7 +27,12 @@ public class Model {
     public void addElementToSetka(PlanElement planElement) {
         setkaElements.add(planElement);
         sortSetka();
-        FileActions.save(setkaElements, ProjectSettings.getParam(ProjectParams.BIN_PATH), "Setka.bin");
+        saveSetka();
+    }
+
+    public void duplicateSetkaElement(int id) {
+        setkaElements.add(id, getElementFromSetka(id));
+        saveSetka();
     }
 
     public PlanElement getElementFromSetka(int id) {
@@ -41,7 +46,7 @@ public class Model {
     public void setElementInSetka(int id, PlanElement planElement) {
         setkaElements.set(id, planElement);
         sortSetka();
-        FileActions.save(setkaElements, ProjectSettings.getParam(ProjectParams.BIN_PATH), "Setka.bin");
+        saveSetka();
     }
 
     private void sortSetka() {
@@ -50,11 +55,15 @@ public class Model {
 
     public void removeFromSetka(int id) {
         setkaElements.remove(id);
-        FileActions.save(setkaElements, ProjectSettings.getParam(ProjectParams.BIN_PATH), "Setka.bin");
+        saveSetka();
     }
 
     private void setSetkaElements(List<PlanElement> setkaElements) {
         this.setkaElements = setkaElements;
+    }
+
+    private void saveSetka() {
+        FileActions.save(setkaElements, ProjectSettings.getParam(ProjectParams.BIN_PATH), "Setka.bin");
     }
 
     public void setFederalElements(List<PlanElement>[] federalElements) {
@@ -68,13 +77,18 @@ public class Model {
     public void addTransitionElement(TransitionElement transitionElement) {
         transitionElements.add(transitionElement);
         sortTransitions();
-        FileActions.save(transitionElements, ProjectSettings.getParam(ProjectParams.BIN_PATH), "Transitions.bin");
+        saveTransitions();
+    }
+
+    public void duplicateTransitionElement(int id) {
+        transitionElements.add(id, getTransitionElement(id));
+        saveTransitions();
     }
     
     public void setTransitionElement(int id, TransitionElement transitionElement) {
         transitionElements.set(id, transitionElement);
         sortTransitions();
-        FileActions.save(transitionElements, ProjectSettings.getParam(ProjectParams.BIN_PATH), "Transitions.bin");
+        saveTransitions();
     }
     
     public int getTransitionsSize() {
@@ -91,11 +105,15 @@ public class Model {
     
     public void removeFromTransitions(int id) {
         transitionElements.remove(id);
-        FileActions.save(transitionElements, ProjectSettings.getParam(ProjectParams.BIN_PATH), "Transitions.bin");
+        saveTransitions();
     }
 
     private void setTransitionElements(List<TransitionElement> transitionElements) {
         this.transitionElements = transitionElements;
+    }
+
+    private void saveTransitions() {
+        FileActions.save(transitionElements, ProjectSettings.getParam(ProjectParams.BIN_PATH), "Transitions.bin");
     }
 
     public void addDataDays(DataDay[] dataDays) {

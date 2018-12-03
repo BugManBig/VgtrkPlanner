@@ -69,11 +69,11 @@ public class ViewTransitions {
         removeButton.addActionListener(e -> controllerTransitions.handleRemoveButtonClick());
         frame.add(removeButton);
 
-        JButton copyButton = new JButton("Дублировать");
-        setButtonDesign(copyButton);
-        copyButton.setBounds(FRAME_WIDTH - 350, FRAME_HEIGHT - 80, 200, 30);
-        copyButton.addActionListener(e -> controllerTransitions.handleCopyButtonClick());
-        frame.add(copyButton);
+        JButton duplicateButton = new JButton("Дублировать");
+        setButtonDesign(duplicateButton);
+        duplicateButton.setBounds(FRAME_WIDTH - 350, FRAME_HEIGHT - 80, 200, 30);
+        duplicateButton.addActionListener(e -> controllerTransitions.handleDuplicateButtonClick());
+        frame.add(duplicateButton);
 
         JButton menuButton = new JButton("Меню");
         setButtonDesign(menuButton);

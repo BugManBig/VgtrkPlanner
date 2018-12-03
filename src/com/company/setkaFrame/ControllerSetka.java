@@ -87,6 +87,16 @@ public class ControllerSetka {
         updateDataInPlaylist();
     }
 
+    public void handleDuplicateButtonClick() {
+        int selectedLine = viewSetka.getSelectedLine();
+        if (selectedLine == -1) {
+            return;
+        }
+        model.duplicateSetkaElement(selectedLine);
+        updateDataInPlaylist();
+        viewSetka.selectLine(selectedLine + 1);
+    }
+
     public void handleMenuButtonClick() {
         viewSetka.close();
         Starter.run(model);

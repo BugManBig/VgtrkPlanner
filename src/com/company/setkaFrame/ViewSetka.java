@@ -68,6 +68,12 @@ public class ViewSetka {
         removeButton.addActionListener(e -> controllerSetka.handleRemoveButtonClick());
         frame.add(removeButton);
 
+        JButton duplicateButton = new JButton("Дублировать");
+        setButtonDesign(duplicateButton);
+        duplicateButton.setBounds(FRAME_WIDTH - 350, FRAME_HEIGHT - 80, 200, 30);
+        duplicateButton.addActionListener(e -> controllerSetka.handleDuplicateButtonClick());
+        frame.add(duplicateButton);
+
         JButton menuButton = new JButton("Меню");
         setButtonDesign(menuButton);
         menuButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);
