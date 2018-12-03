@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ProjectSettings {
@@ -19,6 +21,10 @@ public class ProjectSettings {
             e.printStackTrace();
         }
         path = path.substring(0, path.lastIndexOf("\\") + 1) + "config.ini";
+        if (!new File(path).exists()) {
+            createIniFile(path);
+            return;
+        }
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
             String currentLine = bufferedReader.readLine();
@@ -29,6 +35,22 @@ public class ProjectSettings {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void createIniFile(String path) {
+        List<String> list = new ArrayList<>();
+        list.add("BIN_PATH=");
+        list.add("OUTPUT_PATH=");
+        list.add("WINDOW_WIDTH=1600");
+        list.add("WINDOW_HEIGHT=1000");
+        list.add("FONT_SIZE=20");
+        list.add("WINDOW_BACKGROUND_COLOR=#444444");
+        list.add("WINDOW_FONT_COLOR=#DDDDDD");
+        list.add("BUTTON_BACKGROUND_COLOR=#555555");
+        list.add("BUTTON_FONT_COLOR=#DDDDDD");
+        list.add("SELECTED_LINE_BACKGROUND_COLOR=#666666");
+        list.add("SELECTED_LINE_FONT_COLOR=#FFFFFF");
+        FileActions.createFile(path, list);
     }
 
     private static void parseLine(String line) {

@@ -148,7 +148,7 @@ public class ControllerFinal {
         createDocumentation(reversedDate + " " + "Дубль-3", 3);
         createDocumentation(reversedDate + " " + "Дубль-4", 4);
 
-        JOptionPane.showMessageDialog(null, "Документация успешно сгенерирована", "Сообщение об операции",
+        JOptionPane.showMessageDialog(null, "Отчёты успешно сгенерированы", "Сообщение об операции",
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
