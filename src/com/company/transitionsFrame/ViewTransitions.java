@@ -27,12 +27,15 @@ public class ViewTransitions {
     }
 
     public void create() {
+        String windowBackgroundColor = ProjectSettings.getParam(ProjectParams.WINDOW_BACKGROUND_COLOR);
+        String windowFontColor = ProjectSettings.getParam(ProjectParams.WINDOW_FONT_COLOR);
+
         frame = new JFrame("Справочник замен");
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(null);
         frame.setResizable(false);
-        frame.getContentPane().setBackground(Color.decode("#444444"));
+        frame.getContentPane().setBackground(Color.decode(windowBackgroundColor));
 
         ActionListener listenerForEdit = e -> controllerTransitions.handleEditButtonClick();
 
@@ -44,39 +47,49 @@ public class ViewTransitions {
         frame.add(playlist);
         list.addMouseListener(new DoubleClickListener(listenerForEdit));
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        list.setBackground(Color.decode("#444444"));
-        list.setForeground(Color.decode("#DDDDDD"));
+        list.setBackground(Color.decode(windowBackgroundColor));
+        list.setForeground(Color.decode(windowFontColor));
         list.setCellRenderer(new SelectedCellRenderer());
 
         JButton addButton = new JButton("Добавить");
+        setButtonDesign(addButton);
         addButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
         addButton.addActionListener(e -> controllerTransitions.handleAddButtonClick());
         frame.add(addButton);
 
         JButton editButton = new JButton("Изменить");
+        setButtonDesign(editButton);
         editButton.setBounds(120, FRAME_HEIGHT - 80, 100, 30);
         editButton.addActionListener(listenerForEdit);
         frame.add(editButton);
 
         JButton removeButton = new JButton("Удалить");
+        setButtonDesign(removeButton);
         removeButton.setBounds(230, FRAME_HEIGHT - 80, 100, 30);
         removeButton.addActionListener(e -> controllerTransitions.handleRemoveButtonClick());
         frame.add(removeButton);
 
         JButton copyButton = new JButton("Дублировать");
+        setButtonDesign(copyButton);
         copyButton.setBounds(FRAME_WIDTH - 350, FRAME_HEIGHT - 80, 200, 30);
         copyButton.addActionListener(e -> controllerTransitions.handleCopyButtonClick());
         frame.add(copyButton);
 
-        JButton backButton = new JButton("Меню");
-        backButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);
-        backButton.addActionListener(e -> controllerTransitions.handleBackButtonClick());
-        frame.add(backButton);
+        JButton menuButton = new JButton("Меню");
+        setButtonDesign(menuButton);
+        menuButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);
+        menuButton.addActionListener(e -> controllerTransitions.handleMenuButtonClick());
+        frame.add(menuButton);
 
         frame.repaint();
         frame.revalidate();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    private void setButtonDesign(JButton button) {
+        button.setBackground(Color.decode(ProjectSettings.getParam(ProjectParams.BUTTON_BACKGROUND_COLOR)));
+        button.setForeground(Color.decode(ProjectSettings.getParam(ProjectParams.BUTTON_FONT_COLOR)));
     }
 
     public int getSelectedLine() {

@@ -8,7 +8,10 @@ public class Application {
         ProjectSettings.createMap();
         Model model = new Model();
         model.startCheck();
-        UIManager.put("List.focusCellHighlightBorder", BorderFactory.createLineBorder(Color.decode("#444444"), 1));
+        UIManager.put("List.focusCellHighlightBorder",
+                BorderFactory.createLineBorder(
+                        Color.decode(ProjectSettings.getParam(ProjectParams.SELECTED_LINE_BACKGROUND_COLOR)), 1)
+        );
         Starter.run(model);
     }
 }

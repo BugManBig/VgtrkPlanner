@@ -107,7 +107,7 @@ public class ControllerTransitions {
         selectLineAfterCopyElement(transitionElement);
     }
 
-    public void handleBackButtonClick() {
+    public void handleMenuButtonClick() {
         viewTransitions.close();
         Starter.run(model);
     }

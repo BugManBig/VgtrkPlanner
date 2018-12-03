@@ -3,6 +3,7 @@ package com.company.transitionsFrame;
 import com.company.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -37,57 +38,73 @@ public class ViewMiniTransitions {
     }
     
     public void create() {
+        String windowBackgroundColor = ProjectSettings.getParam(ProjectParams.WINDOW_BACKGROUND_COLOR);
+        String windowFontColor = ProjectSettings.getParam(ProjectParams.WINDOW_FONT_COLOR);
+
         frame = new JFrame("Редактирование");
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setLayout(null);
         frame.setResizable(false);
+        frame.getContentPane().setBackground(Color.decode(windowBackgroundColor));
 
         JLabel startTimeLabel = new JLabel("Время начала (от):");
+        startTimeLabel.setForeground(Color.decode(windowFontColor));
         startTimeLabel.setBounds(10, 10, 150, 30);
         frame.add(startTimeLabel);
 
         startHrsTextfield = new JTextField();
+        setTextfieldDesign(startHrsTextfield);
         startHrsTextfield.setBounds(150, 10, 30, 30);
         frame.add(startHrsTextfield);
 
         startMinTextfield = new JTextField();
+        setTextfieldDesign(startMinTextfield);
         startMinTextfield.setBounds(190, 10, 30, 30);
         frame.add(startMinTextfield);
 
         startSecTextfield = new JTextField();
+        setTextfieldDesign(startSecTextfield);
         startSecTextfield.setBounds(230, 10, 30, 30);
         frame.add(startSecTextfield);
 
         JLabel endTimeLabel = new JLabel("Время окончания (до):");
+        endTimeLabel.setForeground(Color.decode(windowFontColor));
         endTimeLabel.setBounds(10, 50, 150, 30);
         frame.add(endTimeLabel);
 
         endHrsTextfield = new JTextField();
+        setTextfieldDesign(endHrsTextfield);
         endHrsTextfield.setBounds(150, 50, 30, 30);
         frame.add(endHrsTextfield);
 
         endMinTextfield = new JTextField();
+        setTextfieldDesign(endMinTextfield);
         endMinTextfield.setBounds(190, 50, 30, 30);
         frame.add(endMinTextfield);
 
         endSecTextfield = new JTextField();
+        setTextfieldDesign(endSecTextfield);
         endSecTextfield.setBounds(230, 50, 30, 30);
         frame.add(endSecTextfield);
 
         JLabel doubleTimeLabel = new JLabel("Время дубля:");
+        doubleTimeLabel.setForeground(Color.decode(windowFontColor));
         doubleTimeLabel.setBounds(10, 90, 150, 30);
         frame.add(doubleTimeLabel);
 
         transitionHrsTextfield = new JTextField();
+        setTextfieldDesign(transitionHrsTextfield);
         transitionHrsTextfield.setBounds(150, 90, 30, 30);
         frame.add(transitionHrsTextfield);
         
         transitionMinTextfield = new JTextField();
+        setTextfieldDesign(transitionMinTextfield);
         transitionMinTextfield.setBounds(190, 90, 30, 30);
         frame.add(transitionMinTextfield);
         
         transitionSecTextfield = new JTextField();
+        setTextfieldDesign(transitionSecTextfield);
         transitionSecTextfield.setBounds(230, 90, 30, 30);
         frame.add(transitionSecTextfield);
 
@@ -113,16 +130,19 @@ public class ViewMiniTransitions {
 
 
         JButton okButton = new JButton("Ок");
+        setButtonDesign(okButton);
         okButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
         okButton.addActionListener(e -> controllerMiniTransitions.handleOkButtonClick());
         frame.add(okButton);
 
         JButton cancelButton = new JButton("Отмена");
+        setButtonDesign(cancelButton);
         cancelButton.setBounds(FRAME_WIDTH - 125, FRAME_HEIGHT - 80, 100, 30);
         cancelButton.addActionListener(e -> controllerMiniTransitions.handleCancelButtonClick());
         frame.add(cancelButton);
 
         JButton setAllButton = new JButton("Все дни");
+        setButtonDesign(setAllButton);
         setAllButton.setBounds(FRAME_WIDTH / 2 - 50, FRAME_HEIGHT - 80, 100, 30);
         setAllButton.addActionListener(e -> controllerMiniTransitions.handleSetAllButtonClick());
         frame.add(setAllButton);
@@ -130,6 +150,8 @@ public class ViewMiniTransitions {
         weekdaysCheckboxes = new JCheckBox[7];
         for (int i = 0; i < 7; i++) {
             JCheckBox checkBox = new JCheckBox();
+            checkBox.setBackground(Color.decode(windowBackgroundColor));
+            checkBox.setForeground(Color.decode(windowFontColor));
             checkBox.setBounds(10 + ((FRAME_WIDTH - 10) / 7) * i, 130, 60, 30);
             checkBox.setText(DaysOfWeek.values()[i].getShortName());
             weekdaysCheckboxes[i] = checkBox;
@@ -139,6 +161,8 @@ public class ViewMiniTransitions {
         doublesCheckboxes = new JCheckBox[4];
         for (int i = 0; i < 4; i++) {
             JCheckBox checkBox = new JCheckBox();
+            checkBox.setBackground(Color.decode(windowBackgroundColor));
+            checkBox.setForeground(Color.decode(windowFontColor));
             checkBox.setBounds(10 + ((FRAME_WIDTH - 10) / 7) * i, 160, 60, 30);
             checkBox.setText("Д" + (i + 1));
             doublesCheckboxes[i] = checkBox;
@@ -146,15 +170,19 @@ public class ViewMiniTransitions {
         }
 
         radiobuttonsCheckbox = new JCheckBox("Перенос дня недели для дублей. Перенос на:");
+        radiobuttonsCheckbox.setBackground(Color.decode(windowBackgroundColor));
+        radiobuttonsCheckbox.setForeground(Color.decode(windowFontColor));
         radiobuttonsCheckbox.setBounds(10, 220, 300, 30);
         radiobuttonsCheckbox.addActionListener(e -> {
-            setRadiobuttonsEnabled(radiobuttonsCheckbox.isSelected());
+            setRadiobuttonsVisible(radiobuttonsCheckbox.isSelected());
         });
         frame.add(radiobuttonsCheckbox);
 
         weekdaysRadiobuttons = new JRadioButton[7];
         for (int i = 0; i < 7; i++) {
             JRadioButton radioButton = new JRadioButton();
+            radioButton.setBackground(Color.decode(windowBackgroundColor));
+            radioButton.setForeground(Color.decode(windowFontColor));
             radioButton.setBounds(10 + ((FRAME_WIDTH - 10) / 7) * i, 250, 60, 30);
             radioButton.setText(DaysOfWeek.values()[i].getShortName());
             int k = i;
@@ -173,7 +201,7 @@ public class ViewMiniTransitions {
             weekdaysRadiobuttons[i] = radioButton;
             frame.add(radioButton);
         }
-        setRadiobuttonsEnabled(false);
+        setRadiobuttonsVisible(false);
 
         frame.repaint();
         frame.revalidate();
@@ -181,13 +209,24 @@ public class ViewMiniTransitions {
         frame.setVisible(true);
     }
 
+    private void setTextfieldDesign(JTextField textField) {
+        textField.setBackground(Color.decode(ProjectSettings.getParam(ProjectParams.WINDOW_BACKGROUND_COLOR)));
+        textField.setForeground(Color.decode(ProjectSettings.getParam(ProjectParams.WINDOW_FONT_COLOR)));
+        textField.setCaretColor(Color.decode(ProjectSettings.getParam(ProjectParams.WINDOW_FONT_COLOR)));
+    }
+
+    private void setButtonDesign(JButton button) {
+        button.setBackground(Color.decode(ProjectSettings.getParam(ProjectParams.BUTTON_BACKGROUND_COLOR)));
+        button.setForeground(Color.decode(ProjectSettings.getParam(ProjectParams.BUTTON_FONT_COLOR)));
+    }
+
     public boolean isRadiobuttonsCheckboxSelected() {
         return radiobuttonsCheckbox.isSelected();
     }
 
-    private void setRadiobuttonsEnabled(boolean b) {
+    private void setRadiobuttonsVisible(boolean b) {
         for (int i = 0; i < 7; i++) {
-            weekdaysRadiobuttons[i].setEnabled(b);
+            weekdaysRadiobuttons[i].setVisible(b);
             weekdaysRadiobuttons[i].setSelected(false);
         }
         if (b) {
@@ -306,7 +345,7 @@ public class ViewMiniTransitions {
         int offsetWeekday = transitionElement.getOffsetToWeekday();
         if (offsetWeekday > -1) {
             radiobuttonsCheckbox.setSelected(true);
-            setRadiobuttonsEnabled(true);
+            setRadiobuttonsVisible(true);
             selectRadiobutton(offsetWeekday);
         }
     }

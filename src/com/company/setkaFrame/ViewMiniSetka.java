@@ -1,11 +1,9 @@
 package com.company.setkaFrame;
 
-import com.company.Chrono;
-import com.company.DaysOfWeek;
-import com.company.ListenersAdding;
-import com.company.PlanElement;
+import com.company.*;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ViewMiniSetka {
     private ControllerMiniSetka controllerMiniSetka;
@@ -32,49 +30,63 @@ public class ViewMiniSetka {
     }
 
     public void create() {
+        String windowBackgroundColor = ProjectSettings.getParam(ProjectParams.WINDOW_BACKGROUND_COLOR);
+        String windowFontColor = ProjectSettings.getParam(ProjectParams.WINDOW_FONT_COLOR);
+
         frame = new JFrame("Редактирование");
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setLayout(null);
         frame.setResizable(false);
+        frame.getContentPane().setBackground(Color.decode(windowBackgroundColor));
 
         JLabel startTimeLabel = new JLabel("Время начала:");
+        startTimeLabel.setForeground(Color.decode(windowFontColor));
         startTimeLabel.setBounds(10, 10, 100, 30);
         frame.add(startTimeLabel);
 
         startHrsTextfield = new JTextField();
+        setTextfieldDesign(startHrsTextfield);
         startHrsTextfield.setBounds(150, 10, 30, 30);
         frame.add(startHrsTextfield);
 
         startMinTextfield = new JTextField();
+        setTextfieldDesign(startMinTextfield);
         startMinTextfield.setBounds(190, 10, 30, 30);
         frame.add(startMinTextfield);
 
         startSecTextfield = new JTextField();
+        setTextfieldDesign(startSecTextfield);
         startSecTextfield.setBounds(230, 10, 30, 30);
         frame.add(startSecTextfield);
 
         JLabel durationTimeLabel = new JLabel("Продолжительность:");
+        durationTimeLabel.setForeground(Color.decode(windowFontColor));
         durationTimeLabel.setBounds(10, 50, 150, 30);
         frame.add(durationTimeLabel);
 
         durationHrsTextfield = new JTextField();
+        setTextfieldDesign(durationHrsTextfield);
         durationHrsTextfield.setBounds(150, 50, 30, 30);
         frame.add(durationHrsTextfield);
 
         durationMinTextfield = new JTextField();
+        setTextfieldDesign(durationMinTextfield);
         durationMinTextfield.setBounds(190, 50, 30, 30);
         frame.add(durationMinTextfield);
 
         durationSecTextfield = new JTextField();
+        setTextfieldDesign(durationSecTextfield);
         durationSecTextfield.setBounds(230, 50, 30, 30);
         frame.add(durationSecTextfield);
 
         JLabel titleLabel = new JLabel("Название:");
+        titleLabel.setForeground(Color.decode(windowFontColor));
         titleLabel.setBounds(10, 90, 100, 30);
         frame.add(titleLabel);
 
         titleTextfield = new JTextField();
+        setTextfieldDesign(titleTextfield);
         titleTextfield.setBounds(80, 90, FRAME_WIDTH - 105, 30);
         frame.add(titleTextfield);
 
@@ -95,16 +107,19 @@ public class ViewMiniSetka {
 
 
         JButton okButton = new JButton("Ок");
+        setButtonDesign(okButton);
         okButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);
         okButton.addActionListener(e -> controllerMiniSetka.handleOkButtonClick());
         frame.add(okButton);
 
         JButton cancelButton = new JButton("Отмена");
+        setButtonDesign(cancelButton);
         cancelButton.setBounds(FRAME_WIDTH - 125, FRAME_HEIGHT - 80, 100, 30);
         cancelButton.addActionListener(e -> controllerMiniSetka.handleCancelButtonClick());
         frame.add(cancelButton);
 
         JButton setAllButton = new JButton("Все дни");
+        setButtonDesign(setAllButton);
         setAllButton.setBounds(FRAME_WIDTH / 2 - 50, FRAME_HEIGHT - 80, 100, 30);
         setAllButton.addActionListener(e -> controllerMiniSetka.handleSetAllButtonClick());
         frame.add(setAllButton);
@@ -112,6 +127,8 @@ public class ViewMiniSetka {
         checkBoxes = new JCheckBox[7];
         for (int i = 0; i < 7; i++) {
             JCheckBox checkBox = new JCheckBox();
+            checkBox.setBackground(Color.decode(windowBackgroundColor));
+            checkBox.setForeground(Color.decode(windowFontColor));
             checkBox.setBounds(10 + ((FRAME_WIDTH - 10) / 7) * i, 130, 60, 30);
             checkBox.setText(DaysOfWeek.values()[i].getShortName());
             checkBoxes[i] = checkBox;
@@ -122,6 +139,17 @@ public class ViewMiniSetka {
         frame.revalidate();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    private void setTextfieldDesign(JTextField textField) {
+        textField.setBackground(Color.decode(ProjectSettings.getParam(ProjectParams.WINDOW_BACKGROUND_COLOR)));
+        textField.setForeground(Color.decode(ProjectSettings.getParam(ProjectParams.WINDOW_FONT_COLOR)));
+        textField.setCaretColor(Color.decode(ProjectSettings.getParam(ProjectParams.WINDOW_FONT_COLOR)));
+    }
+
+    private void setButtonDesign(JButton button) {
+        button.setBackground(Color.decode(ProjectSettings.getParam(ProjectParams.BUTTON_BACKGROUND_COLOR)));
+        button.setForeground(Color.decode(ProjectSettings.getParam(ProjectParams.BUTTON_FONT_COLOR)));
     }
 
     public void close() {
