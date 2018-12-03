@@ -183,9 +183,7 @@ public class ControllerFinal {
         }
 
         model.resetDataDays();
-
         model.addDataDays(dataDays);
-        model.saveAllDataDays();
 
         GregorianCalendar date = (GregorianCalendar) dateOfMonday.clone();
         for (int i = 0; i < 7; i++) {
@@ -196,6 +194,7 @@ public class ControllerFinal {
         }
 
         updateDataInPlaylist();
+        model.saveAllDataDays();
 
         JOptionPane.showMessageDialog(null, "Дубли успешно сформированы", "Сообщение об операции",
                 JOptionPane.INFORMATION_MESSAGE);
