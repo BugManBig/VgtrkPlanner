@@ -3,6 +3,7 @@ package com.company.transitionsFrame;
 import com.company.DoubleClickListener;
 import com.company.ProjectParams;
 import com.company.ProjectSettings;
+import com.company.SelectedCellRenderer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,6 +32,7 @@ public class ViewTransitions {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(null);
         frame.setResizable(false);
+        frame.getContentPane().setBackground(Color.decode("#444444"));
 
         ActionListener listenerForEdit = e -> controllerTransitions.handleEditButtonClick();
 
@@ -42,6 +44,9 @@ public class ViewTransitions {
         frame.add(playlist);
         list.addMouseListener(new DoubleClickListener(listenerForEdit));
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list.setBackground(Color.decode("#444444"));
+        list.setForeground(Color.decode("#DDDDDD"));
+        list.setCellRenderer(new SelectedCellRenderer());
 
         JButton addButton = new JButton("Добавить");
         addButton.setBounds(10, FRAME_HEIGHT - 80, 100, 30);

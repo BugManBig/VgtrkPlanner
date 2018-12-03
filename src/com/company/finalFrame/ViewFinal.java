@@ -1,9 +1,6 @@
 package com.company.finalFrame;
 
-import com.company.DaysOfWeek;
-import com.company.DoubleClickListener;
-import com.company.ProjectParams;
-import com.company.ProjectSettings;
+import com.company.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,6 +46,7 @@ public class ViewFinal {
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setLayout(null);
         frame.setResizable(false);
+        frame.getContentPane().setBackground(Color.decode("#444444"));
 
         ActionListener listenerForEdit = e -> controllerFinal.handleEditButtonClick();
 
@@ -60,6 +58,9 @@ public class ViewFinal {
         frame.add(playlist);
         list.addMouseListener(new DoubleClickListener(listenerForEdit));
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list.setBackground(Color.decode("#444444"));
+        list.setForeground(Color.decode("#DDDDDD"));
+        list.setCellRenderer(new SelectedCellRenderer());
 
         weekDayField = new JTextField();
         weekDayField.setBounds(FRAME_WIDTH - 410, FRAME_HEIGHT - 120, 100, 30);
