@@ -205,6 +205,49 @@ public class ControllerFinal {
         viewFinal.close();
         Starter.run(model);
     }
+
+    public void handleCheckButtonClick() {
+        checkTimetable(false);
+    }
+
+    private void checkTimetable(boolean isSecond) {
+        List<PlanElement> planElementsDay = model.getDataDay(getCurrentDate()).getPlanElementsDay(mode);
+        int firstProgramEndTime;
+        int secondProgramStartTime;
+        int startPoint;
+        if (isSecond) {
+            startPoint = 0;
+        } else {
+            startPoint = viewFinal.getSelectedLine() + 1;
+        }
+        for (int i = startPoint; i < planElementsDay.size() - 1; i++) {
+            firstProgramEndTime = planElementsDay.get(i).getStartTime().getTimeInSeconds()
+                    + planElementsDay.get(i).getDurationTime().getTimeInSeconds();
+            secondProgramStartTime = planElementsDay.get(i + 1).getStartTime().getTimeInSeconds();
+            if (planElementsDay.get(i).getStartTime().getHours()
+                    > planElementsDay.get(i + 1).getStartTime().getHours()) {
+                secondProgramStartTime += 24 * 60 * 60;
+            }
+            if (firstProgramEndTime > secondProgramStartTime) {
+                viewFinal.selectLine(i);
+                JOptionPane.showMessageDialog(null, "Накладка после выделенного элемента", "Сообщение об операции",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (firstProgramEndTime < secondProgramStartTime) {
+                viewFinal.selectLine(i);
+                JOptionPane.showMessageDialog(null, "Недобор после выделенного элемента", "Сообщение об операции",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+        if (isSecond) {
+            JOptionPane.showMessageDialog(null, "Проблем нет", "Сообщение об операции",
+                    JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        checkTimetable(true);
+    }
     
     private void createDocumentation(String name, int mode) {
         GregorianCalendar shiftedDate = (GregorianCalendar) dateOfMonday.clone();
@@ -255,10 +298,7 @@ public class ControllerFinal {
     }
     
     private GregorianCalendar getCurrentDate() {
-        GregorianCalendar currentDate = new GregorianCalendar(
-                dateOfMonday.get(Calendar.YEAR),
-                dateOfMonday.get(Calendar.MONTH),
-                dateOfMonday.get(Calendar.DAY_OF_MONTH));
+        GregorianCalendar currentDate = (GregorianCalendar) dateOfMonday.clone();
         currentDate.add(Calendar.DAY_OF_MONTH, dayOfWeek);
         return currentDate;
     }

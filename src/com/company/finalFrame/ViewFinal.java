@@ -135,6 +135,12 @@ public class ViewFinal {
         generateDoublesButton.addActionListener(e -> controllerFinal.handleGenerateDoublesButtonClick());
         frame.add(generateDoublesButton);
 
+        JButton checkButton = new JButton("Проверка");
+        setButtonDesign(checkButton);
+        checkButton.setBounds(230, FRAME_HEIGHT - 80, 100, 30);
+        checkButton.addActionListener(e -> controllerFinal.handleCheckButtonClick());
+        frame.add(checkButton);
+
         JButton menuButton = new JButton("Меню");
         setButtonDesign(menuButton);
         menuButton.setBounds(FRAME_WIDTH - 140, FRAME_HEIGHT - 80, 100, 30);
@@ -158,6 +164,7 @@ public class ViewFinal {
 
     public void selectLine(int index) {
         list.setSelectedIndex(index);
+        list.ensureIndexIsVisible(index);
     }
 
     public void close() {

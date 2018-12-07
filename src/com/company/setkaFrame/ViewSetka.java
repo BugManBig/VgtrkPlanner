@@ -97,6 +97,7 @@ public class ViewSetka {
 
     public void selectLine(int index) {
         list.setSelectedIndex(index);
+        list.ensureIndexIsVisible(index);
     }
 
     public void close() {
