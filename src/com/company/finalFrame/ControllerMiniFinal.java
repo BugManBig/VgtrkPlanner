@@ -4,6 +4,7 @@ import com.company.Model;
 import com.company.PlanElement;
 import com.company.SelectedDays;
 
+import javax.swing.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -26,6 +27,21 @@ public class ControllerMiniFinal {
     }
 
     public void handleOkButtonClick() {
+        if (viewMiniFinal.getDurationTime().getHours() > 0) {
+            int answer = JOptionPane.showOptionDialog(
+                    null,
+                    "Введённая длительность передачи слишком большая. Всё равно продолжить?",
+                    "Подтвердите действие",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    new String[]{"Да", "Нет"},
+                    null
+            );
+            if (answer != 0) {
+                return;
+            }
+        }
         boolean[] thisDay = new boolean[7];
         for (int i = 0; i < 7; i++) {
             if (controllerFinal.getWeekday() == i) {

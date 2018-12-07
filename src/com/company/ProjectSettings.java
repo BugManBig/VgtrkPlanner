@@ -67,7 +67,7 @@ public class ProjectSettings {
 
     private static void parseLine(String line) {
         int splitterIndex = line.indexOf("=");
-        config.put(line.substring(0, splitterIndex).toLowerCase(), line.substring(splitterIndex + 1));
+        config.put(line.substring(0, splitterIndex).toLowerCase(), line.substring(splitterIndex + 1).toLowerCase());
     }
 
     public static String getParam(ProjectParams key) {

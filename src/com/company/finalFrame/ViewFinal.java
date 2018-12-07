@@ -55,7 +55,7 @@ public class ViewFinal {
 
         list = new JList<>();
         JScrollPane playlist = new JScrollPane(list);
-        playlist.setBounds(10, 10, FRAME_WIDTH - 50, FRAME_HEIGHT - 140);
+        playlist.setBounds(10, 30, FRAME_WIDTH - 50, FRAME_HEIGHT - 160);
         int fontSize = Integer.parseInt(ProjectSettings.getParam(ProjectParams.FONT_SIZE));
         list.setFont(new Font("Courier new", Font.PLAIN, fontSize));
         frame.add(playlist);
@@ -64,6 +64,12 @@ public class ViewFinal {
         list.setBackground(Color.decode(windowBackgroundColor));
         list.setForeground(Color.decode(windowFontColor));
         list.setCellRenderer(new SelectedCellRenderer());
+
+        JLabel listLabels = new JLabel("Начало      Продолж.    Название");
+        listLabels.setFont(new Font("Courier new", Font.BOLD, fontSize));
+        listLabels.setForeground(Color.decode(windowFontColor));
+        listLabels.setBounds(12, 0, 2000, 30);
+        frame.add(listLabels);
 
         weekDayField = new JTextField();
         weekDayField.setBackground(Color.decode(windowBackgroundColor));
