@@ -1,5 +1,6 @@
 package com.company;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -13,7 +14,7 @@ import java.util.Map;
 public class ProjectSettings {
     private static Map<String, String> config = new HashMap<>();
 
-    public static void createMap() {
+    public static boolean createMap() {
         String path = null;
         try {
             path = new File(ProjectSettings.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
@@ -23,7 +24,7 @@ public class ProjectSettings {
         path = path.substring(0, path.lastIndexOf("\\") + 1) + "config.ini";
         if (!new File(path).exists()) {
             createIniFile(path);
-            return;
+            return false;
         }
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
@@ -35,21 +36,32 @@ public class ProjectSettings {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        if (getParam(ProjectParams.WINDOW_AUTO_SIZE).equals("true")) {
+            config.remove(ProjectParams.WINDOW_WIDTH.toString());
+            config.remove(ProjectParams.WINDOW_HEIGHT.toString());
+            Dimension resolution = Toolkit.getDefaultToolkit().getScreenSize();
+            config.put(ProjectParams.WINDOW_WIDTH.toString().toLowerCase(), String.valueOf(resolution.width - 10));
+            config.put(ProjectParams.WINDOW_HEIGHT.toString().toLowerCase(), String.valueOf(resolution.height - 50));
+        }
+
+        return true;
     }
 
     private static void createIniFile(String path) {
         List<String> list = new ArrayList<>();
-        list.add("BIN_PATH=");
-        list.add("OUTPUT_PATH=");
-        list.add("WINDOW_WIDTH=1600");
-        list.add("WINDOW_HEIGHT=1000");
-        list.add("FONT_SIZE=20");
-        list.add("WINDOW_BACKGROUND_COLOR=#444444");
-        list.add("WINDOW_FONT_COLOR=#DDDDDD");
-        list.add("BUTTON_BACKGROUND_COLOR=#555555");
-        list.add("BUTTON_FONT_COLOR=#DDDDDD");
-        list.add("SELECTED_LINE_BACKGROUND_COLOR=#666666");
-        list.add("SELECTED_LINE_FONT_COLOR=#FFFFFF");
+        list.add(ProjectParams.BIN_PATH + "=");
+        list.add(ProjectParams.OUTPUT_PATH + "=");
+        list.add(ProjectParams.WINDOW_WIDTH + "=1600");
+        list.add(ProjectParams.WINDOW_HEIGHT + "=800");
+        list.add(ProjectParams.WINDOW_AUTO_SIZE + "=true");
+        list.add(ProjectParams.FONT_SIZE + "=20");
+        list.add(ProjectParams.WINDOW_BACKGROUND_COLOR + "=#444444");
+        list.add(ProjectParams.WINDOW_FONT_COLOR + "=#DDDDDD");
+        list.add(ProjectParams.BUTTON_BACKGROUND_COLOR + "=#555555");
+        list.add(ProjectParams.BUTTON_FONT_COLOR + "=#DDDDDD");
+        list.add(ProjectParams.SELECTED_LINE_BACKGROUND_COLOR + "=#666666");
+        list.add(ProjectParams.SELECTED_LINE_FONT_COLOR + "=#FFFFFF");
         FileActions.createFile(path, list);
     }
 

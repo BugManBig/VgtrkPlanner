@@ -5,6 +5,7 @@ public enum ProjectParams {
     OUTPUT_PATH,
     WINDOW_WIDTH,
     WINDOW_HEIGHT,
+    WINDOW_AUTO_SIZE,
     FONT_SIZE,
     WINDOW_BACKGROUND_COLOR,
     WINDOW_FONT_COLOR,
