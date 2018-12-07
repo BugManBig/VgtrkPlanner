@@ -230,14 +230,24 @@ public class ControllerFinal {
             }
             if (firstProgramEndTime > secondProgramStartTime) {
                 viewFinal.selectLine(i);
-                JOptionPane.showMessageDialog(null, "Накладка после выделенного элемента", "Сообщение об операции",
-                        JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Накладка после выделенного элемента. Следующий элемент должен выйти в "
+                                + new Chrono(firstProgramEndTime).getTimeString(),
+                        "Сообщение об операции",
+                        JOptionPane.WARNING_MESSAGE
+                );
                 return;
             }
             if (firstProgramEndTime < secondProgramStartTime) {
                 viewFinal.selectLine(i);
-                JOptionPane.showMessageDialog(null, "Недобор после выделенного элемента", "Сообщение об операции",
-                        JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Недобор после выделенного элемента. Следующий элемент должен выйти в "
+                                + new Chrono(firstProgramEndTime).getTimeString(),
+                        "Сообщение об операции",
+                        JOptionPane.WARNING_MESSAGE
+                );
                 return;
             }
         }
