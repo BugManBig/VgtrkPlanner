@@ -42,52 +42,57 @@ public class ViewMiniFinal {
 
         JLabel startTimeLabel = new JLabel("Время начала:");
         startTimeLabel.setForeground(Color.decode(windowFontColor));
+        startTimeLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         startTimeLabel.setBounds(10, 10, 100, 30);
         frame.add(startTimeLabel);
 
         startHrsTextfield = new JTextField();
         setTextfieldDesign(startHrsTextfield);
-        startHrsTextfield.setBounds(150, 10, 30, 30);
+        startHrsTextfield.setBounds(160, 10, 30, 30);
         frame.add(startHrsTextfield);
 
         startMinTextfield = new JTextField();
         setTextfieldDesign(startMinTextfield);
-        startMinTextfield.setBounds(190, 10, 30, 30);
+        startMinTextfield.setBounds(200, 10, 30, 30);
         frame.add(startMinTextfield);
 
         startSecTextfield = new JTextField();
         setTextfieldDesign(startSecTextfield);
-        startSecTextfield.setBounds(230, 10, 30, 30);
+        startSecTextfield.setBounds(240, 10, 30, 30);
         frame.add(startSecTextfield);
 
         JLabel durationTimeLabel = new JLabel("Продолжительность:");
         durationTimeLabel.setForeground(Color.decode(windowFontColor));
+        durationTimeLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         durationTimeLabel.setBounds(10, 50, 150, 30);
         frame.add(durationTimeLabel);
 
         durationHrsTextfield = new JTextField();
         setTextfieldDesign(durationHrsTextfield);
-        durationHrsTextfield.setBounds(150, 50, 30, 30);
+        durationHrsTextfield.setBounds(160, 50, 30, 30);
         frame.add(durationHrsTextfield);
 
         durationMinTextfield = new JTextField();
         setTextfieldDesign(durationMinTextfield);
-        durationMinTextfield.setBounds(190, 50, 30, 30);
+        durationMinTextfield.setBounds(200, 50, 30, 30);
         frame.add(durationMinTextfield);
 
         durationSecTextfield = new JTextField();
         setTextfieldDesign(durationSecTextfield);
-        durationSecTextfield.setBounds(230, 50, 30, 30);
+        durationSecTextfield.setBounds(240, 50, 30, 30);
         frame.add(durationSecTextfield);
 
         JLabel titleLabel = new JLabel("Название:");
         titleLabel.setForeground(Color.decode(windowFontColor));
+        titleLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         titleLabel.setBounds(10, 90, 100, 30);
         frame.add(titleLabel);
 
         titleTextfield = new JTextField();
         setTextfieldDesign(titleTextfield);
-        titleTextfield.setBounds(80, 90, FRAME_WIDTH - 105, 30);
+        titleTextfield.setFont(new Font("Arial", Font.PLAIN, 16));
+        titleTextfield.setHorizontalAlignment(JTextField.LEFT);
+        titleTextfield.setBounds(90, 90, FRAME_WIDTH - 115, 30);
         frame.add(titleTextfield);
 
 
@@ -130,6 +135,8 @@ public class ViewMiniFinal {
         textField.setBackground(Color.decode(ProjectSettings.getParam(ProjectParams.WINDOW_BACKGROUND_COLOR)));
         textField.setForeground(Color.decode(ProjectSettings.getParam(ProjectParams.WINDOW_FONT_COLOR)));
         textField.setCaretColor(Color.decode(ProjectSettings.getParam(ProjectParams.WINDOW_FONT_COLOR)));
+        textField.setFont(new Font("Arial", Font.BOLD, 17));
+        textField.setHorizontalAlignment(JTextField.CENTER);
     }
 
     public void close() {
@@ -155,13 +162,13 @@ public class ViewMiniFinal {
     }
 
     public void setFieldsFromPlanElement(PlanElement planElement) {
-        startHrsTextfield.setText(String.valueOf(planElement.getStartTime().getHours()));
-        startMinTextfield.setText(String.valueOf(planElement.getStartTime().getMinutes()));
-        startSecTextfield.setText(String.valueOf(planElement.getStartTime().getSeconds()));
+        startHrsTextfield.setText(planElement.getStartTime().getHoursString());
+        startMinTextfield.setText(planElement.getStartTime().getMinutesString());
+        startSecTextfield.setText(planElement.getStartTime().getSecondsString());
 
-        durationHrsTextfield.setText(String.valueOf(planElement.getDurationTime().getHours()));
-        durationMinTextfield.setText(String.valueOf(planElement.getDurationTime().getMinutes()));
-        durationSecTextfield.setText(String.valueOf(planElement.getDurationTime().getSeconds()));
+        durationHrsTextfield.setText(planElement.getDurationTime().getHoursString());
+        durationMinTextfield.setText(planElement.getDurationTime().getMinutesString());
+        durationSecTextfield.setText(planElement.getDurationTime().getSecondsString());
 
         titleTextfield.setText(planElement.getTitle());
 
