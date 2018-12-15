@@ -43,7 +43,9 @@ public class ControllerStart {
 
     public void handleLoadButtonClick() {
         GregorianCalendar mondayDate = DateInput.run();
-        if (mondayDate == null) return;
+        if (mondayDate == null) {
+            return;
+        }
 
         boolean isLoaded = model.loadWeek((GregorianCalendar) mondayDate.clone());
         if (!isLoaded) {
@@ -60,7 +62,7 @@ public class ControllerStart {
         controllerFinal.setViewFinal(viewFinal);
 
         viewFinal.setControllerFinal(controllerFinal);
-        viewFinal.create();
+        viewFinal.create((GregorianCalendar) mondayDate.clone());
 
         controllerFinal.setDateOfMonday(mondayDate);
         controllerFinal.updateDataInPlaylist();
@@ -108,7 +110,7 @@ public class ControllerStart {
         controllerFinal.setViewFinal(viewFinal);
 
         viewFinal.setControllerFinal(controllerFinal);
-        viewFinal.create();
+        viewFinal.create((GregorianCalendar) mondayDate.clone());
 
         controllerFinal.setDateOfMonday(mondayDate);
         controllerFinal.updateDataInPlaylist();

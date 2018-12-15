@@ -12,7 +12,7 @@ public class ViewMiniTransitions {
 
     private JFrame frame;
 
-    private static final int FRAME_WIDTH = 450;
+    private static final int FRAME_WIDTH = 500;
     private static final int FRAME_HEIGHT = 370;
 
     private JTextField startHrsTextfield;
@@ -31,6 +31,7 @@ public class ViewMiniTransitions {
     private JCheckBox[] doublesCheckboxes;
 
     private JCheckBox radiobuttonsCheckbox;
+    private JLabel radioLabel;
     private JRadioButton[] weekdaysRadiobuttons;
 
     public void setControllerMiniTransitions(ControllerMiniTransitions controllerMiniTransitions) {
@@ -48,64 +49,67 @@ public class ViewMiniTransitions {
         frame.setResizable(false);
         frame.getContentPane().setBackground(Color.decode(windowBackgroundColor));
 
-        JLabel startTimeLabel = new JLabel("Время начала (от):");
+        JLabel startTimeLabel = new JLabel("Время начала РР:");
         startTimeLabel.setForeground(Color.decode(windowFontColor));
+        startTimeLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         startTimeLabel.setBounds(10, 10, 150, 30);
         frame.add(startTimeLabel);
 
         startHrsTextfield = new JTextField();
         setTextfieldDesign(startHrsTextfield);
-        startHrsTextfield.setBounds(150, 10, 30, 30);
+        startHrsTextfield.setBounds(170, 10, 30, 30);
         frame.add(startHrsTextfield);
 
         startMinTextfield = new JTextField();
         setTextfieldDesign(startMinTextfield);
-        startMinTextfield.setBounds(190, 10, 30, 30);
+        startMinTextfield.setBounds(210, 10, 30, 30);
         frame.add(startMinTextfield);
 
         startSecTextfield = new JTextField();
         setTextfieldDesign(startSecTextfield);
-        startSecTextfield.setBounds(230, 10, 30, 30);
+        startSecTextfield.setBounds(250, 10, 30, 30);
         frame.add(startSecTextfield);
 
-        JLabel endTimeLabel = new JLabel("Время окончания (до):");
+        JLabel endTimeLabel = new JLabel("Время окончания РР:");
         endTimeLabel.setForeground(Color.decode(windowFontColor));
+        endTimeLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         endTimeLabel.setBounds(10, 50, 150, 30);
         frame.add(endTimeLabel);
 
         endHrsTextfield = new JTextField();
         setTextfieldDesign(endHrsTextfield);
-        endHrsTextfield.setBounds(150, 50, 30, 30);
+        endHrsTextfield.setBounds(170, 50, 30, 30);
         frame.add(endHrsTextfield);
 
         endMinTextfield = new JTextField();
         setTextfieldDesign(endMinTextfield);
-        endMinTextfield.setBounds(190, 50, 30, 30);
+        endMinTextfield.setBounds(210, 50, 30, 30);
         frame.add(endMinTextfield);
 
         endSecTextfield = new JTextField();
         setTextfieldDesign(endSecTextfield);
-        endSecTextfield.setBounds(230, 50, 30, 30);
+        endSecTextfield.setBounds(250, 50, 30, 30);
         frame.add(endSecTextfield);
 
         JLabel doubleTimeLabel = new JLabel("Время дубля:");
         doubleTimeLabel.setForeground(Color.decode(windowFontColor));
+        doubleTimeLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         doubleTimeLabel.setBounds(10, 90, 150, 30);
         frame.add(doubleTimeLabel);
 
         transitionHrsTextfield = new JTextField();
         setTextfieldDesign(transitionHrsTextfield);
-        transitionHrsTextfield.setBounds(150, 90, 30, 30);
+        transitionHrsTextfield.setBounds(170, 90, 30, 30);
         frame.add(transitionHrsTextfield);
         
         transitionMinTextfield = new JTextField();
         setTextfieldDesign(transitionMinTextfield);
-        transitionMinTextfield.setBounds(190, 90, 30, 30);
+        transitionMinTextfield.setBounds(210, 90, 30, 30);
         frame.add(transitionMinTextfield);
         
         transitionSecTextfield = new JTextField();
         setTextfieldDesign(transitionSecTextfield);
-        transitionSecTextfield.setBounds(230, 90, 30, 30);
+        transitionSecTextfield.setBounds(250, 90, 30, 30);
         frame.add(transitionSecTextfield);
 
 
@@ -154,6 +158,7 @@ public class ViewMiniTransitions {
             checkBox.setForeground(Color.decode(windowFontColor));
             checkBox.setBounds(10 + ((FRAME_WIDTH - 10) / 7) * i, 130, 60, 30);
             checkBox.setText(DaysOfWeek.values()[i].getShortName());
+            checkBox.setFont(new Font("Arial", Font.PLAIN, 15));
             weekdaysCheckboxes[i] = checkBox;
             frame.add(checkBox);
         }
@@ -169,10 +174,17 @@ public class ViewMiniTransitions {
             frame.add(checkBox);
         }
 
-        radiobuttonsCheckbox = new JCheckBox("Перенос дня недели для дублей. Перенос на:");
+        radioLabel = new JLabel("Перенос на:");
+        radioLabel.setForeground(Color.decode(windowFontColor));
+        radioLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+        radioLabel.setBounds(10, 250, 150, 30);
+        frame.add(radioLabel);
+
+        radiobuttonsCheckbox = new JCheckBox("Перенос дня недели для дублей");
         radiobuttonsCheckbox.setBackground(Color.decode(windowBackgroundColor));
         radiobuttonsCheckbox.setForeground(Color.decode(windowFontColor));
-        radiobuttonsCheckbox.setBounds(10, 220, 300, 30);
+        radiobuttonsCheckbox.setBounds(10, 220, 400, 30);
+        radiobuttonsCheckbox.setFont(new Font("Arial", Font.PLAIN, 15));
         radiobuttonsCheckbox.addActionListener(e -> {
             setRadiobuttonsVisible(radiobuttonsCheckbox.isSelected());
         });
@@ -183,8 +195,9 @@ public class ViewMiniTransitions {
             JRadioButton radioButton = new JRadioButton();
             radioButton.setBackground(Color.decode(windowBackgroundColor));
             radioButton.setForeground(Color.decode(windowFontColor));
-            radioButton.setBounds(10 + ((FRAME_WIDTH - 10) / 7) * i, 250, 60, 30);
+            radioButton.setBounds(100 + ((FRAME_WIDTH - 110) / 7) * i, 250, 50, 30);
             radioButton.setText(DaysOfWeek.values()[i].getShortName());
+            radioButton.setFont(new Font("Arial", Font.PLAIN, 15));
             int k = i;
             radioButton.addActionListener(new ActionListener() {
                 @Override
@@ -213,6 +226,8 @@ public class ViewMiniTransitions {
         textField.setBackground(Color.decode(ProjectSettings.getParam(ProjectParams.WINDOW_BACKGROUND_COLOR)));
         textField.setForeground(Color.decode(ProjectSettings.getParam(ProjectParams.WINDOW_FONT_COLOR)));
         textField.setCaretColor(Color.decode(ProjectSettings.getParam(ProjectParams.WINDOW_FONT_COLOR)));
+        textField.setFont(new Font("Arial", Font.BOLD, 17));
+        textField.setHorizontalAlignment(JTextField.CENTER);
     }
 
     private void setButtonDesign(JButton button) {
@@ -225,6 +240,7 @@ public class ViewMiniTransitions {
     }
 
     private void setRadiobuttonsVisible(boolean b) {
+        radioLabel.setVisible(b);
         for (int i = 0; i < 7; i++) {
             weekdaysRadiobuttons[i].setVisible(b);
             weekdaysRadiobuttons[i].setSelected(false);
@@ -320,17 +336,17 @@ public class ViewMiniTransitions {
     }
 
     public void setFieldsFromTransitionElement(TransitionElement transitionElement) {
-        startHrsTextfield.setText(String.valueOf(transitionElement.getStartTime().getHours()));
-        startMinTextfield.setText(String.valueOf(transitionElement.getStartTime().getMinutes()));
-        startSecTextfield.setText(String.valueOf(transitionElement.getStartTime().getSeconds()));
+        startHrsTextfield.setText(transitionElement.getStartTime().getHoursString());
+        startMinTextfield.setText(transitionElement.getStartTime().getMinutesString());
+        startSecTextfield.setText(transitionElement.getStartTime().getSecondsString());
         
-        endHrsTextfield.setText(String.valueOf(transitionElement.getEndTime().getHours()));
-        endMinTextfield.setText(String.valueOf(transitionElement.getEndTime().getMinutes()));
-        endSecTextfield.setText(String.valueOf(transitionElement.getEndTime().getSeconds()));
+        endHrsTextfield.setText(transitionElement.getEndTime().getHoursString());
+        endMinTextfield.setText(transitionElement.getEndTime().getMinutesString());
+        endSecTextfield.setText(transitionElement.getEndTime().getSecondsString());
         
-        transitionHrsTextfield.setText(String.valueOf(transitionElement.getTransitionTime().getHours()));
-        transitionMinTextfield.setText(String.valueOf(transitionElement.getTransitionTime().getMinutes()));
-        transitionSecTextfield.setText(String.valueOf(transitionElement.getTransitionTime().getSeconds()));
+        transitionHrsTextfield.setText(transitionElement.getTransitionTime().getHoursString());
+        transitionMinTextfield.setText(transitionElement.getTransitionTime().getMinutesString());
+        transitionSecTextfield.setText(transitionElement.getTransitionTime().getSecondsString());
         
         boolean[] weekdaysSelections = transitionElement.getSelectedDays().getSelectionsArray();
         for (int i = 0; i < 7; i++) {

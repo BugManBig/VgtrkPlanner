@@ -19,6 +19,18 @@ public class Chrono implements Serializable {
         return seconds;
     }
 
+    public String getHoursString() {
+        return getTwoDigitsNumber(hours);
+    }
+
+    public String getMinutesString() {
+        return getTwoDigitsNumber(minutes);
+    }
+
+    public String getSecondsString() {
+        return getTwoDigitsNumber(seconds);
+    }
+
     public Chrono(int hours, int minutes, int seconds) {
         this.hours = hours;
         this.minutes = minutes;

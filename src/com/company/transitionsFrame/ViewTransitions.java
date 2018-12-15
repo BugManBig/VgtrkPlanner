@@ -51,7 +51,7 @@ public class ViewTransitions {
         list.setForeground(Color.decode(windowFontColor));
         list.setCellRenderer(new SelectedCellRenderer());
 
-        JLabel listLabels = new JLabel("Начало      Конец       Дни недели                      Время дуб.  Дубли");
+        JLabel listLabels = new JLabel("Начало РР   Конец РР    Дни недели                      Время дуб.  Дубли");
         listLabels.setFont(new Font("Courier new", Font.BOLD, fontSize));
         listLabels.setForeground(Color.decode(windowFontColor));
         listLabels.setBounds(12, 0, 2000, 30);
@@ -75,9 +75,9 @@ public class ViewTransitions {
         removeButton.addActionListener(e -> controllerTransitions.handleRemoveButtonClick());
         frame.add(removeButton);
 
-        JButton duplicateButton = new JButton("Дублировать");
+        JButton duplicateButton = new JButton("Копировать");
         setButtonDesign(duplicateButton);
-        duplicateButton.setBounds(FRAME_WIDTH - 350, FRAME_HEIGHT - 80, 200, 30);
+        duplicateButton.setBounds(FRAME_WIDTH - 300, FRAME_HEIGHT - 80, 150, 30);
         duplicateButton.addActionListener(e -> controllerTransitions.handleDuplicateButtonClick());
         frame.add(duplicateButton);
 

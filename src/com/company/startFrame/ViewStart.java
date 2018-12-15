@@ -21,7 +21,7 @@ public class ViewStart {
     public void create() {
         String windowBackgroundColor = ProjectSettings.getParam(ProjectParams.WINDOW_BACKGROUND_COLOR);
 
-        frame = new JFrame("Выберите нужный вариант");
+        frame = new JFrame("Меню");
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);

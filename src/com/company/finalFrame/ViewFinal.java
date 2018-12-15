@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class ViewFinal {
@@ -13,6 +14,7 @@ public class ViewFinal {
     private JList<String> list;
     private JTextField weekDayField;
     private JTextField doubleField;
+    private JTextField dateField;
     private JFrame frame;
 
     private static final int FRAME_WIDTH = Integer.parseInt(ProjectSettings.getParam(ProjectParams.WINDOW_WIDTH));
@@ -40,11 +42,15 @@ public class ViewFinal {
         list.setListData(data);
     }
 
-    public void create() {
+    public void create(GregorianCalendar date) {
         String windowBackgroundColor = ProjectSettings.getParam(ProjectParams.WINDOW_BACKGROUND_COLOR);
         String windowFontColor = ProjectSettings.getParam(ProjectParams.WINDOW_FONT_COLOR);
 
-        frame = new JFrame();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.YYYY");
+        String dateString = "Неделя: " + simpleDateFormat.format(date.getTime());
+        date.add(Calendar.DAY_OF_MONTH, 6);
+        dateString += " - " + simpleDateFormat.format(date.getTime());
+        frame = new JFrame(dateString);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setLayout(null);
@@ -74,7 +80,9 @@ public class ViewFinal {
         weekDayField = new JTextField();
         weekDayField.setBackground(Color.decode(windowBackgroundColor));
         weekDayField.setForeground(Color.decode(windowFontColor));
-        weekDayField.setBounds(FRAME_WIDTH - 410, FRAME_HEIGHT - 120, 100, 30);
+        weekDayField.setBounds(FRAME_WIDTH - 410, FRAME_HEIGHT - 120, 120, 30);
+        weekDayField.setFont(new Font("Arial", Font.BOLD, 15));
+        weekDayField.setHorizontalAlignment(JTextField.CENTER);
         weekDayField.setEditable(false);
         weekDayField.setFocusable(false);
         frame.add(weekDayField);
@@ -82,10 +90,22 @@ public class ViewFinal {
         doubleField = new JTextField();
         doubleField.setBackground(Color.decode(windowBackgroundColor));
         doubleField.setForeground(Color.decode(windowFontColor));
-        doubleField.setBounds(FRAME_WIDTH - 410, FRAME_HEIGHT - 80, 100, 30);
+        doubleField.setBounds(FRAME_WIDTH - 410, FRAME_HEIGHT - 80, 120, 30);
+        doubleField.setFont(new Font("Arial", Font.BOLD, 15));
+        doubleField.setHorizontalAlignment(JTextField.CENTER);
         doubleField.setEditable(false);
         doubleField.setFocusable(false);
         frame.add(doubleField);
+
+        dateField = new JTextField();
+        dateField.setBackground(Color.decode(windowBackgroundColor));
+        dateField.setForeground(Color.decode(windowFontColor));
+        dateField.setBounds(FRAME_WIDTH - 690, FRAME_HEIGHT - 120, 200, 70);
+        dateField.setFont(new Font("Arial", Font.BOLD, 30));
+        dateField.setHorizontalAlignment(JTextField.CENTER);
+        dateField.setEditable(false);
+        dateField.setFocusable(false);
+        frame.add(dateField);
 
         JButton addButton = new JButton("Добавить");
         setButtonDesign(addButton);
@@ -107,25 +127,25 @@ public class ViewFinal {
 
         JButton prevDayButton = new JButton("<<<");
         setButtonDesign(prevDayButton);
-        prevDayButton.setBounds(FRAME_WIDTH - 520, FRAME_HEIGHT - 120, 100, 30);
+        prevDayButton.setBounds(FRAME_WIDTH - 480, FRAME_HEIGHT - 120, 60, 30);
         prevDayButton.addActionListener(e -> controllerFinal.handlePrevDayButtonClick());
         frame.add(prevDayButton);
 
         JButton nextDayButton = new JButton(">>>");
         setButtonDesign(nextDayButton);
-        nextDayButton.setBounds(FRAME_WIDTH - 300, FRAME_HEIGHT - 120, 100, 30);
+        nextDayButton.setBounds(FRAME_WIDTH - 280, FRAME_HEIGHT - 120, 60, 30);
         nextDayButton.addActionListener(e -> controllerFinal.handleNextDayButtonClick());
         frame.add(nextDayButton);
 
         JButton prevDoubleButton = new JButton("<<<");
         setButtonDesign(prevDoubleButton);
-        prevDoubleButton.setBounds(FRAME_WIDTH - 520, FRAME_HEIGHT - 80, 100, 30);
+        prevDoubleButton.setBounds(FRAME_WIDTH - 480, FRAME_HEIGHT - 80, 60, 30);
         prevDoubleButton.addActionListener(e -> controllerFinal.handlePrevDoubleButtonClick());
         frame.add(prevDoubleButton);
 
         JButton nextDoubleButton = new JButton(">>>");
         setButtonDesign(nextDoubleButton);
-        nextDoubleButton.setBounds(FRAME_WIDTH - 300, FRAME_HEIGHT - 80, 100, 30);
+        nextDoubleButton.setBounds(FRAME_WIDTH - 280, FRAME_HEIGHT - 80, 60, 30);
         nextDoubleButton.addActionListener(e -> controllerFinal.handleNextDoubleButtonClick());
         frame.add(nextDoubleButton);
 
@@ -177,9 +197,9 @@ public class ViewFinal {
         frame.dispose();
     }
 
-    public void setDateAtFrameTitle(GregorianCalendar date) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY");
+    public void setCurrentDateAtFrame(GregorianCalendar date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.YYYY");
         String dateString = simpleDateFormat.format(date.getTime());
-        frame.setTitle("Неделя: " + dateString);
+        dateField.setText(dateString);
     }
 }
