@@ -12,9 +12,9 @@ import java.util.GregorianCalendar;
 public class ViewFinal {
     private ControllerFinal controllerFinal;
     private JList<String> list;
-    private JTextField weekDayField;
-    private JTextField doubleField;
-    private JTextField dateField;
+    private JLabel weekDayLabel;
+    private JLabel doubleLabel;
+    private JLabel dateLabel;
     private JFrame frame;
 
     private static final int FRAME_WIDTH = Integer.parseInt(ProjectSettings.getParam(ProjectParams.WINDOW_WIDTH));
@@ -27,14 +27,14 @@ public class ViewFinal {
     public void setWeekDayText(int weekDay) {
         String day = DaysOfWeek.values()[weekDay].toString();
         day = day.substring(0, 1) + day.substring(1).toLowerCase();
-        weekDayField.setText(day);
+        weekDayLabel.setText(day);
     }
 
     public void setDoubleText(int doubleNumber) {
         if (doubleNumber == 0) {
-            doubleField.setText("Федеральное");
+            doubleLabel.setText("Федеральное");
         } else {
-            doubleField.setText("Дубль-" + doubleNumber);
+            doubleLabel.setText("Дубль-" + doubleNumber);
         }
     }
 
@@ -77,35 +77,26 @@ public class ViewFinal {
         listLabels.setBounds(12, 0, 2000, 30);
         frame.add(listLabels);
 
-        weekDayField = new JTextField();
-        weekDayField.setBackground(Color.decode(windowBackgroundColor));
-        weekDayField.setForeground(Color.decode(windowFontColor));
-        weekDayField.setBounds(FRAME_WIDTH - 410, FRAME_HEIGHT - 120, 120, 30);
-        weekDayField.setFont(new Font("Arial", Font.BOLD, 15));
-        weekDayField.setHorizontalAlignment(JTextField.CENTER);
-        weekDayField.setEditable(false);
-        weekDayField.setFocusable(false);
-        frame.add(weekDayField);
+        weekDayLabel = new JLabel();
+        weekDayLabel.setForeground(Color.decode(windowFontColor));
+        weekDayLabel.setBounds(FRAME_WIDTH - 410, FRAME_HEIGHT - 120, 120, 30);
+        weekDayLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        weekDayLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        frame.add(weekDayLabel);
 
-        doubleField = new JTextField();
-        doubleField.setBackground(Color.decode(windowBackgroundColor));
-        doubleField.setForeground(Color.decode(windowFontColor));
-        doubleField.setBounds(FRAME_WIDTH - 410, FRAME_HEIGHT - 80, 120, 30);
-        doubleField.setFont(new Font("Arial", Font.BOLD, 15));
-        doubleField.setHorizontalAlignment(JTextField.CENTER);
-        doubleField.setEditable(false);
-        doubleField.setFocusable(false);
-        frame.add(doubleField);
+        doubleLabel = new JLabel();
+        doubleLabel.setForeground(Color.decode(windowFontColor));
+        doubleLabel.setBounds(FRAME_WIDTH - 410, FRAME_HEIGHT - 80, 120, 30);
+        doubleLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        doubleLabel.setHorizontalAlignment(JTextField.CENTER);
+        frame.add(doubleLabel);
 
-        dateField = new JTextField();
-        dateField.setBackground(Color.decode(windowBackgroundColor));
-        dateField.setForeground(Color.decode(windowFontColor));
-        dateField.setBounds(FRAME_WIDTH - 690, FRAME_HEIGHT - 120, 200, 70);
-        dateField.setFont(new Font("Arial", Font.BOLD, 30));
-        dateField.setHorizontalAlignment(JTextField.CENTER);
-        dateField.setEditable(false);
-        dateField.setFocusable(false);
-        frame.add(dateField);
+        dateLabel = new JLabel();
+        dateLabel.setForeground(Color.decode(windowFontColor));
+        dateLabel.setBounds(FRAME_WIDTH - 750, FRAME_HEIGHT - 120, 200, 70);
+        dateLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        dateLabel.setHorizontalAlignment(JTextField.CENTER);
+        frame.add(dateLabel);
 
         JButton addButton = new JButton("Добавить");
         setButtonDesign(addButton);
@@ -200,6 +191,6 @@ public class ViewFinal {
     public void setCurrentDateAtFrame(GregorianCalendar date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.YYYY");
         String dateString = simpleDateFormat.format(date.getTime());
-        dateField.setText(dateString);
+        dateLabel.setText(dateString);
     }
 }
