@@ -43,7 +43,7 @@ public class ViewMiniFinal {
         JLabel startTimeLabel = new JLabel("Время начала:");
         startTimeLabel.setForeground(Color.decode(windowFontColor));
         startTimeLabel.setFont(new Font("Arial", Font.PLAIN, 15));
-        startTimeLabel.setBounds(10, 10, 100, 30);
+        startTimeLabel.setBounds(10, 10, 150, 30);
         frame.add(startTimeLabel);
 
         startHrsTextfield = new JTextField();
