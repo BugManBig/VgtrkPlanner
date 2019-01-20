@@ -7,8 +7,8 @@ import java.util.List;
 
 public class DoublesGenerator {
     public static List<PlanElement>[][] generate(Model model, GregorianCalendar dateOfMonday) {
-        List<PlanElement>[][] doublesElements = new ArrayList[4][7];
-        for (int i = 0; i < 4; i++) {
+        List<PlanElement>[][] doublesElements = new ArrayList[11][7];
+        for (int i = 0; i < 11; i++) {
             for (int j = 0; j < 7; j++) {
                 doublesElements[i][j] = new ArrayList<>();
             }
@@ -37,7 +37,7 @@ public class DoublesGenerator {
                     planElement = model.getDataDay(date).getPlanElementsDay(0).get(federalElementId);
                     federalElementStartTime = planElement.getStartTime().getTimeInSeconds();
                     if (federalElementStartTime >= startTime && federalElementStartTime < endTime) {
-                        for (int doubleId = 0; doubleId < 4; doubleId++) {
+                        for (int doubleId = 0; doubleId < 11; doubleId++) {
                             if (transitionElement.getSelectedDoubles().getSelectionsArray()[doubleId]) {
                                 try {
                                     transitionedElement = planElement.clone();

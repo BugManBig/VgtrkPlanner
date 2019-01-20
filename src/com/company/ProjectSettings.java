@@ -62,6 +62,7 @@ public class ProjectSettings {
         list.add(ProjectParams.BUTTON_FONT_COLOR + "=#DDDDDD");
         list.add(ProjectParams.SELECTED_LINE_BACKGROUND_COLOR + "=#666666");
         list.add(ProjectParams.SELECTED_LINE_FONT_COLOR + "=#FFFFFF");
+        list.add(ProjectParams.DOUBLES_COUNT + "=4");
         FileActions.createFile(path, list);
     }
 

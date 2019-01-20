@@ -163,7 +163,7 @@ public class Model {
         DataDay dataDay;
         for (int i = 0; i < 7; i++) {
             dataDay = getDataDay(date);
-            for (int j = 1; j <= 4; j++) {
+            for (int j = 1; j <= 11; j++) {
                 if (dataDay.getPlanElementsDay(j).size() > 0) return true;
             }
             date.add(Calendar.DAY_OF_MONTH, 1);

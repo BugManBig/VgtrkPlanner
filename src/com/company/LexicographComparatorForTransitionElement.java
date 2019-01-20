@@ -21,8 +21,8 @@ public class LexicographComparatorForTransitionElement implements Comparator<Tra
                 break;
             }
         }
-        int timeFirstElement = o1.getStartTime().getTimeInSeconds() * 4 + selectedDouble1;
-        int timeSecondElement = o2.getStartTime().getTimeInSeconds() * 4 + selectedDouble2;
+        int timeFirstElement = o1.getStartTime().getTimeInSeconds() * 11 + selectedDouble1;
+        int timeSecondElement = o2.getStartTime().getTimeInSeconds() * 11 + selectedDouble2;
         return Integer.compare(timeFirstElement, timeSecondElement);
     }
 }

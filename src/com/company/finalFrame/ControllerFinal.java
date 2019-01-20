@@ -16,6 +16,7 @@ public class ControllerFinal {
     private int mode = 0;
     private int dayOfWeek = 0;
     private GregorianCalendar dateOfMonday;
+    private final int doublesCount = Integer.parseInt(ProjectSettings.getParam(ProjectParams.DOUBLES_COUNT));
 
     public void setViewFinal(ViewFinal viewFinal) {
         this.viewFinal = viewFinal;
@@ -112,12 +113,12 @@ public class ControllerFinal {
     }
     
     public void handlePrevDoubleButtonClick() {
-        mode = mode > 0 ? mode - 1 : 4;
+        mode = mode > 0 ? mode - 1 : doublesCount;
         updateDataInPlaylist();
     }
     
     public void handleNextDoubleButtonClick() {
-        mode = mode < 4 ? mode + 1 : 0;
+        mode = mode < doublesCount ? mode + 1 : 0;
         updateDataInPlaylist();
     }
     
@@ -143,10 +144,10 @@ public class ControllerFinal {
         }
 
         createDocumentation(reversedDate + " " + "Федеральное", 0);
-        createDocumentation(reversedDate + " " + "Дубль-1", 1);
-        createDocumentation(reversedDate + " " + "Дубль-2", 2);
-        createDocumentation(reversedDate + " " + "Дубль-3", 3);
-        createDocumentation(reversedDate + " " + "Дубль-4", 4);
+        int doublesCount = Integer.parseInt(ProjectSettings.getParam(ProjectParams.DOUBLES_COUNT));
+        for (int i = 1; i <= doublesCount; i++) {
+            createDocumentation(reversedDate + " " + "Дубль-" + i, i);
+        }
 
         JOptionPane.showMessageDialog(null, "Отчёты успешно сгенерированы", "Сообщение об операции",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -172,8 +173,8 @@ public class ControllerFinal {
         List<PlanElement>[][] doubles = DoublesGenerator.generate(model, (GregorianCalendar) dateOfMonday.clone());
         DataDay[] dataDays = new DataDay[7];
         for (int i = 0; i < 7; i++) {
-            List<PlanElement>[] oneDayDoubles = new ArrayList[4];
-            for (int j = 0; j < 4; j++) {
+            List<PlanElement>[] oneDayDoubles = new ArrayList[11];
+            for (int j = 0; j < 11; j++) {
                 oneDayDoubles[j] = new ArrayList<>();
                 oneDayDoubles[j].addAll(doubles[j][i]);
             }
@@ -187,7 +188,7 @@ public class ControllerFinal {
 
         GregorianCalendar date = (GregorianCalendar) dateOfMonday.clone();
         for (int i = 0; i < 7; i++) {
-            for (int j = 1; j <= 4; j++) {
+            for (int j = 1; j <= 11; j++) {
                 model.sortDataDay(date, j);
             }
             date.add(Calendar.DAY_OF_MONTH, 1);

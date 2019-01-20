@@ -11,7 +11,8 @@ public class SelectedDoubles implements Serializable {
 
     public String getDoublesString() {
         String string = "";
-        for (int i = 0; i < 4; i++) {
+        int doublesCount = Integer.parseInt(ProjectSettings.getParam(ProjectParams.DOUBLES_COUNT));
+        for (int i = 0; i < doublesCount; i++) {
             string += selectedDoubles[i] ? i + 1 : "-";
             string += " ";
         }

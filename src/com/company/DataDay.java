@@ -13,8 +13,8 @@ public class DataDay implements Serializable {
 
     public DataDay(List<PlanElement> federal, List<PlanElement>[] doubles, GregorianCalendar date) {
         if (doubles == null) {
-            this.doubles = new List[4];
-            for (int i = 0; i < 4; i++) {
+            this.doubles = new List[11];
+            for (int i = 0; i < 11; i++) {
                 this.doubles[i] = new ArrayList<>();
             }
         } else {

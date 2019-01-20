@@ -12,7 +12,7 @@ public class ViewMiniTransitions {
 
     private JFrame frame;
 
-    private static final int FRAME_WIDTH = 500;
+    private static final int FRAME_WIDTH = 700;
     private static final int FRAME_HEIGHT = 370;
 
     private JTextField startHrsTextfield;
@@ -156,19 +156,20 @@ public class ViewMiniTransitions {
             JCheckBox checkBox = new JCheckBox();
             checkBox.setBackground(Color.decode(windowBackgroundColor));
             checkBox.setForeground(Color.decode(windowFontColor));
-            checkBox.setBounds(10 + ((FRAME_WIDTH - 10) / 7) * i, 130, 60, 30);
+            checkBox.setBounds(10 + 60 * i, 130, 60, 30);
             checkBox.setText(DaysOfWeek.values()[i].getShortName());
             checkBox.setFont(new Font("Arial", Font.PLAIN, 15));
             weekdaysCheckboxes[i] = checkBox;
             frame.add(checkBox);
         }
 
-        doublesCheckboxes = new JCheckBox[4];
-        for (int i = 0; i < 4; i++) {
+        int doublesCount = Integer.parseInt(ProjectSettings.getParam(ProjectParams.DOUBLES_COUNT));
+        doublesCheckboxes = new JCheckBox[doublesCount];
+        for (int i = 0; i < doublesCount; i++) {
             JCheckBox checkBox = new JCheckBox();
             checkBox.setBackground(Color.decode(windowBackgroundColor));
             checkBox.setForeground(Color.decode(windowFontColor));
-            checkBox.setBounds(10 + ((FRAME_WIDTH - 10) / 7) * i, 160, 60, 30);
+            checkBox.setBounds(10 + 60 * i, 160, 60, 30);
             checkBox.setText("Д" + (i + 1));
             doublesCheckboxes[i] = checkBox;
             frame.add(checkBox);
@@ -195,7 +196,7 @@ public class ViewMiniTransitions {
             JRadioButton radioButton = new JRadioButton();
             radioButton.setBackground(Color.decode(windowBackgroundColor));
             radioButton.setForeground(Color.decode(windowFontColor));
-            radioButton.setBounds(100 + ((FRAME_WIDTH - 110) / 7) * i, 250, 50, 30);
+            radioButton.setBounds(100 + 60 * i, 250, 50, 30);
             radioButton.setText(DaysOfWeek.values()[i].getShortName());
             radioButton.setFont(new Font("Arial", Font.PLAIN, 15));
             int k = i;
@@ -304,8 +305,9 @@ public class ViewMiniTransitions {
     }
     
     public boolean[] getDoublesCheckboxes() {
-        boolean[] result = new boolean[4];
-        for (int i = 0; i < 4; i++) {
+        boolean[] result = new boolean[11];
+        int doublesCount = Integer.parseInt(ProjectSettings.getParam(ProjectParams.DOUBLES_COUNT));
+        for (int i = 0; i < doublesCount; i++) {
             result[i] = doublesCheckboxes[i].isSelected();
         }
         return result;
@@ -354,7 +356,7 @@ public class ViewMiniTransitions {
         }
         
         boolean[] doublesSelections = transitionElement.getSelectedDoubles().getSelectionsArray();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 11; i++) {
             doublesCheckboxes[i].setSelected(doublesSelections[i]);
         }
 
