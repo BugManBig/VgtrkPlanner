@@ -354,9 +354,10 @@ public class ViewMiniTransitions {
         for (int i = 0; i < 7; i++) {
             weekdaysCheckboxes[i].setSelected(weekdaysSelections[i]);
         }
-        
+
+        int doublesCount = Integer.parseInt(ProjectSettings.getParam(ProjectParams.DOUBLES_COUNT));
         boolean[] doublesSelections = transitionElement.getSelectedDoubles().getSelectionsArray();
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < doublesCount; i++) {
             doublesCheckboxes[i].setSelected(doublesSelections[i]);
         }
 
