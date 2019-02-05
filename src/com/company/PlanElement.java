@@ -29,6 +29,10 @@ public class PlanElement implements Cloneable, Serializable {
         return selectedDays;
     }
 
+    public Chrono getEndTime() {
+        return new Chrono(startTime.getTimeInSeconds() + lengthTime.getTimeInSeconds());
+    }
+
     public PlanElement(String title, Chrono startTime, Chrono lengthTime, SelectedDays selectedDays) {
         this.title = title;
         this.startTime = startTime;

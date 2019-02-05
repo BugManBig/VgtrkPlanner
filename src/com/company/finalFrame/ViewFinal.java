@@ -71,7 +71,7 @@ public class ViewFinal {
         list.setForeground(Color.decode(windowFontColor));
         list.setCellRenderer(new SelectedCellRenderer());
 
-        JLabel listLabels = new JLabel("Начало      Продолж.    Название");
+        JLabel listLabels = new JLabel("   Начало      Продолж.    Название");
         listLabels.setFont(new Font("Courier new", Font.BOLD, fontSize));
         listLabels.setForeground(Color.decode(windowFontColor));
         listLabels.setBounds(12, 0, 2000, 30);
@@ -151,12 +151,6 @@ public class ViewFinal {
         generateDoublesButton.setBounds(10, FRAME_HEIGHT - 80, 210, 30);
         generateDoublesButton.addActionListener(e -> controllerFinal.handleGenerateDoublesButtonClick());
         frame.add(generateDoublesButton);
-
-        JButton checkButton = new JButton("Проверка");
-        setButtonDesign(checkButton);
-        checkButton.setBounds(230, FRAME_HEIGHT - 80, 100, 30);
-        checkButton.addActionListener(e -> controllerFinal.handleCheckButtonClick());
-        frame.add(checkButton);
 
         JButton menuButton = new JButton("Меню");
         setButtonDesign(menuButton);

@@ -30,11 +30,11 @@ public class ViewStart {
         frame.setResizable(false);
         frame.getContentPane().setBackground(Color.decode(windowBackgroundColor));
 
-        JButton createButton = new JButton("Сетка");
-        setButtonDesign(createButton);
-        createButton.setBounds(FRAME_WIDTH / 2 - 100, 30, 200, 30);
-        createButton.addActionListener(e -> controllerStart.handleCreateButtonClick());
-        frame.add(createButton);
+        JButton setkaButton = new JButton("Сетка");
+        setButtonDesign(setkaButton);
+        setkaButton.setBounds(FRAME_WIDTH / 2 - 100, 30, 200, 30);
+        setkaButton.addActionListener(e -> controllerStart.handleSetkaButtonClick());
+        frame.add(setkaButton);
 
         JButton loadButton = new JButton("Загрузить неделю");
         setButtonDesign(loadButton);

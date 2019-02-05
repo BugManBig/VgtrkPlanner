@@ -34,15 +34,24 @@ public class ControllerFinal {
         viewFinal.setWeekDayText(dayOfWeek);
         viewFinal.setDoubleText(mode);
         
-        DataDay dataDay = model.getDataDay(getCurrentDate());
-        if (dataDay.getPlanElementsDay(mode) == null) {
-            viewFinal.setDataToList(new String[]{});
-            return;
-        }
-        String[] data = new String[dataDay.getPlanElementsDay(mode).size()];
+        List<PlanElement> planElementsDay = model.getDataDay(getCurrentDate()).getPlanElementsDay(mode);
+        List<Results> errors = getErrorsList();
+
+        String dataString;
+        String[] data = new String[planElementsDay.size()];
         for (int i = 0; i < data.length; i++) {
-            data[i] = dataDay.getPlanElementsDay(mode).get(i).getDataStringForFinal();
+            dataString = planElementsDay.get(i).getDataStringForFinal();
+            if (errors.get(i) == Results.NO_ERROR) {
+                data[i] = "   " + dataString;
+            }
+            if (errors.get(i) == Results.HAS_SPACE) {
+                data[i] = "< >" + dataString;
+            }
+            if (errors.get(i) == Results.HAS_OVERLAY) {
+                data[i] = "> <" + dataString;
+            }
         }
+
         viewFinal.setDataToList(data);
         viewFinal.setCurrentDateAtFrame(getCurrentDate());
     }
@@ -207,57 +216,29 @@ public class ControllerFinal {
         Starter.run(model);
     }
 
-    public void handleCheckButtonClick() {
-        checkTimetable(false);
-    }
-
-    private void checkTimetable(boolean isSecond) {
+    private List<Results> getErrorsList() {
+        List<Results> errors = new ArrayList<>();
+        errors.add(Results.NO_ERROR);
         List<PlanElement> planElementsDay = model.getDataDay(getCurrentDate()).getPlanElementsDay(mode);
         int firstProgramEndTime;
         int secondProgramStartTime;
-        int startPoint;
-        if (isSecond) {
-            startPoint = 0;
-        } else {
-            startPoint = viewFinal.getSelectedLine() + 1;
-        }
-        for (int i = startPoint; i < planElementsDay.size() - 1; i++) {
-            firstProgramEndTime = planElementsDay.get(i).getStartTime().getTimeInSeconds()
-                    + planElementsDay.get(i).getDurationTime().getTimeInSeconds();
+        for (int i = 0; i < planElementsDay.size() - 1; i++) {
+            firstProgramEndTime = planElementsDay.get(i).getEndTime().getTimeInSeconds();
             secondProgramStartTime = planElementsDay.get(i + 1).getStartTime().getTimeInSeconds();
-            if (planElementsDay.get(i).getStartTime().getHours()
-                    > planElementsDay.get(i + 1).getStartTime().getHours()) {
+            if (new Chrono(firstProgramEndTime).getHours() > planElementsDay.get(i + 1).getStartTime().getHours()) {
                 secondProgramStartTime += 24 * 60 * 60;
             }
-            if (firstProgramEndTime > secondProgramStartTime) {
-                viewFinal.selectLine(i);
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Накладка после выделенного элемента. Следующий элемент должен выйти в "
-                                + new Chrono(firstProgramEndTime).getTimeString(),
-                        "Сообщение об операции",
-                        JOptionPane.WARNING_MESSAGE
-                );
-                return;
+            if (firstProgramEndTime == secondProgramStartTime) {
+                errors.add(Results.NO_ERROR);
             }
             if (firstProgramEndTime < secondProgramStartTime) {
-                viewFinal.selectLine(i);
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Недобор после выделенного элемента. Следующий элемент должен выйти в "
-                                + new Chrono(firstProgramEndTime).getTimeString(),
-                        "Сообщение об операции",
-                        JOptionPane.WARNING_MESSAGE
-                );
-                return;
+                errors.add(Results.HAS_SPACE);
+            }
+            if (firstProgramEndTime > secondProgramStartTime) {
+                errors.add(Results.HAS_OVERLAY);
             }
         }
-        if (isSecond) {
-            JOptionPane.showMessageDialog(null, "Проблем нет", "Сообщение об операции",
-                    JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        checkTimetable(true);
+        return errors;
     }
     
     private void createDocumentation(String name, int mode) {

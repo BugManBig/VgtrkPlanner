@@ -26,7 +26,7 @@ public class ControllerStart {
         this.viewStart = viewStart;
     }
 
-    public void handleCreateButtonClick() {
+    public void handleSetkaButtonClick() {
         viewStart.close();
 
         ViewSetka viewSetka = new ViewSetka();

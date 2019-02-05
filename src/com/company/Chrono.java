@@ -38,6 +38,7 @@ public class Chrono implements Serializable {
     }
     
     public Chrono(int timeInSeconds) {
+        timeInSeconds = timeInSeconds % (24 * 60 * 60);
         hours = timeInSeconds / 60 / 60;
         minutes = (timeInSeconds - hours * 60 * 60) / 60;
         seconds = timeInSeconds - hours * 60 * 60 - minutes * 60;
