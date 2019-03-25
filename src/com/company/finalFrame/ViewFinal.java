@@ -100,19 +100,19 @@ public class ViewFinal {
 
         JButton addButton = new JButton("Добавить");
         setButtonDesign(addButton);
-        addButton.setBounds(10, FRAME_HEIGHT - 120, 100, 30);
+        addButton.setBounds(10, FRAME_HEIGHT - 120, 120, 30);
         addButton.addActionListener(e -> controllerFinal.handleAddButtonClick());
         frame.add(addButton);
 
         JButton editButton = new JButton("Изменить");
         setButtonDesign(editButton);
-        editButton.setBounds(120, FRAME_HEIGHT - 120, 100, 30);
+        editButton.setBounds(140, FRAME_HEIGHT - 120, 120, 30);
         editButton.addActionListener(listenerForEdit);
         frame.add(editButton);
 
         JButton removeButton = new JButton("Удалить");
         setButtonDesign(removeButton);
-        removeButton.setBounds(230, FRAME_HEIGHT - 120, 100, 30);
+        removeButton.setBounds(270, FRAME_HEIGHT - 120, 120, 30);
         removeButton.addActionListener(e -> controllerFinal.handleRemoveButtonClick());
         frame.add(removeButton);
 
@@ -148,9 +148,15 @@ public class ViewFinal {
 
         JButton generateDoublesButton = new JButton("Формирование дублей");
         setButtonDesign(generateDoublesButton);
-        generateDoublesButton.setBounds(10, FRAME_HEIGHT - 80, 210, 30);
+        generateDoublesButton.setBounds(10, FRAME_HEIGHT - 80, 250, 30);
         generateDoublesButton.addActionListener(e -> controllerFinal.handleGenerateDoublesButtonClick());
         frame.add(generateDoublesButton);
+
+        JButton duplicateButton = new JButton("Дублировать");
+        setButtonDesign(duplicateButton);
+        duplicateButton.setBounds(270, FRAME_HEIGHT - 80, 120, 30);
+        duplicateButton.addActionListener(e -> controllerFinal.handleDuplicateButtonClick());
+        frame.add(duplicateButton);
 
         JButton menuButton = new JButton("Меню");
         setButtonDesign(menuButton);

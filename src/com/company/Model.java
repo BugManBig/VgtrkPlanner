@@ -191,4 +191,8 @@ public class Model {
     public void removeFromFinal(GregorianCalendar date, int mode, int id) {
         getDataDay(date).getPlanElementsDay(mode).remove(id);
     }
+
+    public void duplicateFinalElement(GregorianCalendar date, int mode, int id) {
+        getDataDay(date).getPlanElementsDay(mode).add(id, getDataDay(date).getPlanElementsDay(mode).get(id));
+    }
 }

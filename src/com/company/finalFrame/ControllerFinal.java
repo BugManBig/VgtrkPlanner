@@ -216,6 +216,17 @@ public class ControllerFinal {
         Starter.run(model);
     }
 
+    public void handleDuplicateButtonClick() {
+        int selectedLine = viewFinal.getSelectedLine();
+        if (selectedLine == -1) {
+            return;
+        }
+        model.duplicateFinalElement(dateOfMonday, mode, selectedLine);
+        model.saveAllDataDays();
+        updateDataInPlaylist();
+        viewFinal.selectLine(selectedLine + 1);
+    }
+
     private List<Results> getErrorsList() {
         List<Results> errors = new ArrayList<>();
         errors.add(Results.NO_ERROR);
