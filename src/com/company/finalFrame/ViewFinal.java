@@ -152,7 +152,7 @@ public class ViewFinal {
         generateDoublesButton.addActionListener(e -> controllerFinal.handleGenerateDoublesButtonClick());
         frame.add(generateDoublesButton);
 
-        JButton duplicateButton = new JButton("Дублировать");
+        JButton duplicateButton = new JButton("Копировать");
         setButtonDesign(duplicateButton);
         duplicateButton.setBounds(270, FRAME_HEIGHT - 80, 120, 30);
         duplicateButton.addActionListener(e -> controllerFinal.handleDuplicateButtonClick());
