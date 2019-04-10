@@ -236,7 +236,7 @@ public class ControllerFinal {
         for (int i = 0; i < planElementsDay.size() - 1; i++) {
             firstProgramEndTime = planElementsDay.get(i).getEndTime().getTimeInSeconds();
             secondProgramStartTime = planElementsDay.get(i + 1).getStartTime().getTimeInSeconds();
-            if (new Chrono(firstProgramEndTime).getHours() > planElementsDay.get(i + 1).getStartTime().getHours()) {
+            if (new Chrono(firstProgramEndTime).getHours() != 0 && planElementsDay.get(i + 1).getStartTime().getHours() == 0) {
                 secondProgramStartTime += 24 * 60 * 60;
             }
             if (firstProgramEndTime == secondProgramStartTime) {
@@ -274,7 +274,8 @@ public class ControllerFinal {
         for (int i = 0; i < 7; i++) {
             list = model.getDataDay(shiftedDate).getPlanElementsDay(mode);
             data.add(shiftedDate.get(Calendar.DAY_OF_MONTH) + " "
-                    + (Months.values()[shiftedDate.get(Calendar.MONTH)]) + " - "
+                    + (Months.values()[shiftedDate.get(Calendar.MONTH)]) + " "
+                    + shiftedDate.get(Calendar.YEAR) + " - "
                     + DaysOfWeek.values()[i].toString());
             for (PlanElement planElement : list) {
                 line = planElement.getStartTime().getTimeStringSmall();

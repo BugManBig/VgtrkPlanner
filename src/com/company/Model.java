@@ -175,6 +175,8 @@ public class Model {
         int shift = 0;
         if (mode == 1) shift = 3;
         if (mode == 2) shift = 1;
+        if (mode == 3) shift = 23;
+        if (mode == 4) shift = 21;
         getDataDay(date).getPlanElementsDay(mode).sort(new LexicographComparatorForPlanElement(shift));
     }
     
