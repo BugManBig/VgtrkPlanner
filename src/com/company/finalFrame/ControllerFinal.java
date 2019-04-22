@@ -221,7 +221,7 @@ public class ControllerFinal {
         if (selectedLine == -1) {
             return;
         }
-        model.duplicateFinalElement(dateOfMonday, mode, selectedLine);
+        model.duplicateFinalElement(getCurrentDate(), mode, selectedLine);
         model.saveAllDataDays();
         updateDataInPlaylist();
         viewFinal.selectLine(selectedLine + 1);
