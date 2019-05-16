@@ -227,6 +227,36 @@ public class ControllerFinal {
         viewFinal.selectLine(selectedLine + 1);
     }
 
+    public void handleSerialButtonClick() {
+        int selectedLine = viewFinal.getSelectedLine();
+        if (selectedLine == -1) {
+            return;
+        }
+        GregorianCalendar currentDate = getCurrentDate();
+        PlanElement planElement = model.getDataDay(currentDate).getPlanElementsDay(mode).get(selectedLine);
+        Chrono time = planElement.getStartTime();
+        String title = planElement.getTitle();
+        int seriaNumber = Integer.parseInt(title.substring(title.lastIndexOf(' ') + 1, title.length() - 2));
+        title = title.substring(0, title.lastIndexOf(' ') + 1);
+        currentDate = (GregorianCalendar) dateOfMonday.clone();
+        currentDate.add(Calendar.DAY_OF_MONTH, dayOfWeek);
+        for (int i = dayOfWeek; i < 5; i++) {
+            List<PlanElement> planElementsDay = model.getDataDay(currentDate).getPlanElementsDay(mode);
+            int j = 0;
+            while (j < planElementsDay.size()
+                    && !planElementsDay.get(j).getStartTime().getTimeString().equals(time.getTimeString())) {
+                j++;
+            }
+            planElement = planElementsDay.remove(j);
+            planElementsDay.add(j, new PlanElement(title + seriaNumber + "-я", planElement.getStartTime(), planElement.getDurationTime(), planElement.getSelectedDays()));
+            seriaNumber++;
+            currentDate.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        updateDataInPlaylist();
+        viewFinal.selectLine(selectedLine);
+        model.saveAllDataDays();
+    }
+
     private List<Results> getErrorsList() {
         List<Results> errors = new ArrayList<>();
         errors.add(Results.NO_ERROR);

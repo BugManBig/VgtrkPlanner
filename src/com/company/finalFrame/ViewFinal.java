@@ -164,6 +164,12 @@ public class ViewFinal {
         menuButton.addActionListener(e -> controllerFinal.handleMenuButtonClick());
         frame.add(menuButton);
 
+        JButton serialButton = new JButton("Сериал");
+        setButtonDesign(serialButton);
+        serialButton.setBounds(400, FRAME_HEIGHT - 80, 100, 30);
+        serialButton.addActionListener(e -> controllerFinal.handleSerialButtonClick());
+        frame.add(serialButton);
+
         frame.repaint();
         frame.revalidate();
         frame.setLocationRelativeTo(null);
