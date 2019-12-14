@@ -132,7 +132,7 @@ public class ControllerFinal {
     }
     
     public void handleDocumentationButtonClick() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String reversedDate = simpleDateFormat.format(dateOfMonday.getTime());
 
         if (new File(ProjectSettings.getParam(ProjectParams.OUTPUT_PATH)
@@ -291,7 +291,7 @@ public class ControllerFinal {
             data.add("РРД-" + mode);
         }
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.YY");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yy");
         GregorianCalendar dateOfSunday = (GregorianCalendar) dateOfMonday.clone();
         dateOfSunday.add(Calendar.DAY_OF_MONTH, 6);
         data.add("на неделю с " + simpleDateFormat.format(dateOfMonday.getTime())

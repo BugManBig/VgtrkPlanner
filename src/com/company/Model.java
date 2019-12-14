@@ -128,14 +128,14 @@ public class Model {
 
     private void saveDataDay(DataDay dataDay) {
         GregorianCalendar date = dataDay.getDate();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String fileName = simpleDateFormat.format(date.getTime()) + ".bin";
         FileActions.save(dataDay, ProjectSettings.getParam(ProjectParams.BIN_PATH), fileName);
     }
 
     public boolean loadWeek(GregorianCalendar date) {
         DataDay[] week = new DataDay[7];
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String fileName;
         for (int i = 0; i < 7; i++) {
             fileName = simpleDateFormat.format(date.getTime()) + ".bin";

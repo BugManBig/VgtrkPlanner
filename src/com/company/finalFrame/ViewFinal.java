@@ -46,7 +46,7 @@ public class ViewFinal {
         String windowBackgroundColor = ProjectSettings.getParam(ProjectParams.WINDOW_BACKGROUND_COLOR);
         String windowFontColor = ProjectSettings.getParam(ProjectParams.WINDOW_FONT_COLOR);
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.YYYY");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         String dateString = "Неделя: " + simpleDateFormat.format(date.getTime());
         date.add(Calendar.DAY_OF_MONTH, 6);
         dateString += " - " + simpleDateFormat.format(date.getTime());
@@ -195,7 +195,7 @@ public class ViewFinal {
     }
 
     public void setCurrentDateAtFrame(GregorianCalendar date) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.YYYY");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         String dateString = simpleDateFormat.format(date.getTime());
         dateLabel.setText(dateString);
     }
