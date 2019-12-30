@@ -72,7 +72,7 @@ public class ControllerStart {
         GregorianCalendar mondayDate = DateInput.run();
         if (mondayDate == null) return;
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String fileName = simpleDateFormat.format(mondayDate.getTime()) + ".bin";
         if (FileActions.isExist(ProjectSettings.getParam(ProjectParams.BIN_PATH), fileName)) {
             int answer = JOptionPane.showOptionDialog(
